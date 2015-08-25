@@ -1,7 +1,7 @@
 .idea/*
-.target/*
+target/*
 Korent.iml
-src/main/*
+src/main/test/*
 src/resources/hibernate.cfg.xml
 src/resources/mySqlConfigure.properties
 
