@@ -1,0 +1,7 @@
+.idea/*
+.target/*
+Korent.iml
+src/main/*
+src/resources/hibernate.cfg.xml
+src/resources/mySqlConfigure.properties
+
