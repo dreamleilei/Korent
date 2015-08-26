@@ -2,6 +2,6 @@
 target/*
 Korent.iml
 src/main/test/*
-src/resources/hibernate.cfg.xml
-src/resources/mySqlConfigure.properties
+src/main/resources/hibernate.cfg.xml
+src/main/resources/mySqlConfigure.properties
 
