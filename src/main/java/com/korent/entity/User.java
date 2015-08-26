@@ -16,19 +16,19 @@ public class User {
     @Column(name="uid")
     private Integer id;
 
-    @Column(name="name", unique=true)
+    @Column(name="name", unique=true, length=20,nullable=false)
     private String name;
 
-    @Column(name="password")
+    @Column(name="password", length=40, nullable=false)
     private String password;
 
-    @Column(name="phone")
+    @Column(name="phone", length=16)
     private String phone;
 
-    @Column(name="email")
+    @Column(name="email", length=30, nullable=false)
     private String email;
 
-    @Column(name="qq")
+    @Column(name="qq",length=20)
     private String qq;
 
     @OneToMany(targetEntity=RentGoods.class)

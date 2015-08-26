@@ -13,10 +13,10 @@ public class Admin {
     @Column(name ="aid")
     private Integer id;
 
-    @Column(name="name", unique=true)
+    @Column(name="name", length = 20, unique=true,nullable=false)
     private String name;
 
-    @Column(name="password")
+    @Column(name="password",length=40,nullable=false)
     private String password;
 
 

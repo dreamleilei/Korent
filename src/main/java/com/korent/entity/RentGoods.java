@@ -20,13 +20,13 @@ public class RentGoods {
     @Column(name="rid")
     private Integer id;
 
-    @Column(name="description")
+    @Column(name="description", length=3000,nullable=false)
     private String description;          //×âÆ·µÄ¼òµ¥ÃèÊö
 
-    @Column(name="classify")
+    @Column(name="classify",length=255,nullable=false)
     private String classify;
 
-    @Column(name="address")
+    @Column(name="address",nullable=false)
     private Address address;
 
     @Enumerated(EnumType.ORDINAL)

@@ -15,16 +15,16 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Address {
 
-    @Column(name="province")
+    @Column(name="province",length=20,nullable=false)
     private String province;
 
-    @Column(name="city")
+    @Column(name="city",length=20,nullable=false)
     private String city;
 
-    @Column(name="country")
+    @Column(name="country",length=20,nullable=false)
     private String country;
 
-    @Column(name="district")
+    @Column(name="district",length=20,nullable=false)
     private String district;
 
     @Parent

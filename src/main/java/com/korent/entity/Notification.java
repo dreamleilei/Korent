@@ -15,13 +15,13 @@ public class Notification {
     @Column(name="nid")
     private Integer id;
 
-    @Column(name="ToId")
+    @Column(name="ToId",nullable=false)
     private Integer ToId;                //该属性记录要给谁发送通知，为用户的id
 
-    @Column(name="content")
+    @Column(name="content",length =255,nullable=false)
     private String content;              //发送通知的内容
 
-    @Column(name="status")
+    @Column(name="status",nullable=false)
     private Integer status;              //消息的状态，默认为0未读，已读为1
 
     public Notification() {
