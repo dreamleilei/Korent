@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
  * Created by lei on 2015/8/25.
  */
 
-/*µØÖ·×é¼ş£¬ÓÃÀ´¼ÇÂ¼×âÆ·µÄµØÖ·*/
+/*ä½œä¸ºç§Ÿå“çš„ç»„ä»¶,è®°å½•ç§Ÿå“çš„åœ°å€*/
 @Embeddable
 public class Address {
 

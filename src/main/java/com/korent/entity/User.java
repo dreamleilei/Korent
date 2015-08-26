@@ -35,7 +35,7 @@ public class User {
     @JoinColumn(name="uid", referencedColumnName="uid")
     List<RentGoods> order = new ArrayList<RentGoods>();
 
-    /*Í¨¹ıË«ÏòµÄ¹ØÁªÓ³Éä£¬ÊµÏÖÓÃ»§¹Ø×¢×âÆ·µÄ¹¦ÄÜ*/
+    /*é€šè¿‡åŒå‘çš„å…³è”æ˜ å°„ï¼Œå®ç°ç”¨æˆ·å…³æ³¨ç§Ÿå“çš„åŠŸèƒ½*/
     @ManyToMany(targetEntity=RentGoods.class)
     @JoinTable(name="follow",
             joinColumns=@JoinColumn(name="uid", referencedColumnName="uid"),

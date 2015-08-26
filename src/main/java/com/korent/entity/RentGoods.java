@@ -21,7 +21,7 @@ public class RentGoods {
     private Integer id;
 
     @Column(name="description", length=3000,nullable=false)
-    private String description;          //×âÆ·µÄ¼òµ¥ÃèÊö
+    private String description;          //ç§Ÿå“çš„ç®€å•æè¿°
 
     @Column(name="classify",length=255,nullable=false)
     private String classify;
@@ -34,16 +34,16 @@ public class RentGoods {
 
     @Temporal(TemporalType.DATE)
     @Column(name="updateDate")
-    private Date updateDate = new Date();     //¸ÃÊôĞÔÃèÊö×âÆ·×´Ì¬×îĞÂµÄ¸üĞÂÊ±¼ä
+    private Date updateDate = new Date();      //è¯¥å±æ€§æè¿°ç§Ÿå“çŠ¶æ€æœ€æ–°çš„æ›´æ–°æ—¶é—´
 
-    /*¼ÇÂ¼×âÆ·µÄÍ¼Æ¬µÄ´æ´¢Â·¾¶*/
+    /*è®°å½•ç§Ÿå“çš„å›¾ç‰‡çš„å­˜å‚¨è·¯å¾„*/
     @ElementCollection(targetClass=String.class)
     @CollectionTable(name="picturePath", joinColumns=@JoinColumn(name="rid", referencedColumnName="rid", nullable=false))
     @OrderColumn(name="id")
     @Column(name="path")
     private List<String> picturePathList = new ArrayList<String>();
 
-    /*Í¨¹ıË«ÏòµÄ¹ÜÁ¬Ó³Éä£¬ÊµÏÖ×âÆ·±»¹Ø×¢¹¦ÄÜ*/
+    /*é€šè¿‡åŒå‘çš„ç®¡è¿æ˜ å°„ï¼Œå®ç°ç§Ÿå“è¢«å…³æ³¨åŠŸèƒ½*/
     @ManyToMany
     @JoinTable(name="follow",
     joinColumns=@JoinColumn(name="rid", referencedColumnName="rid"),

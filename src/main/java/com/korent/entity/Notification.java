@@ -16,13 +16,13 @@ public class Notification {
     private Integer id;
 
     @Column(name="ToId",nullable=false)
-    private Integer ToId;                //¸ÃÊôĞÔ¼ÇÂ¼Òª¸øË­·¢ËÍÍ¨Öª£¬ÎªÓÃ»§µÄid
+    private Integer ToId;                //è¯¥å±æ€§è®°å½•è¦ç»™è°å‘é€é€šçŸ¥ï¼Œä¸ºç”¨æˆ·çš„id
 
     @Column(name="content",length =255,nullable=false)
-    private String content;              //·¢ËÍÍ¨ÖªµÄÄÚÈİ
+    private String content;              //å‘é€é€šçŸ¥çš„å†…å®¹
 
     @Column(name="status",nullable=false)
-    private Integer status;              //ÏûÏ¢µÄ×´Ì¬£¬Ä¬ÈÏÎª0Î´¶Á£¬ÒÑ¶ÁÎª1
+    private Integer status;              //æ¶ˆæ¯çš„çŠ¶æ€ï¼Œé»˜è®¤ä¸º0æœªè¯»ï¼Œå·²è¯»ä¸º1
 
     public Notification() {
     }
