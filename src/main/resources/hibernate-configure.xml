@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+       <!--配置属性占位符-->
+       <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >
+              <property name="locations">
+                     <list>
+                            <value>classpath:mySqlConfigure.properties</value>
+                     </list>
+              </property>
+       </bean>
+
+       <!--配置数据源-->
+       <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+               destroy-method="close"
+               p:driverClass="com.mysql.jdbc.Driver"
+               p:jdbcUrl="${url}"
+               p:user="${username}"
+               p:password="${password}"
+               p:maxPoolSize="40"
+               p:minPoolSize="2"
+               p:maxIdleTime="30"
+               p:acquireIncrement="2"
+               />
+
+       <!--配置SessionFactory-->
+       <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+             p:dataSource-ref="dataSource" >
+              <property name="packagesToScan" >
+                     <list>
+                            <value>com.korent.entity</value>
+                     </list>
+              </property>
+              <property name="hibernateProperties">
+                     <props>
+                            <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+                            <prop key="hibernate.hbm2ddl.auto">update</prop>
+                            <prop key="hibernate.show_sql">true</prop>
+                            <prop key="hibernate.format_sql">true</prop>
+                            <prop key="hibernate.enable_lazy_load_no_trans">true</prop>  <!--取得对象的时候同时获取集合-->
+                     </props>
+              </property>
+             </bean>
+
+       <!--配置事务管理-->
+       <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+             p:sessionFactory-ref="sessionFactory"/>
+
+
+</beans>
