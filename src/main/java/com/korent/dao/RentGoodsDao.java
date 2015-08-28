@@ -3,8 +3,12 @@ package com.korent.dao;
 import com.korent.entity.RentGoods;
 import com.korent.entity.User;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import java.io.Serializable;
 import java.util.List;
@@ -44,7 +48,13 @@ public class RentGoodsDao extends BaseDao<RentGoods> {
     /*获取租品的预定者*/
     public User getOrderUser(Serializable id) {
         RentGoods rentGoods = get(RentGoods.class, id);
-        return rentGoods.getUser();
+        return rentGoods.getOrderUser();
+    }
+
+    /*获取租品的发布者*/
+    public User getOwner(Serializable id) {
+        RentGoods rentGoods = get(RentGoods.class, id);
+        return rentGoods.getOwner();
     }
 
     /*根据租品的分类获取租品*/
@@ -56,6 +66,59 @@ public class RentGoodsDao extends BaseDao<RentGoods> {
                 add(Restrictions.like("classify","%"+classify +"%" )).
                 list();
         return list;
+    }
+
+    /*获取租品的关注者*/
+    public List<User> findFollowUser(Serializable id, int pageNo, int pageSize) {
+        RentGoods rentGoods = get(RentGoods.class, id);
+        List<User> list = rentGoods.getFollower();
+        if((pageNo - 1) * pageSize  > list.size() ) {
+            return null;
+        } else if((pageNo * pageSize > list.size())) {
+            return list.subList((pageNo -1) * pageSize, list.size());
+        }
+
+        return list.subList((pageNo - 1) * pageSize, pageNo *pageSize);
+    }
+
+    /*根据关预定者获取租品*/
+    public List<RentGoods> findByFollower(Serializable id, final int pageNo, final int pageSize) {
+        //return findByProperty("owner", id, pageNo, pageSize);
+        final String query = "FROM RentGoods WHERE owner = " + id;
+        List<RentGoods> list= getHibernateTemplate().execute(new HibernateCallback<List<RentGoods>>() {
+            @Override
+            public List doInHibernate(Session session) throws HibernateException {
+                Query query1 = session.createQuery(query);
+                return query1.setFirstResult((pageNo -1) * pageSize)
+                .setMaxResults(pageSize).list();
+            }
+        });
+        return list;
+    }
+
+    /*根据关预定者获取租品*/
+    public List<RentGoods> findByOrder(Serializable id, final int pageNo, final int pageSize) {
+        //return findByProperty("owner", id, pageNo, pageSize);
+        final String query = "FROM RentGoods WHERE orderUser = " + id;
+        List<RentGoods> list= getHibernateTemplate().execute(new HibernateCallback<List<RentGoods>>() {
+            @Override
+            public List doInHibernate(Session session) throws HibernateException {
+                Query query1 = session.createQuery(query);
+                return query1.setFirstResult((pageNo -1) * pageSize)
+                        .setMaxResults(pageSize).list();
+            }
+        });
+        return list;
+    }
+
+    public void addPath(Serializable id, String path) { //获取租品图片的路径
+        RentGoods rentGoods = get(RentGoods.class, id);
+        rentGoods.getPicturePathList().add(path);
+    }
+
+    public void delPath(Serializable id, String path) { //删除租品图片路径
+        RentGoods rentGoods = get(RentGoods.class, id);
+        rentGoods.getPicturePathList().remove(path);
     }
 
     @Override

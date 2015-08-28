@@ -61,7 +61,44 @@ public class UserDao extends BaseDao<User> {
 
     public List<RentGoods> getSendGoods(User user, int pageNo, int pageSize) { //获取用户发布的消息
         List<RentGoods> list = user.getSend();
-        return list.subList((pageNo -1) * pageSize, pageNo * pageSize + 1);
+        if(pageSize < 0) {
+            return list;
+        }
+        if((pageNo - 1) * pageSize  > list.size() ) {
+            return null;
+        } else if((pageNo * pageSize > list.size())) {
+            return list.subList((pageNo -1) * pageSize, list.size());
+        }
+
+        return list.subList((pageNo - 1) * pageSize, pageNo *pageSize);
+    }
+
+    public List<RentGoods> getFollowGoods(User user, int pageNo, int pageSize) {
+        List<RentGoods> list = user.getFollow();
+        if(pageSize < 0) {
+            return list;
+        }
+        if((pageNo - 1) * pageSize  > list.size() ) {
+            return null;
+        } else if((pageNo * pageSize > list.size())) {
+            return list.subList((pageNo -1) * pageSize, list.size());
+        }
+
+        return list.subList((pageNo - 1) * pageSize, pageNo *pageSize);
+    }
+
+    public List<RentGoods> getOrderGoods(User user, int pageNo, int pageSize) {
+        List<RentGoods> list = user.getOrder();
+        if(pageSize < 0) {
+            return list;
+        }
+        if((pageNo - 1) * pageSize  > list.size() ) {
+            return null;
+        } else if((pageNo * pageSize > list.size())) {
+            return list.subList((pageNo -1) * pageSize, list.size());
+        }
+
+        return list.subList((pageNo - 1) * pageSize, pageNo *pageSize);
     }
 
     @Override
