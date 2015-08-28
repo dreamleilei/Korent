@@ -50,4 +50,5 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
     public void delete(T entity) {
         getHibernateTemplate().delete(entity);
     }
+
 }

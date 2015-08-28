@@ -25,4 +25,5 @@ public interface IBaseDao<T> {
     public void delete(T entity) ;          //根据实体删除
 
 
+
 }

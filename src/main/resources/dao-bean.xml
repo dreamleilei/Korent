@@ -6,5 +6,11 @@
        <import resource="classpath:hibernate-configure.xml" />
        <bean id="userDao" class="com.korent.dao.UserDao"
              p:sessionFactory-ref="sessionFactory" />
+       <bean id="adminDao" class="com.korent.dao.AdminDao"
+             p:sessionFactory-ref="sessionFactory" />
+       <bean id="rentGoodsDao" class="com.korent.dao.RentGoodsDao"
+             p:sessionFactory-ref="sessionFactory" />
+       <bean id="notificationDao" class="com.korent.dao.NotificationDao"
+               p:sessionFactory-ref="sessionFactory"/>
 
 </beans>
