@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @ContextConfiguration(locations = "classpath:spring-hibernate.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -36,7 +37,7 @@ public class UserDaoTest extends TestCase {
     @Test
     public void testSave() throws Exception {
         User user= new User();
-        user.setName("leilei");
+        user.setName("leileitest");
         user.setEmail("1679211339@qq.com");
         user.setPassword("leilei");
         userDao.save(user);
@@ -47,25 +48,26 @@ public class UserDaoTest extends TestCase {
 
     @Test
     public void testUpdate() throws Exception {
-        User user = userDao.get(User.class, 7);
+        User user = userDao.get(User.class, 2);
         user.setPassword("change My Password");
         userDao.update(user);
     }
 
     @Test
     public void testDelete() throws Exception {
-        userDao.delete(User.class, 7);
+        userDao.delete(User.class, 1);
 
     }
 
     @Test
     public void testFindAll() throws Exception {
-        userDao.findAll(User.class);
+        List<User> list = userDao.findAll(User.class);
+        System.out.println(list);
     }
 
     @Test
     public void testFindCount() throws Exception {
-        assertEquals(Long.valueOf(0),(Long)userDao.findCount(User.class));
+        assertEquals(Long.valueOf(1),(Long)userDao.findCount(User.class));
     }
 
     public void testDelete1() throws Exception {
