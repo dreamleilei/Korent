@@ -35,8 +35,11 @@ public class UserDaoTest extends TestCase {
 
     }
 
+    @Test
     public void testgetOrder() throws Exception {
-        List<RentGoods> list
+        User user = userDao.get(User.class, 2);
+        List<RentGoods> list = userDao.getOrderGoods(user, 1, -1);
+        System.out.println(list.get(0).getId());
 
     }
 
@@ -54,8 +57,11 @@ public class UserDaoTest extends TestCase {
 
     @Test
     public void testUpdate() throws Exception {
-        User user = userDao.get(User.class, 2);
+        /*User user = userDao.get(User.class, 2);
         user.setPassword("change My Password");
+        userDao.update(user);*/
+        User user = new User();
+        user.setPassword("nonono");
         userDao.update(user);
     }
 
@@ -88,8 +94,13 @@ public class UserDaoTest extends TestCase {
 
     }
 
+    @Test
     public void testUpdate1() throws Exception {
+        User user = new User();
+        user.setId(1);
 
+        User user1 = userDao.get(User.class, 1);
+        userDao.delete(user1);
     }
 
     public void testDelete2() throws Exception {

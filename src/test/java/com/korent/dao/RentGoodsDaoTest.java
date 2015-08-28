@@ -50,7 +50,7 @@ public class RentGoodsDaoTest extends TestCase {
         address.setCountry("changan");
         address.setProvince("shanxi");
         address.setDistrict("xianyoudian");
-        List<RentGoods> list = rentGoodsDao.findByAddress(address, 1, 1);
+        List<RentGoods> list = rentGoodsDao.findByAddress(address, 1, -1);
         System.out.println(list);
     }
 
@@ -72,5 +72,11 @@ public class RentGoodsDaoTest extends TestCase {
     public void testFingByClassify() throws Exception {
         List<RentGoods> list = rentGoodsDao.findByClassify("gzi", 1, 3);
         System.out.println(list);
+    }
+
+    @Test
+    public void testFindFollowUser() throws Exception {
+        System.out.println(rentGoodsDao.findByFollower(3, 1, 1).get(0).getId());
+
     }
 }
