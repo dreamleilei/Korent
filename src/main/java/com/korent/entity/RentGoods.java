@@ -4,6 +4,7 @@ import com.korent.component.Address;
 import com.korent.genmu.GoodsStatus;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Entity
 @Table(name="rent")
-public class RentGoods {
+public class RentGoods implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="rid")
@@ -53,9 +54,9 @@ public class RentGoods {
     inverseJoinColumns=@JoinColumn(name="uid", referencedColumnName="uid"))
     private List<User> follower = new ArrayList<User>();
 
-    @ManyToOne
+    @ManyToOne(targetEntity=User.class)
     @JoinColumn(name="orderId", referencedColumnName="uid")
-    private User user;                      //记录该租品的预定者
+    private User orderUser;                      //记录该租品的预定者
 
     @ManyToOne(targetEntity=User.class)
     @JoinColumn(name="ownerId", referencedColumnName="uid")
@@ -137,12 +138,12 @@ public class RentGoods {
         this.address = address;
     }
 
-    public User getUser() {
-        return user;
+    public User getOrderUser() {
+        return orderUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setOrderUser(User orderUser) {
+        this.orderUser = orderUser;
     }
 
     public User getOwner() {

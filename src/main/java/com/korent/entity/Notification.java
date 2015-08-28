@@ -1,6 +1,7 @@
 package com.korent.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by lei on 2015/8/25.
@@ -8,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="notify")
-public class Notification {
+public class Notification implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

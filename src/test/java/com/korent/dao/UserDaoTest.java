@@ -1,5 +1,6 @@
 package com.korent.dao;
 
+import com.korent.entity.RentGoods;
 import com.korent.entity.User;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -31,6 +32,11 @@ public class UserDaoTest extends TestCase {
     }
 
     public void testGet() throws Exception {
+
+    }
+
+    public void testgetOrder() throws Exception {
+        List<RentGoods> list
 
     }
 

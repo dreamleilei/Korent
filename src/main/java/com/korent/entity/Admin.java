@@ -1,13 +1,14 @@
 package com.korent.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by lei on 2015/8/25.
  */
 @Entity
 @Table(name ="admin")
-public class Admin {
+public class Admin implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name ="aid")
