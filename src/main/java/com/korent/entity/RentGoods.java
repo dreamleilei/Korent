@@ -53,6 +53,14 @@ public class RentGoods {
     inverseJoinColumns=@JoinColumn(name="uid", referencedColumnName="uid"))
     private List<User> follower = new ArrayList<User>();
 
+    @ManyToOne
+    @JoinColumn(name="orderId", referencedColumnName="uid")
+    private User user;                      //记录该租品的预定者
+
+    @ManyToOne(targetEntity=User.class)
+    @JoinColumn(name="ownerId", referencedColumnName="uid")
+    private User owner;             //记录改该租品的发布者
+
     public RentGoods() {
     }
 
@@ -125,6 +133,23 @@ public class RentGoods {
     }
 
     public void setAddress(Address address) {
+
         this.address = address;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

@@ -32,7 +32,7 @@ public class User {
     private String qq;
 
     @OneToMany(targetEntity=RentGoods.class)
-    @JoinColumn(name="uid", referencedColumnName="uid")
+    @JoinColumn(name="orderId", referencedColumnName="uid")
     List<RentGoods> order = new ArrayList<RentGoods>();
 
     /*通过双向的关联映射，实现用户关注租品的功能*/
@@ -42,6 +42,10 @@ public class User {
             inverseJoinColumns=@JoinColumn(name="rid", referencedColumnName="rid")
     )
     private List<RentGoods> follow = new ArrayList<RentGoods>();
+
+    @OneToMany(targetEntity=RentGoods.class)
+    @JoinColumn(name="ownerId", referencedColumnName="uid")
+    private List<RentGoods> send = new ArrayList<RentGoods>();
 
     public User() {
     }
@@ -108,5 +112,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<RentGoods> getSend() {
+        return send;
+    }
+
+    public void setSend(List<RentGoods> send) {
+        this.send = send;
     }
 }
