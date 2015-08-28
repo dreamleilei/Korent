@@ -5,6 +5,7 @@ import com.korent.entity.User;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 
+import javax.jws.soap.SOAPBinding;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +52,16 @@ public class UserDao extends BaseDao<User> {
             map.put(o[0], o[1]);
         }
         return map;
+    }
+
+    public void orderRentGoods (User user, RentGoods rentGoods) {  //用户预定租品
+        user.getOrder().add(rentGoods);
+        update(user);
+    }
+
+    public List<RentGoods> getSendGoods(User user, int pageNo, int pageSize) { //获取用户发布的消息
+        List<RentGoods> list = user.getSend();
+        return list.subList((pageNo -1) * pageSize, pageNo * pageSize + 1);
     }
 
     @Override
