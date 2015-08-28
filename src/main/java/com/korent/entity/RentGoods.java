@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name="recent")
+@Table(name="rent")
 public class RentGoods {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -31,6 +31,9 @@ public class RentGoods {
 
     @Enumerated(EnumType.ORDINAL)
     private GoodsStatus status;
+
+    @Column(name="priceDescription",length=30,nullable=true)
+    private String price;
 
     @Temporal(TemporalType.DATE)
     @Column(name="updateDate")
@@ -95,6 +98,14 @@ public class RentGoods {
 
     public Date getUpdateDate() {
         return updateDate;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public void setUpdateDate(Date updateDate) {
