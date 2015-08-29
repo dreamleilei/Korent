@@ -76,7 +76,18 @@ public class RentGoodsDaoTest extends TestCase {
 
     @Test
     public void testFindFollowUser() throws Exception {
-        System.out.println(rentGoodsDao.findByFollower(3, 1, 1).get(0).getId());
+      //  System.out.println(rentGoodsDao.findByFollower(3, 1, 1).get(0).getId());
+
+    }
+
+    @Test
+    public void testAddPath() throws Exception {
+        //RentGoods rentGoods = rentGoodsDao.get(RentGoods.class, 2);
+        rentGoodsDao.addPath(2, "/picture");
+    }
+
+    @Test
+    public void testDelPath() throws Exception {
 
     }
 }

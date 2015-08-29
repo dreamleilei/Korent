@@ -61,4 +61,52 @@ public class UserServerTest {
     public void testGetUserDao() throws Exception {
 
     }
+
+    @Test
+    public void testGetAllFollowRentGoods1() throws Exception {
+
+    }
+
+    @Test
+    public void testGetFollowRentGoodsByPage1() throws Exception {
+
+    }
+
+    @Test
+    public void testGetFollowGoodsCount() throws Exception {
+        Integer result = userServer.getFollowGoodsCount(3,1);
+        assertEquals(Integer.valueOf(2), result);
+        assertEquals(Integer.valueOf(0), (Integer)userServer.getFollowGoodsCount(100, 1));
+
+    }
+
+    @Test
+    public void testGetAllRoderGoods1() throws Exception {
+
+    }
+
+    @Test
+    public void testGetOrderGoodsByPage1() throws Exception {
+
+    }
+
+    @Test
+    public void testGetOrderGoodsCount() throws Exception {
+
+    }
+
+    @Test
+    public void testGetSendGoods() throws Exception {
+
+    }
+
+    @Test
+    public void testGetSendGoodsbyPage() throws Exception {
+
+    }
+
+    @Test
+    public void testGetSendGoodsCount() throws Exception {
+
+    }
 }

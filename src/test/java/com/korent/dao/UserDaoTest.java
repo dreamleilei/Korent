@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import javax.transaction.Transactional;
+import java.io.Serializable;
 import java.util.List;
 
 @ContextConfiguration(locations = "classpath:spring-hibernate.xml")
@@ -33,6 +34,11 @@ public class UserDaoTest extends TestCase {
 
     public void testGet() throws Exception {
 
+    }
+
+    @Test
+    public void testgetFollowGoodsByPage(){
+        System.out.println(userDao.getFollowGoodsByPage(3, 1, 5));
     }
 
     @Test
@@ -116,6 +122,17 @@ public class UserDaoTest extends TestCase {
     }
 
     public void testDelete3() throws Exception {
+
+    }
+
+    @Test
+    public void testChangeInformation() throws Exception {
+
+    }
+
+    @Test
+    public void testChangeEmail() throws Exception {
+        userDao.changeEmail(3, "234234");
 
     }
 }
