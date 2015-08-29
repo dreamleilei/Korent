@@ -1,4 +1,4 @@
-package com.korent.genmu;
+package com.korent.kenum;
 
 /**
  * Created by lei on 2015/8/25.
