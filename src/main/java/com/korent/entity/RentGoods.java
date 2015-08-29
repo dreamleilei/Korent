@@ -1,9 +1,7 @@
 package com.korent.entity;
 
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
 import com.korent.component.Address;
-import com.korent.genmu.GoodsStatus;
+import com.korent.kenum.GoodsStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;

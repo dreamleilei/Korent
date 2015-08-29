@@ -51,6 +51,14 @@ public class User implements Serializable {
     public User() {
     }
 
+    public User(String name, String password, String phone, String email, String qq) {
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+        this.email = email;
+        this.qq = qq;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -122,20 +130,5 @@ public class User implements Serializable {
     public void setSend(List<RentGoods> send) {
 
         this.send = send;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", qq='" + qq + '\'' +
-                ", order=" + order +
-                ", follow=" + follow +
-                ", send=" + send +
-                '}';
     }
 }
