@@ -18,5 +18,6 @@
   <s:submit />
 </s:form>
 
+<s:debug />
 </body>
 </html>
