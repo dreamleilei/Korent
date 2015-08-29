@@ -99,7 +99,13 @@ public class UserService {
     }
 
     public List<RentGoods> searchRentGoods(String key) {
+
         return rentGoodsDao.findByClassify(key, 1, -1);
+    }
+
+    /*保存用户*/
+    public void saveUser(User user) {
+        userDao.save(user);
     }
 
     public UserService() {

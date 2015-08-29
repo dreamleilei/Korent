@@ -1,5 +1,6 @@
 package com.korent.service;
 
+import com.korent.entity.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -107,6 +108,13 @@ public class UserServiceTest {
 
     @Test
     public void testGetSendGoodsCount() throws Exception {
+
+    }
+
+    @Test
+    public void testSaveUser() throws Exception {
+        User user = new User("leilei", "leilei", "18829291276", "1679211339@qq.com", "1679211339");
+        userService.saveUser(user);
 
     }
 }
