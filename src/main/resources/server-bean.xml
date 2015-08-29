@@ -6,17 +6,17 @@
 
        <import resource="classpath:dao-bean.xml" />
 
-       <bean id="adminServer" class="com.korent.server.AdminServer"
+       <bean id="adminService" class="com.korent.service.AdminService"
              p:adminDao-ref="adminDao"
                />
 
-       <bean id="userServer" class="com.korent.server.UserServer"
+       <bean id="userService" class="com.korent.service.UserService"
              p:notificationDao-ref="notificationDao"
              p:rentGoodsDao-ref="rentGoodsDao"
              p:userDao-ref="userDao"
              />
 
-       <bean id="rentGoodsServer" class="com.korent.server.RentGoodsServer"
+       <bean id="rentGoodsService" class="com.korent.service.RentGoodsService"
              p:userDao-ref="userDao"
              p:rentGoodsDao-ref="rentGoodsDao"
              p:notificationDao-ref="notificationDao"

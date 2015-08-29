@@ -133,6 +133,22 @@ public class UserDaoTest extends TestCase {
     @Test
     public void testChangeEmail() throws Exception {
         userDao.changeEmail(3, "234234");
-
     }
+
+    @Test
+    public void testChangeQq() throws Exception {
+        userDao.changeQq(3, "1679211330");
+    }
+
+    @Test
+    public void testChangePhone() throws Exception {
+        userDao.changePhone(3, "18829291277");
+    }
+
+    @Test
+    public void testChangePassword() throws Exception {
+        userDao.changePassword(3, "leileichange");
+    }
+
+
 }

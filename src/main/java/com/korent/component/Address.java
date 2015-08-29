@@ -70,6 +70,7 @@ public class Address {
     }
 
     public void setOwner(RentGoods owner) {
+
         this.owner = owner;
     }
 }

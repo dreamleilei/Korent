@@ -1,5 +1,7 @@
 package com.korent.entity;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.korent.component.Address;
 import com.korent.genmu.GoodsStatus;
 
@@ -151,6 +153,9 @@ public class RentGoods implements Serializable {
     }
 
     public void setOwner(User owner) {
+
         this.owner = owner;
     }
+
 }
+

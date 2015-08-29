@@ -1,12 +1,12 @@
 package com.korent.action;
 
-import com.korent.server.RentGoodsServer;
+import com.korent.service.RentGoodsService;
 
 /**
  * Created by lei on 15-8-28.
  */
 public class RentGoodsAction {
-    private RentGoodsServer rentGoodsServer;
+    private RentGoodsService rentGoodsService;
     public RentGoodsAction() {
     }
 }
