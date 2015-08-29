@@ -81,8 +81,8 @@ public class RentGoodsDao extends BaseDao<RentGoods> {
         return list.subList((pageNo - 1) * pageSize, pageNo *pageSize);
     }
 
-    /*根据关预定者获取租品*/
-    public List<RentGoods> findByFollower(Serializable id, final int pageNo, final int pageSize) {
+    /*根据发布者获取租品*/
+    public List<RentGoods> findByOwner(Serializable id, final int pageNo, final int pageSize) {
         //return findByProperty("owner", id, pageNo, pageSize);
         final String query = "FROM RentGoods WHERE owner = " + id;
         List<RentGoods> list= getHibernateTemplate().execute(new HibernateCallback<List<RentGoods>>() {
@@ -110,6 +110,15 @@ public class RentGoodsDao extends BaseDao<RentGoods> {
         });
         return list;
     }
+
+    /*根据租品分页获取关注者*/
+    @SuppressWarnings("unchecked")
+    public List<User> findFollower(Serializable id, final int pageNo, final int pageSize){
+        RentGoods rentGoods = get(RentGoods.class, id);
+        return (List<User>)currentSession().createFilter(rentGoods.getFollower(),"").setFirstResult((pageNo - 1) * pageSize)
+        .setMaxResults(pageSize).list();
+    }
+
 
     public void addPath(Serializable id, String path) { //获取租品图片的路径
         RentGoods rentGoods = get(RentGoods.class, id);

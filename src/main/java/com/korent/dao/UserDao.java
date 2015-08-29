@@ -7,6 +7,7 @@ import org.hibernate.criterion.Projections;
 
 import javax.jws.soap.SOAPBinding;
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,11 @@ import java.util.Map;
  */
 public class UserDao extends BaseDao<User> {
 
-
+    private static final String email = "email";
+    private static final String qq = "qq";
+    private static final String phone = "phone";
+    private static final String password = "password";
+            
     /*获取所有预定的租品的列表*/
     public List<RentGoods> findOrderRentGoods(Serializable id) {
         User user = get(User.class, id);
@@ -54,10 +59,111 @@ public class UserDao extends BaseDao<User> {
         return map;
     }
 
+    /*用户预定租品*/
     public void orderRentGoods (User user, RentGoods rentGoods) {  //用户预定租品
         user.getOrder().add(rentGoods);
         update(user);
     }
+
+    /*用户预定租品*/
+    public void orderRentGoods(Serializable uid, RentGoods rentGoods){
+        User user = get(User.class, uid);
+        user.getOrder().add(rentGoods);
+        update(user);
+    }
+
+    /*根据用户分页获关注的取租品*/
+    @SuppressWarnings("unchecked")
+    public List<RentGoods> getFollowGoodsByPage(Serializable id, int pageNo, int pageSize) {
+        User user = get(User.class, id);
+        List<RentGoods> list =currentSession().createFilter(user.getFollow(), "")
+                .setMaxResults(pageSize)
+                .setFirstResult((pageNo -1) *(pageSize))
+                .list();
+        return list;
+    }
+
+    /*获取用户关注租品的总集合页数*/
+    public int getFollowGoodsCount(Serializable id, int pageSize){
+        int resultCount = getFollowGoodsByPage(id, 1, -1).size();
+        return resultCount % pageSize == 0 ? resultCount /pageSize : resultCount /pageSize + 1;
+    }
+
+    /*根据用户分页获取发布的租品*/
+    @SuppressWarnings("unchecked")
+    public List<RentGoods> getSendGoodsByPage(Serializable id, int pageNo, int pageSize) {
+            User user = get(User.class, id);
+            List<RentGoods> list =currentSession().createFilter(user.getSend(), "")
+                    .setMaxResults(pageSize)
+                    .setFirstResult((pageNo -1) *(pageSize))
+                    .list();
+            return list;
+    }
+
+
+    /*获取用户租品的总集合页数*/
+    public int getSendGoodsCount(Serializable id, int pageSize){
+        int resultCount = getSendGoodsByPage(id, 1, -1).size();
+        return resultCount % pageSize == 0 ? resultCount /pageSize : resultCount /pageSize + 1;
+    }
+
+    /*根据用户分页获取预定的租品*/
+    @SuppressWarnings("unchecked")
+    public List<RentGoods> getOrderGoodsByPage(Serializable id, int pageNo, int pageSize) {
+        User user = get(User.class, id);
+        List<RentGoods> list =currentSession().createFilter(user.getOrder(), "")
+                .setMaxResults(pageSize)
+                .setFirstResult((pageNo -1) *(pageSize))
+                .list();
+        return list;
+    }
+
+    /*获取用户租品的总集合页数*/
+    public int getOrderGoodsCount(Serializable id, int pageSize){
+        int resultCount = getOrderGoodsByPage(id, 1, -1).size();
+        return resultCount % pageSize == 0 ? resultCount /pageSize : resultCount /pageSize + 1;
+    }
+
+    /*用户修改信息*/ //暂时先留个接口
+    public void changeInformation(Serializable id, String property, Object value) {
+        User user = get(User.class, id);
+        Field field = null;
+        try {
+            field = user.getClass().getDeclaredField(property);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+        field.setAccessible(true);
+        try {
+            field.set(user, value);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        update(user);
+    }
+
+    /*修改用户的邮箱*/
+    public void changeEmail(Serializable id, Object value) {
+        changeInformation(id, email, value);
+    }
+
+    /*修改用户的QQ*/
+    public void changeQq(Serializable id, Object value) {
+        changeInformation(id, qq, value);
+    }
+
+    /*修改用户的电话*/
+    public void changePhone(Serializable id, Object value) {
+        changeInformation(id, phone, value);
+    }
+
+    /*修改用户的密码*/
+    public void changePassword(Serializable id, Object value) {
+        changeInformation(id, password, value);
+    }
+
+
+
 
     public List<RentGoods> getSendGoods(User user, int pageNo, int pageSize) { //获取用户发布的消息
         List<RentGoods> list = user.getSend();
