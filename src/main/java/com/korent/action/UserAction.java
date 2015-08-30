@@ -13,12 +13,15 @@ import java.util.regex.Pattern;
  */
 public class UserAction extends ActionSupport {
     private UserService userService;
+
+    private Integer id;
     private String username;
     private String password;
     private String email;
     private String qq;
     private String phone;
 
+    /*用户登录的action*/
     public String login() {
         Map<Object, Object> userMap = userService.getUserMap();
         if(!userMap.containsKey(username)){
@@ -30,6 +33,7 @@ public class UserAction extends ActionSupport {
         return SUCCESS;
     }
 
+    /*用户注册的action*/
     public String register() {
         Map<Object, Object> userMap = userService.getUserMap();
         if(userMap.containsKey(username)) {
@@ -41,10 +45,23 @@ public class UserAction extends ActionSupport {
         }
     }
 
+    /*用户修改信息的action*/
+    public String changeInformation() {
+        userService.changeInformation(id, phone, qq, email);
+        return SUCCESS;
+    }
+
+    /*用户修改密码action*/
+    public String changePassword() {
+        userService.changePassword(id, password);
+        return SUCCESS;
+    }
+
+
     public void validateRegister() {
         if (phone == null) {
         } else if(phone.length() != 11){
-            addFieldError(phone, "电话号码格式不正确");
+            addFieldError("phone", "电话号码格式不正确");
         }
     }
 
@@ -53,7 +70,7 @@ public class UserAction extends ActionSupport {
         Pattern userPattern = Pattern.compile("^([_\\u4e00-\\u9fa5a-zA-Z0-9]+)$");
         Matcher matcher = userPattern.matcher(username);
         if(!matcher.matches()){
-            addFieldError(username, "用户名格式不正确");
+            addFieldError("username", "用户名格式不正确");
         }
     }
 
