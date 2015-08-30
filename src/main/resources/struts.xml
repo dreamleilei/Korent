@@ -10,5 +10,9 @@
                         <result>/index.jsp</result>
                         <result name="input">/WEB-INF/content/register.jsp</result>
                 </action>
+                <action name="register" class="userAction" method="register">
+                        <result name="success" >/login.html</result>
+                        <result name="input" >/login.jsp</result>
+                </action>
         </package>
 </struts>
