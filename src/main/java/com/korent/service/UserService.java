@@ -20,6 +20,12 @@ public class UserService {
     private NotificationDao notificationDao;
 
 
+
+    /*获取所有用户的列表*/
+
+    public List<String> getUserList() {
+        return userDao.getAllUserName();
+    }
     /*获取用户名和密码的map序列*/
 
     public Map<Object, Object> getUserMap() {
@@ -103,10 +109,17 @@ public class UserService {
         return rentGoodsDao.findByClassify(key, 1, -1);
     }
 
+    /*用户修改信息*/
+
+    public void changeInformation(Serializable id, Object phone, Object qq, Object email) {
+        userDao.changeInformation(id, phone, qq, email);
+    }
+
     /*保存用户*/
     public void saveUser(User user) {
         userDao.save(user);
     }
+
 
     public UserService() {
     }

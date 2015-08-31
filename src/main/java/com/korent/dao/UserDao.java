@@ -4,6 +4,7 @@ import com.korent.entity.RentGoods;
 import com.korent.entity.User;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import javax.jws.soap.SOAPBinding;
 import java.io.Serializable;
@@ -70,6 +71,15 @@ public class UserDao extends BaseDao<User> {
         User user = get(User.class, uid);
         user.getOrder().add(rentGoods);
         update(user);
+    }
+
+    /*根据用户名获取用户的id*/
+    @SuppressWarnings("unchecked")
+    public Integer getIdByName(String name){
+        List<User> list = currentSession().createCriteria(User.class).
+                add(Restrictions.eq("name",  name)).
+                list();
+        return list.get(0).getId();
     }
 
     /*根据用户分页获关注的取租品*/
@@ -162,6 +172,13 @@ public class UserDao extends BaseDao<User> {
         changeInformation(id, password, value);
     }
 
+    /*用户修改信息*/
+    public void changeInformation(Serializable id, Object phoneNumber, Object qqNumber, Object emailNumber) {
+        User user = get(User.class, id);
+        user.setPhone((String) phoneNumber);
+        user.setEmail((String) emailNumber);
+        user.setQq((String) qqNumber);
+    }
 
 
 

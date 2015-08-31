@@ -1,9 +1,13 @@
 package com.korent.action;
 
+import com.google.gson.Gson;
 import com.korent.entity.User;
 import com.korent.service.UserService;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
 
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,6 +34,8 @@ public class UserAction extends ActionSupport {
         if(!userMap.get(username).equals(password)){
             return ERROR;
         }
+        ActionContext actionContext = ActionContext.getContext();
+        actionContext.getSession().put("user",id);
         return SUCCESS;
     }
 
@@ -51,13 +57,29 @@ public class UserAction extends ActionSupport {
         return SUCCESS;
     }
 
+
     /*用户修改密码action*/
     public String changePassword() {
         userService.changePassword(id, password);
         return SUCCESS;
     }
 
+    /*获得所有用户的action*/
+    public String getUserList() {
 
+        Gson gson = new Gson();
+
+        List <String> userNameList = userService.getUserList();
+        System.out.println(gson.toJson(userNameList));
+        String userList = gson.toJson(userNameList);
+
+
+        ActionContext actionContext = ActionContext.getContext();
+
+        ServletActionContext.getRequest().setAttribute("userList", userList);
+
+        return SUCCESS;
+    }
     public void validateRegister() {
         if (phone == null) {
         } else if(phone.length() != 11){
@@ -65,15 +87,14 @@ public class UserAction extends ActionSupport {
         }
     }
 
-    @Override
+   /* @Override
     public void validate() {
         Pattern userPattern = Pattern.compile("^([_\\u4e00-\\u9fa5a-zA-Z0-9]+)$");
         Matcher matcher = userPattern.matcher(username);
         if(!matcher.matches()){
             addFieldError("username", "用户名格式不正确");
         }
-    }
-
+    }*/
     public UserAction() {
     }
 
