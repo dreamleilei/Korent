@@ -1,5 +1,5 @@
 body{
-    background-image:url(/resource/image/loginBackGround.jpg);
+    background-image:url(../uploadImage/loginBackGround.jpg);
     background-repeat:no-repeat;
     background-size:100%;
 }
@@ -101,4 +101,16 @@ font-size: xx-large;
     font-family: "黑体";
     background-image: url(/resource/image/loginButton.png);
     border: thin outset #999999;
+}
+
+#Layer4 {
+    font-size:35px;
+    text-align:center;
+    color:#FFFFFF;
+    text-shadow: 0 0 10px #fff, 0 0 15px #fff, 0 0 40px green, 0 0 40px green;
+}
+
+.message{
+    color:red;
+    padding-left:10px;
 }
