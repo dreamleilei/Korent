@@ -1,117 +1,260 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
-<head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<meta http-equiv="Content-Language" content="zh-cn" />
-	<link rel="stylesheet" href="/resource/css/regist.css" type="text/css" />
+<head lang="en">
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Language" content="zh-cn" />
+	<link rel="stylesheet" href="./resource/css/regist.css" type="text/css" />
+	<script type="text/javascript" src="./resource/js/jquery-1.6.1.min.js" ></script>
+	<title></title>
 </head>
-
-<body>
 <div id="header">
-<h1>×¢²áÍ¨ĞĞÖ¤</h1>
+	<h1>æ³¨å†Œé€šè¡Œè¯</h1>
 </div>
 <div id="line"></div>
 
 <div id="content">
-<br/>
-<form action="/korent/register.action"  method="post"><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ÓÃ»§Ãû: 
-<input type="text" name="username" /><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ÊÖ»úºÅ: 
-<input type="tel" name="phone"  id="phone" onKeyUp="checkphone()"/><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ÃÜÂë: 
-<input type="password" name="password" /><br/><br/>
-<span class="prompt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp6-18Î»£¬Çø·Ö´óĞ¡Ğ´,×ÖÄ¸¡¢Êı×Ö¡¢ÌØÊâ·ûºÅÖĞµÄÁ½ÖÖ»òÁ½ÖÖÒÔÉÏ</span></p>
-ÔÙ´ÎÊäÈëÃÜÂë: 
-<input type="password" name="passwordAgain" /><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QQºÅ: 
-<input type="text" name="qq"  id="qq"  onKeyUp="checkqq()"/><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email: 
-<input type="email" name="email" id="Email" onKeyUp="checkEmail()" /><br/><br/>
-<input type="checkbox" name="protocol" />
-ÎÒÒÑÔÄ¶Á²¢½ÓÊÜ¡¶ÓÃ»§·şÎñĞ­Òé¡·<br />
-<br/>
-<input type="submit" value="È·ÈÏ" onClick="" style="width:100px; height:30px; " class="queren"/>
-</form>
+	<br/>
+	<s:action name="getUserList" namespace="/korent" var="userList">
+	</s:action>
+
+	<s:form  action="login" namespace="/korent" method="post"><br/><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ç”¨æˆ·å:
+		<input type="text" name="username" id="username"/>
+		<span class="error" id="username_format_error"><br />ç”¨æˆ·åä¸åˆæ³•åªå…è®¸æ±‰å­—,æ•°å­—,å­—æ¯å’Œä¸‹åˆ’çº¿</span>
+		<span class="error" id="username_length_error"><br />ç”¨æˆ·åé•¿åº¦ä¸åˆæ³•(4-16ä¸ªå­—ç¬¦)</span>
+		<span class ="message" id="username_message" ><br/>è¯¥ç”¨æˆ·åå·²ç»å­˜åœ¨,è¯·é€‰æ‹©å…¶å®ƒç”¨æˆ·å</span>
+		<br/><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;æ‰‹æœºå·:
+		<input type="tel" name="phone"  id="phone" />
+		<span id="phone_error" class="error"><br />è¯·è¾“å…¥æ­£ç¡®çš„æ‰‹æœºå·</span><br/><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;å¯†ç :
+		<input type="password" name="password" id="password"/>
+		<br/><br/>
+		<span class="prompt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp6-18ä½ï¼ŒåŒºåˆ†å¤§å°å†™,å­—æ¯ã€æ•°å­—ã€ä¸åŒ…å«ç©ºæ ¼</span>
+		<span id = password_error class="error" ><br/>å¯†ç æ ¼å¼ä¸æ­£ç¡®,é•¿åº¦ä¸º6-18ä½,ä¸”ä¸å«ç©ºæ ¼</span></p>
+		å†æ¬¡è¾“å…¥å¯†ç :
+		<input type="password" name="passwordAgain" id="passwordAgain" />
+        <span id="passwordAgain_error" class="error">
+            <br />ä¸¤æ¬¡å¯†ç ä¸ä¸€è‡´</span><br/><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QQå·:
+		<input type="text" name="qq"  id="qq"/>
+		<span id ="qq_error" class="error"><br />è¯·è¾“å…¥æ­£ç¡®çš„qqå·ç </span><br/><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email:
+		<input type="email" name="email" id="email" />
+		<span id="email_error" class="error"><br />è¯·è¾“å…¥æ­£ç¡®çš„é‚®ç®±æ ¼å¼</span><br/><br/>
+		<input type="checkbox" name="protocol" id="protocol"/>
+		æˆ‘å·²é˜…è¯»å¹¶æ¥å—ã€Šç”¨æˆ·æœåŠ¡åè®®ã€‹
+		<span id="message_show" class="message" ><br/>è¯·æŒ‰ç…§ç›¸åº”çš„æ ¼å¼è¡¥å…¨ä¿¡æ¯</span><br />
+		<br/>
+		<input id = "submit" type="submit" value="ç¡®è®¤" onClick="" style="width:100px; height:30px; " class="queren"/>
+		<span class="message" id="submit_message" >è¯·ç¡®ä¿ç”¨æˆ·åå’Œå¯†ç éƒ½ä¸ä¸ºç©º</span>
+
+	</s:form>
 </div>
 <div id="menu">
-<dr/><dr/>
-<h4>×¢²á³ÉÎª¡°¿á×âÍø¡±µÄÓÃ»§ºó£¬Äú¿ÉÒÔ£º</h4>
-<ul>
-  <li><span class="red">ä¯ÀÀ</span>ÍøÕ¾ÏÔÊ¾µÄ×âÆ·ĞÅÏ¢</li>
-  <br/>
-  <li><span class="red">·¢²¼</span>ÄúĞÄ°®×âÆ·µÄ¾ßÌåĞÅÏ¢£¬ÒÔ·½±ãÆäËûÓÃ»§Ô¤¶©</li>
-  <br/>
-  <li>³É¹¦Ô¤¶©ºóÄú¿ÉÒÔÁªÏµµ½×âÖ÷½øĞĞÉÌÒé</li>
-  <br/>
-  <li><span class="red">²éÑ¯</span>ÄúÏëÒª×âÁŞµÄÎïÆ·</li>
-  <br/>
-  <li><span class="red">¹ÜÀí</span>ÄúµÄ¸öÈËĞÅÏ¢</li>
-  <br/>
-  <li><span class="red">ÊÕ²Ø</span>ÄúĞÄÒÇµÄ×âÆ·</li>
-</ul>
+	<dr/><dr/>
+	<h4>æ³¨å†Œæˆä¸ºâ€œé…·ç§Ÿç½‘â€çš„ç”¨æˆ·åï¼Œæ‚¨å¯ä»¥ï¼š</h4>
+	<ul>
+		<li><span class="red">æµè§ˆ</span>ç½‘ç«™æ˜¾ç¤ºçš„ç§Ÿå“ä¿¡æ¯</li>
+		<br/>
+		<li><span class="red">å‘å¸ƒ</span>æ‚¨å¿ƒçˆ±ç§Ÿå“çš„å…·ä½“ä¿¡æ¯ï¼Œä»¥æ–¹ä¾¿å…¶ä»–ç”¨æˆ·é¢„è®¢</li>
+		<br/>
+		<li>æˆåŠŸé¢„è®¢åæ‚¨å¯ä»¥è”ç³»åˆ°ç§Ÿä¸»è¿›è¡Œå•†è®®</li>
+		<br/>
+		<li><span class="red">æŸ¥è¯¢</span>æ‚¨æƒ³è¦ç§Ÿèµçš„ç‰©å“</li>
+		<br/>
+		<li><span class="red">ç®¡ç†</span>æ‚¨çš„ä¸ªäººä¿¡æ¯</li>
+		<br/>
+		<li><span class="red">æ”¶è—</span>æ‚¨å¿ƒä»ªçš„ç§Ÿå“</li>
+	</ul>
 </div>
 <body onload="show()">
-    <center>
-<div id="footer" style="color:#000000">¿á×âÍø  Korent</div>
- </center>
+<center>
+	<div id="footer" style="color:#000000">é…·ç§Ÿç½‘  Korent</div>
+</center>
 </body>
-
-
-
+<s:debug />
 </body>
-<script type="text/javascript">
+<script type="text/javascript" >
+
 	function show() {
 		footer.style.visibility = (footer.style.visibility == "hidden") ? "visible" : "hidden";
 		setTimeout("show()", 400);
 	}
-	function checkEmail(){
-		var ENumber = document.getElementById('Email').value;
-		var show = document.getElementById('Email');
-		var pattern =  /^\w+[@]\w+[.]\w+$/g;
-		if(pattern.test(ENumber)){
-			show.style.borderColor = 'green';
-			show.style.borderStyle = 'solid';
-			show.style.borderWidth = 1;
-		}
-		else{
-			show.style.borderColor = 'red';
-			show.style.borderStyle = 'solid';
-			show.style.borderWidth = 1;
-		}
-	}
 
-	function checkqq(){
-		var ENumber = document.getElementById('qq').value;
-		var show = document.getElementById('qq');
-		var pattern =  /^[0-9]+$/g;
-		if(pattern.test(ENumber)){
-			show.style.borderColor = 'green';
-			show.style.borderStyle = 'solid';
-			show.style.borderWidth = 1;
+	var  protocolValidate  = function() {
+		/*  $('#submit').prop('disabled', true);*/
+		{
+			if ($('#protocol').is(':checked')) {
+				$('#submit').prop('disabled', false);
+			} else {
+				$('#submit').prop('disabled', true);
+			}
 		}
-		else{
-			show.style.borderColor = 'red';
-			show.style.borderStyle = 'solid';
-			show.style.borderWidth = 1;
-		}
-	}
 
-	function checkphone(){
-		var ENumber = document.getElementById('phone').value;
-		var show = document.getElementById('phone');
-		var pattern =  /^1[0-9]{10}$/g;
-		if(pattern.test(ENumber)){
-			show.style.borderColor = 'green';
-			show.style.borderStyle = 'solid';
-			show.style.borderWidth = 1;
+	};
+	var emailValidation =  function(){
+		var email = $('#email').val();
+		var emailPattern = new RegExp("\\b^[\'_a-z0-9-\\+]+(\\.[\'_a-z0-9-\\+]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*\\.([a-z]{2}|aero|arpa|asia|biz|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|nato|net|org|pro|tel|travel|xxx)$\\b");
+		if(!emailPattern.test(email)){
+			$('#email_error').show();
+			$(this).addClass('wrong');
+			$(this).removeClass('correct');
+		} else {
+			$('#email_error').hide();
+			$(this).addClass('correct');
+			$(this).removeClass('wrong');
 		}
-		else{
-			show.style.borderColor = 'red';
-			show.style.borderStyle = 'solid';
-			show.style.borderWidth = 1;
+	};
+
+	var usernameValidation = function(){
+		var username = $('#username').val();
+		var userPattern =  /^([_\u4e00-\u9fa5a-zA-Z0-9]{4,16})$/g;
+		var userList =<s:property value="#request.userList" escape="false" escapeHtml="false"/>;
+
+		if(username.length < 4 || username.length >16){
+			$('#username_length_error').show();
+			$(this).addClass('wrong');
+			$(this).removeClass('correct');
+
+		} else {
+			$('#username_length_error').hide();
+			$(this).addClass('correct');
+			$(this).removeClass('wrong');
 		}
-	}
+		if(!userPattern.test(username)){
+			$('#username_format_error').show();
+			$(this).addClass('wrong');
+			$(this).removeClass('correct');
+
+		} else {
+			$('#username_format_error').hide();
+			$(this).addClass('correct');
+			$(this).removeClass('wrong');
+		}
+
+		if($.inArray(username, userList) == -1){
+			$('#username_message').hide();
+			$(this).addClass('correct');
+			$(this).removeClass('wrong');
+		} else{
+			$('#username_message').show();
+			$(this).addClass('wrong');
+			$(this).removeClass('correct');
+
+		}
+
+	};
+
+	var qqValidation = function(){
+		var qq = $('#qq').val();
+		var qqPattern =/^[1-9][0-9]{5,10}$/g;
+		if(qq.length > 0) {
+			if(!qqPattern.test(qq) ) {
+				$('#qq_error').show();
+				$(this).addClass('wrong');
+				$(this).removeClass('correct');
+			}
+			else {
+				$('#qq_error').hide();
+				$(this).addClass('correct');
+				$(this).removeClass('wrong');
+			}
+		}
+	};
+
+	var phoneValidation = function(){
+		var phone = $('#phone').val();
+		var phonePattern =  /^1[0-9]{10}$/g;
+		if(phone.length >0) {
+			if(!phonePattern.test(phone)){
+				$('#phone_error').show();
+				$(this).addClass('wrong');
+				$(this).removeClass('correct');
+			} else {
+				$('#phone_error').hide();
+				$(this).addClass('correct');
+				$(this).removeClass('wrong');
+			}
+		}
+	};
+
+	var errorShow = function(){
+		$('.error').each(function() {
+			if (!$(this).is(':hidden')) {
+				$('#submit').prop('disabled', true);
+				$('#protocol').attr("checked", false);
+				$('#message_show').show().delay(1500).hide(0);
+
+
+			}
+		})
+	};
+
+	var passwordValidate = function() {
+		var password = $('#password').val();
+		var passwordPattern = /^[^ ]{4,16}$/g;
+		if(password.length < 6 || password.length >18){
+			$('#password_error').show();
+			$(this).addClass('wrong');
+			$(this).removeClass('correct');
+
+		} else {
+			$('#password_error').hide();
+			$(this).addClass('correct');
+		}
+		if(!passwordPattern.test(password)){
+			$('#password_error').show();
+			$(this).addClass('wrong');
+			$(this).removeClass('correct');
+
+		} else {
+			$('#password_error').hide();
+			$(this).addClass('correct');
+			$(this).removeClass('wrong');
+		}
+	};
+
+	var passwordAgainValidate = function() {
+		var password  = $('#password').val();
+		var passwordAgain = $('#passwordAgain').val();
+		if(password != passwordAgain) {
+			$('#passwordAgain_error').show();
+			$(this).addClass('wrong');
+			$(this).removeClass('correct');
+		} else {
+			$('#passwordAgain_error').hide();
+			$(this).addClass('correct');
+			$(this).removeClass('wrong');
+		}
+	};
+	$(document).ready(function() {
+		$('.error').hide();
+		$(".message").hide();
+		/*  $('#submit').prop('disabled', true);*
+
+		 */
+
+		$('#protocol').click(protocolValidate).click(errorShow);
+		$('#username').keyup(usernameValidation);
+		$('#email').keyup(emailValidation);
+		$('#qq').keyup(qqValidation);
+		$('#phone').keyup(phoneValidation);
+		$('#password').keyup(passwordValidate);
+		$('#passwordAgain').keyup(passwordAgainValidate);
+
+		$('#submit').prop('disabled', true).click(function(event){
+			var username = $('#username').val();
+			var password = $('password').val();
+			if(username.length < 1 || password.length <1){
+				$('#submit_message').show().delay(3000).hide(0);
+				$('#protocol').attr('checked', false);
+				event.preventDefault();
+			}
+		});
+	})
 </script>
 </html>
