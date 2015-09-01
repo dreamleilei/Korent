@@ -151,4 +151,9 @@ public class UserDaoTest extends TestCase {
     }
 
 
+    @Test
+    public void testGetIdByName() throws Exception {
+        Integer result = userDao.getIdByName("sunlei");
+        assertEquals(result, Integer.valueOf(8));
+    }
 }

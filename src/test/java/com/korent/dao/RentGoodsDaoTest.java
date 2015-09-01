@@ -90,4 +90,10 @@ public class RentGoodsDaoTest extends TestCase {
     public void testDelPath() throws Exception {
 
     }
+
+    @Test
+    public void testFindByOrder() throws Exception {
+        System.out.println(rentGoodsDao.findByOrder(4, 1, 5));
+
+    }
 }
