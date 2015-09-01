@@ -6,13 +6,51 @@
 
 <struts>
         <package name ="korent" namespace="/korent" extends="struts-default" >
+
+                <!--用户登录-->
                 <action name="login" class="userAction" method="login" >
                         <result>/index.jsp</result>
                         <result name="input">/WEB-INF/content/register.jsp</result>
                 </action>
+
+                <!--用户注册-->
                 <action name="register" class="userAction" method="register">
-                        <result name="success" >/login.html</result>
-                        <result name="input" >/login.jsp</result>
+                        <result name="success" >/userLogin.html</result>
+                        <result name="input" >/register.jsp</result>
                 </action>
+                <!--用户修改注释-->
+                <action name="changeInformation" class="userAction" method="changeInformation" >
+                </action>
+
+                <!--获取用户列表-->
+                <action name="getUserList" class="userAction" method="getUserList" >
+                </action>
+
+                <action name="upload" class="upload" method="execute" >
+                        <param name="savePath">/uploadFiles</param>
+                        <result >/index.jsp</result>
+                </action>
+
+                <!--用户获取个人信息-->
+                <action name="getInformation" class="userAction" method="getInformation" />
+
+        </package>
+
+        <package name="getInfo" namespace="/getInfo" extends="json-default" >
+                <action name="getJson" class="userInfoAction" >
+                        <result type="json" >
+                                <param name="noCache">true</param>
+                                <param name="contentType">text/html</param>
+                                <param name="excludeProperties">userService</param>
+                        </result>
+                </action>
+
+                <action name="page" class="rentGoodsAction" method="getOrderRent">
+                </action>
+        </package>
+
+        <package name="util" namespace="/util" extends="struts-default" >
+                <action name="createCheckCode" class="codeAction" method="createCheckCode" />
+                <action name="checkCheckCode" class="codeAction" method="checkCheckCode" />
         </package>
 </struts>
