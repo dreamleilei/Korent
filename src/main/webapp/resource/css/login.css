@@ -39,7 +39,7 @@ font-size: xx-large;
 #Layer3 {
     position:absolute;
     left:140px;
-    top:274px;
+    top:325px;
     width:252px;
     height:48px;
     z-index:3;
@@ -113,4 +113,24 @@ font-size: xx-large;
 .message{
     color:red;
     padding-left:10px;
+}
+
+#Layer7 {
+    position:absolute;
+    left:9px;
+    top:11px;
+    width:200px;
+    height:100px;
+    z-index:4;
+    background-image:url(/resouce/image/logo5.png);
+    background-repeat:no-repeat;
+    background-size:100%;
+}
+
+#checkCode{
+    position: absolute;
+    left:172px;
+    top:274px;
+    width:395px;
+    height:43px;
 }

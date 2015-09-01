@@ -1,7 +1,16 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
+<head>
+    <title></title>
+</head>
 <body>
-<h2>Hello World!</h2>
-<input type="button" value="login" onclick="onclick()"
+<h1>hello</h1>
+<s:action name="getInformation" namespace="/korent" />
+<s:property value="#session.user" />
+<s:property value="#request.userInfo" />
+<a href="/page.jsp" ><input type="button" value="goTo" /></a>
+<%--<s:debug />--%>
 </body>
 <script type="text/javascript" >
     function onclick() {

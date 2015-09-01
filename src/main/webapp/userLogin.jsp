@@ -6,9 +6,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+  String path = request.getContextPath();
+  String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
+
+
+%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
+  <base href="<%=basePath%>">
   <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
   <title>用户登录</title>
   <link href="./resource/css/login.css" rel="stylesheet" type="text/css" />
@@ -23,6 +31,10 @@
   <div id="Layer2">
     <input name="password" id = "password" type="password" value="" placeholder="密码" class="login_mima" />
   </div>
+  <div id="checkCode">
+  <input type="text" id="check" name="check"  class="login_mima" placeholder="密码" maxlength="4"/>
+  <img border=0 src="/util/createCheckCode.action" id="safecode"><a href="javascript:changeCode();">不清晰，换一张</a></td>
+    <span id="show"></span></div>
   <div id="Layer3" align="center">
     <input type="submit" class="login_button" id="submit" value ="登录" style="width:195px; height:34px;" />
     <span id="submit_message" class="message"><br /> 请确保用户名和密码不为空</span>
@@ -35,16 +47,16 @@
 </body>
 <script type="text/javascript">
   <!--
-  /*function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+  function MM_reloadPage(init) {  //reloads the window if Nav4 resized
     if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
       document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
     else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
   }
-  MM_reloadPage(true);*/
+  MM_reloadPage(true);
   //-->
   $(document).ready(function(event){
     $('.message').hide();
-    $('#submit').click(function(event){
+    $('#submit').prop('disabled', true).click(function(event){
               var username = $('#username').val();
               var password = $('#password').val();
               if(username.length < 1 || password.length < 1){
@@ -54,6 +66,70 @@
             }
     )
   })
+</script>
+
+<script type="text/javascript">
+  var code1 = "";
+  $(document).ready(
+          function (){
+            $("#check").keyup(
+                    function(){
+                      $.ajax({
+                        type: "POST",
+                        url: "/util/checkCheckCode.action",
+                        data: "code="+$("#check").val(),
+
+                        success: function(msg){
+                          if(msg==1)
+                          {
+                            code1="ok";
+                            $("#show").css({"color":"#666666"});
+                            $("#show").html("<br/>验证码正确");
+                            $('#submit').prop('disabled', false);
+
+                          }
+
+                          else if(msg==0)
+                          {
+                            code1="";
+                            $("#show").css({"color":"#F00"});
+                            $("#show").html("<br/>验证码错误");
+                            $('#submit').prop('disabled', true);
+                          }
+
+                        },
+                        error:function(msg){
+                          alert("<br/>您的网络状态不佳,请稍后再次尝试");
+                          $('#submit').prop('disabled', true);
+
+                        }
+                      });
+                    }
+            );
+
+
+          }
+
+  );
+
+
+</script>
+<script type="text/javascript">
+  function fo()
+  {
+    $("#username").focus();
+  }
+
+  function changeCode()
+  {
+    $("#safecode").attr("src","/util/createCheckCode.action?x="+Math.random());
+  }
+  function log()
+  {
+    if(code1=="ok")
+      document.getElementById("login").submit();
+  }
+
 </script>
 </html>
 
