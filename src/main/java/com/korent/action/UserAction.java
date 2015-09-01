@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -35,6 +36,7 @@ public class UserAction extends ActionSupport {
             return ERROR;
         }
         ActionContext actionContext = ActionContext.getContext();
+        Integer id = userService.getIdByName(username);
         actionContext.getSession().put("user",id);
         return SUCCESS;
     }
@@ -49,6 +51,15 @@ public class UserAction extends ActionSupport {
             userService.saveUser(user);
             return SUCCESS;
         }
+    }
+
+    /*用户获取个人信息*/
+    public String getInformation() {
+       // Integer id = (Integer)ServletActionContext.getRequest().getSession().getAttribute("user");
+        System.out.println(id);
+        System.out.println((Integer) ServletActionContext.getRequest().getSession().getAttribute("user"));
+        ServletActionContext.getRequest().setAttribute("userInfo", userService.information(id));
+        return SUCCESS;
     }
 
     /*用户修改信息的action*/
@@ -69,10 +80,8 @@ public class UserAction extends ActionSupport {
 
         Gson gson = new Gson();
 
-        List <String> userNameList = userService.getUserList();
-        System.out.println(gson.toJson(userNameList));
+        List<String> userNameList = userService.getUserList();
         String userList = gson.toJson(userNameList);
-
 
         ActionContext actionContext = ActionContext.getContext();
 
@@ -80,6 +89,9 @@ public class UserAction extends ActionSupport {
 
         return SUCCESS;
     }
+
+    /*分页获取用户的订单*/
+
     public void validateRegister() {
         if (phone == null) {
         } else if(phone.length() != 11){
@@ -146,10 +158,14 @@ public class UserAction extends ActionSupport {
         this.phone = phone;
     }
 
-    public static void main(String[] args) {
-        Pattern pattern = Pattern.compile("^([_\\u4e00-\\u9fa5a-zA-Z0-9]+)$");
-        Matcher matcher = pattern.matcher("孙磊_adffdaf__**");
-        System.out.println(matcher.matches());
+    public Integer getId() {
+        if(username == null || username.equals("")){
+            return (Integer) ServletActionContext.getRequest().getSession().getAttribute("user");
+        }
+        return userService.getIdByName(username);
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

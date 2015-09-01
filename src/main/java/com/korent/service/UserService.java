@@ -6,6 +6,7 @@ import com.korent.dao.RentGoodsDao;
 import com.korent.dao.UserDao;
 import com.korent.entity.RentGoods;
 import com.korent.entity.User;
+import com.korent.util.UserExclusionStrategy;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,6 +21,11 @@ public class UserService {
     private NotificationDao notificationDao;
 
 
+
+    /*根据姓名获取用户id*/
+    public Integer getIdByName(String name) {
+        return userDao.getIdByName(name);
+    }
 
     /*获取所有用户的列表*/
 
@@ -68,7 +74,7 @@ public class UserService {
     }
 
     /*分页获取用户发布的租品*/
-    public List<RentGoods> getSendGoodsbyPage(Serializable id, int pageNo, int pageSize) {
+    public List<RentGoods> getSendGoodsByPage(Serializable id, int pageNo, int pageSize) {
         return rentGoodsDao.findByOwner(id, pageNo, pageSize);
     }
 
@@ -148,21 +154,6 @@ public class UserService {
 
         this.notificationDao = notificationDao;
     }
-
-    private static class UserExclusionStrategy implements ExclusionStrategy {
-        public boolean shouldSkipClass(Class<?> clazz) {
-            return false;
-        }
-
-        public boolean shouldSkipField(FieldAttributes f) {
-            Boolean skip = f.getName().equals("order") ||
-                    f.getName().equals("follow") ||
-                    f.getName().equals("send") ||
-                    f.getName().equals("password");
-            return skip;
-        }
-    }
-
 
 
 }

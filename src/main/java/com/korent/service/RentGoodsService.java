@@ -5,6 +5,7 @@ import com.korent.dao.NotificationDao;
 import com.korent.dao.RentGoodsDao;
 import com.korent.dao.UserDao;
 import com.korent.entity.RentGoods;
+import com.korent.util.RentGoodsExclusionStrategy;
 
 import java.io.Serializable;
 
@@ -50,17 +51,5 @@ public class RentGoodsService {
         this.rentGoodsDao = rentGoodsDao;
     }
 
-    private static class RentGoodsExclusionStrategy implements ExclusionStrategy {
-        public boolean shouldSkipClass(Class<?> clazz) {
-            return false;
-        }
-
-        public boolean shouldSkipField(FieldAttributes f) {
-            Boolean skip = f.getName().equals("owner") ||
-                    f.getName().equals("orderUser") ||
-                    f.getName().equals("follower");
-            return skip;
-        }
-    }
 
 }

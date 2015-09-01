@@ -1,8 +1,10 @@
 package com.korent.dao;
 
 import com.korent.entity.Admin;
+import com.korent.entity.User;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,5 +38,14 @@ public class AdminDao extends BaseDao<Admin> {
             map.put(o[0], o[1]);
         }
         return map;
+    }
+
+    /*根据管理员名获取管理员的id*/
+    @SuppressWarnings("unchecked")
+    public Integer getIdByName(String name){
+        List<User> list = currentSession().createCriteria(Admin.class).
+                add(Restrictions.eq("name", name)).
+                list();
+        return list.get(0).getId();
     }
 }
