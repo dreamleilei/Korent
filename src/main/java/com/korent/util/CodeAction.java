@@ -17,7 +17,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class CodeAction extends ActionSupport {
 
     //ajax检查验证码
-    public void checkCheckCode() throws Exception {
+    public void  checkCheckCode() throws Exception {
 
         //获得提交参数值
         String myCheckCode = ServletActionContext.getRequest().getParameter("code");
@@ -37,6 +37,7 @@ public class CodeAction extends ActionSupport {
             out.print(0);
         }
         out.close();
+       // return SUCCESS;
     }
     public void createCheckCode() throws Exception {
         //设置页面不缓存
@@ -110,6 +111,7 @@ public class CodeAction extends ActionSupport {
 
         // 输出图象到页面
         ImageIO.write(image, "JPEG", ServletActionContext.getResponse().getOutputStream());
+       // return SUCCESS;
     }
 
 
