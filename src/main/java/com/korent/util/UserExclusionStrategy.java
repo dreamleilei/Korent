@@ -16,7 +16,8 @@ public class UserExclusionStrategy implements ExclusionStrategy {
                 f.getName().equals("follow") ||
                 f.getName().equals("send") ||
                 f.getName().equals("password") ||
-                f.getName().equals("id");
+                f.getName().equals("id")||
+                f.getName().equals("otherInformation");
         return skip;
     }
 }

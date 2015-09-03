@@ -3,7 +3,10 @@ package com.korent.service;
 import com.korent.dao.AdminDao;
 import com.korent.dao.NotificationDao;
 import com.korent.dao.UserDao;
+import com.korent.entity.User;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 
@@ -14,6 +17,7 @@ public class AdminService {
     private AdminDao adminDao;
     private UserDao userDao;
     private NotificationDao notificationDao;
+
 
     /*根据管理员姓名获取管理员的id*/
     public Integer getIdByName(String name) {
@@ -27,9 +31,21 @@ public class AdminService {
 
 
 
-    public String getAllUser() {
-        userDao.getAllUserName();
-        return null;
+    /*管理员获取 所有的用户*/
+    public List<User> getAllUser() {
+        return userDao.findAll(User.class);
+    }
+
+    /*管理员删除用户*/
+    public void deleteUser (Serializable id) {
+        userDao.delete(User.class, id);
+
+    }
+
+    /*管理员根据用户姓名获取用户的id*/
+
+    public Serializable getUserIdByName(String name) {
+        return userDao.getIdByName(name);
     }
 
     public AdminService() {

@@ -1,10 +1,16 @@
 package com.korent.action;
 
+import com.korent.entity.User;
 import com.korent.service.AdminService;
+import com.korent.util.UserGson;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,9 +21,10 @@ public class AdminAction extends ActionSupport {
     private String adminname;
     private String password;
     private Integer id;
+    private String username;
     
 
-    /*用户登录的action*/
+    /*管理员登录的action*/
     public String login() {
         Map<Object, Object> adminMap = adminService.getAdminMap();
         if(!adminMap.containsKey(adminname)){
@@ -33,13 +40,30 @@ public class AdminAction extends ActionSupport {
     }
 
     /*查看所有用户的action*/
-    public String getAllUser() {
+    public String getAllUser() throws IOException {
         if(getId() == null) {
             return null;
         }
-        adminService.getAllUser();
+        PrintWriter out = ServletActionContext.getResponse().getWriter();
+        List<User> list = adminService.getAllUser();
+        String result = UserGson.getGson().toJson(list);
+        out.write(result);
+        out.flush();
+        out.close();
          return null;
+
     }
+    /*管理员删除用户的action*/
+    public String deleteUser() {
+        if(getId() == null) {
+            return null;
+        }
+        Serializable delete = adminService.getUserIdByName(username);
+        adminService.deleteUser(delete);
+        return null;
+    }
+
+
     public AdminAction() {
     }
 
@@ -73,5 +97,13 @@ public class AdminAction extends ActionSupport {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

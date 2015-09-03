@@ -121,6 +121,14 @@ public class UserService {
         userDao.changeInformation(id, phone, qq, email);
     }
 
+    public void changeInformation(Serializable id, Object phone, Object qq, Object email, Object otherInformation){
+        userDao.changeInformation(id, phone, qq, email, otherInformation);
+    }
+
+    public String getOtherInformation(Serializable id){
+        return userDao.getOtherInformation(id);
+    }
+
     /*保存用户*/
     public void saveUser(User user) {
         userDao.save(user);

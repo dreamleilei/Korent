@@ -32,6 +32,9 @@ public class User implements Serializable {
     @Column(name="qq",length=20)
     private String qq;
 
+    @Column(name="otherInformation")
+    private String otherInformation;
+
     @OneToMany(targetEntity=RentGoods.class)
     @JoinColumn(name="orderId", referencedColumnName="uid")
     List<RentGoods> order = new ArrayList<RentGoods>();
@@ -130,5 +133,13 @@ public class User implements Serializable {
     public void setSend(List<RentGoods> send) {
 
         this.send = send;
+    }
+
+    public String getOtherInformation() {
+        return otherInformation;
+    }
+
+    public void setOtherInformation(String otherInformation) {
+        this.otherInformation = otherInformation;
     }
 }

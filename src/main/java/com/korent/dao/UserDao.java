@@ -79,6 +79,9 @@ public class UserDao extends BaseDao<User> {
         List<User> list = currentSession().createCriteria(User.class).
                 add(Restrictions.eq("name",  name)).
                 list();
+        if(list == null) {
+            return null;
+        }
         return list.get(0).getId();
     }
 
@@ -117,6 +120,17 @@ public class UserDao extends BaseDao<User> {
         return resultCount % pageSize == 0 ? resultCount /pageSize : resultCount /pageSize + 1;
     }
 
+    /*获取用户的其它信息*/
+    @SuppressWarnings("unchecked")
+    public String getOtherInformation(Serializable id){
+        List<User> list = currentSession().createCriteria(User.class).
+                add(Restrictions.eq("id",  id)).
+                list();
+        if(list == null) {
+            return null;
+        }
+        return list.get(0).getOtherInformation();
+    }
     /*根据用户分页获取预定的租品*/
     @SuppressWarnings("unchecked")
     public List<RentGoods> getOrderGoodsByPage(Serializable id, int pageNo, int pageSize) {
@@ -180,6 +194,14 @@ public class UserDao extends BaseDao<User> {
         user.setQq((String) qqNumber);
     }
 
+    /*用户修改个人信息*/
+    public void changeInformation(Serializable id, Object phoneNumber, Object qqNumber, Object emailNumber, Object otherInformation) {
+        User user = get(User.class, id);
+        user.setPhone((String) phoneNumber);
+        user.setEmail((String) emailNumber);
+        user.setQq((String) qqNumber);
+        user.setOtherInformation((String)otherInformation);
+    }
 
 
     public List<RentGoods> getSendGoods(User user, int pageNo, int pageSize) { //获取用户发布的消息

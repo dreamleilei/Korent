@@ -55,11 +55,11 @@ public class UserAction extends ActionSupport {
 
     /*用户获取个人信息*/
     public String getInformation() {
-       // Integer id = (Integer)ServletActionContext.getRequest().getSession().getAttribute("user");
-        System.out.println(id);
-        System.out.println((Integer) ServletActionContext.getRequest().getSession().getAttribute("user"));
-        ServletActionContext.getRequest().setAttribute("userInfo", userService.information(id));
-        return SUCCESS;
+
+        ServletActionContext.getRequest().setAttribute("userInfo", userService.information(getId()));
+        ServletActionContext.getRequest().setAttribute("otherInfo", userService.getOtherInformation(getId()));
+        System.out.println(userService.information(getId()));
+        return null;
     }
 
     /*用户修改信息的action*/
@@ -91,7 +91,6 @@ public class UserAction extends ActionSupport {
     }
 
     /*分页获取用户的订单*/
-
     public void validateRegister() {
         if (phone == null) {
         } else if(phone.length() != 11){

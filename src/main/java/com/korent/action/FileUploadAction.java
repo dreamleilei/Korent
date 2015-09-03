@@ -1,5 +1,6 @@
 package com.korent.action;
 
+import com.google.gson.Gson;
 import com.korent.service.UserService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
@@ -7,23 +8,27 @@ import org.apache.struts2.ServletActionContext;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by lei on 15-8-31.
  */
 public class FileUploadAction extends ActionSupport {
     private UserService userService;
-    private File upload;
+    private File photo;
     private String savePath;
-    private String uploadContentType;
-    private String uploadFileName;
+    private String photoContentType;
+    private String photoFileName;
+    private String returnDir;
 
-    public File getUpload() {
-        return upload;
+    public File getPhoto() {
+        return photo;
     }
 
-    public void setUpload(File upload) {
-        this.upload = upload;
+    public void setPhoto(File photo) {
+        this.photo = photo;
     }
 
     public String getSavePath() {
@@ -37,39 +42,59 @@ public class FileUploadAction extends ActionSupport {
         this.savePath = savePath;
     }
 
-    public String getUploadContentType() {
-        return uploadContentType;
+    public String getPhotoContentType() {
+        return photoContentType;
     }
 
-    public void setUploadContentType(String uploadContentType) {
-        this.uploadContentType = uploadContentType;
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
     }
 
-    public String getUploadFileName() {
-        return uploadFileName;
+    public String getPhotoFileName() {
+        return photoFileName;
     }
 
-    public void setUploadFileName(String uploadFileName) {
-        this.uploadFileName = uploadFileName;
+    public void setPhotoFileName(String photoFileName) {
+        this.photoFileName = photoFileName;
     }
 
     public String execute() throws Exception {
-        FileOutputStream fos = new FileOutputStream(getSavePath() + "/" + getUploadFileName());
-        FileInputStream fis = new FileInputStream(getUpload());
+        PrintWriter out = ServletActionContext.getResponse().getWriter();
+        System.out.println(getSavePath() + "/" + getPhotoFileName());
+        System.out.println("hello");
+        FileOutputStream fos = new FileOutputStream(getSavePath() + "/" + getPhotoFileName());
+        FileInputStream fis = new FileInputStream(photo);
         byte[] buffer = new byte[1024];
         int len;
         while ((len = fis.read(buffer)) != -1) {
             fos.write(buffer, 0, len);
         }
-        return SUCCESS;
+
+        Map map= new HashMap();
+        map.put("savePath", getReturnDir() +"/" + getPhotoFileName());
+        Gson gson = new Gson();
+        System.out.println(gson.toJson(map));
+        out.write(gson.toJson(map));
+
+        return null;
 
     }
+
 
     public UserService getUserService() {
         return userService;
     }
 
     public void setUserService(UserService userService) {
+
         this.userService = userService;
+    }
+
+    public String getReturnDir() {
+        return  "/resource/uploadImage";
+    }
+
+    public void setReturnDir(String returnDir) {
+        this.returnDir = returnDir;
     }
 }
