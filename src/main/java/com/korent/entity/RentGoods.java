@@ -65,6 +65,15 @@ public class RentGoods implements Serializable {
     public RentGoods() {
     }
 
+    public RentGoods(String description, String classify, Address address, String price, Date updateDate) {
+        this.description = description;
+        this.classify = classify;
+        this.address = address;
+        this.status = status;
+        this.price = price;
+        this.updateDate = updateDate;
+    }
+
     public Integer getId() {
         return id;
     }

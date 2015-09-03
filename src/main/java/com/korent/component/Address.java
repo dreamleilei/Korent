@@ -33,6 +33,13 @@ public class Address {
     public Address() {
     }
 
+    public Address(String province, String city, String country, String district) {
+        this.province = province;
+        this.city = city;
+        this.country = country;
+        this.district = district;
+    }
+
     public String getProvince() {
         return province;
     }
