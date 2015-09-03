@@ -65,7 +65,7 @@
 
 
 <div id="Layer5" style="position:absolute; left:650px; top:797px; width:184px; height:45px; z-index:4">
-  <input type="submit" value="发布" onClick="" class="queren" style="width:195px; height:34px;" />
+  <input id="submit" type="submit" value="发布" onClick="" class="queren" style="width:195px; height:34px;" />
 </div>
 <div id="Layer6" style="position:absolute; left:426px; top:699px; width:262px; height:16px; z-index:5">
   <input name="photo" id="photo1" type="file" hidden="hidden"  multiple/>
@@ -89,34 +89,6 @@
 <div id="Layer10" style="position:absolute; left:940px; top:693px; width:175px; height:30px; z-index:9">
   <input name="photo" id="photo3" type="file" hidden="hidden"  multiple/>
   <input name="submit" id ="photo3Button" type="button"   class="queren1" onclick="" value="上传图片"/>
- <%-- <s:file name="photo3"   class="queren1" .fileupload({
-        autoUpload:true,
-        url:"/korent/upload.action",
-        acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
-        maxNumberOfFiles : 1,
-
-        error:function(data,e){
-          alert('error');
-        },
-
-        success:function(data, e){
-          var url= data.savePath;
-          alert(url);
-          $('img').eq(0).attr("src", url);
-
-        },
-
-        progressall: function (e, data) {//设置上传进度事件的回调函数
-          var progress = parseInt(data.loaded / data.total * 5, 10);
-          $('#progress .bar').css(
-                  'width',
-                  progress + '%'
-          );
-          $('#pro').html(progress +"%");
-        }
-
-
-      });onclick="" label="上传图片"/>--%>
 </div>
 <div id="Layer11" style="position:absolute; left:919px; top:573px; width:139px; height:103px; z-index:10">
   <%--<input  value="" disabled type="image"  name="photo" style=" height:103px; width:139px; "/>--%>
@@ -167,6 +139,15 @@
 </body>
 <script type="text/javascript">
   $(document).ready(function(){
+
+    $('#submit').click(function(event){
+      event.preventDefault();
+      $.ajax({
+        url:"/korent/sendGoods.action",
+        type:"POST",
+
+      })
+    });
     $('#photo1Button').click(function(event){
       $('#photo1').click().fileupload({
         autoUpload:true,
