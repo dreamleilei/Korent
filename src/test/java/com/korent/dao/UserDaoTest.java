@@ -110,7 +110,6 @@ public class UserDaoTest extends TestCase {
     }
 
     public void testDelete2() throws Exception {
-
     }
 
     public void testFindAll1() throws Exception {
@@ -155,5 +154,10 @@ public class UserDaoTest extends TestCase {
     public void testGetIdByName() throws Exception {
         Integer result = userDao.getIdByName("sunlei");
         assertEquals(result, Integer.valueOf(8));
+    }
+
+    @Test
+    public void testFindAll2() throws Exception {
+        System.out.println(userDao.findAll(User.class));
     }
 }
