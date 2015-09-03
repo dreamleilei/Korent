@@ -126,8 +126,6 @@
 
     $('#submit').click(function(event){
       event.preventDefault();
-      var temp = $('#form').serialize();
-      alert(temp);
       $.ajax({
         url:"/korent/changeInformation.action",
         type:"post",
