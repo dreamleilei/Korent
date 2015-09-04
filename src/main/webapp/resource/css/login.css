@@ -1,5 +1,5 @@
 body{
-    background-image:url(../uploadImage/loginBackGround.jpg);
+    background-image:url(../image/login.jpg);
     background-repeat:no-repeat;
     background-size:100%;
 }
@@ -99,7 +99,7 @@ font-size: xx-large;
     font-size: 25px;
     font-weight: normal;
     font-family: "黑体";
-    background-image: url(/resource/image/loginButton.png);
+    background-image: url(../image/loginButton.png);
     border: thin outset #999999;
 }
 
@@ -122,7 +122,7 @@ font-size: xx-large;
     width:200px;
     height:100px;
     z-index:4;
-    background-image:url(/resouce/image/logo5.png);
+    background-image:url(../image/logo5.png);
     background-repeat:no-repeat;
     background-size:100%;
 }
@@ -133,4 +133,16 @@ font-size: xx-large;
     top:274px;
     width:395px;
     height:43px;
+}
+
+#Layer7 {
+    position:absolute;
+    left:9px;
+    top:11px;
+    width:200px;
+    height:100px;
+    z-index:4;
+    background-image:url(../image/logo5.png);
+    background-repeat:no-repeat;
+    background-size:100%;
 }

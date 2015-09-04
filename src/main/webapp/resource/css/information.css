@@ -97,3 +97,41 @@ a.href2:active{
     position:relative;
     left:20px;
 }
+.save{
+    color:#FFFFFF;
+    font-size: 24px;
+    background-color:#00CCFF;
+    width:200px;
+    height:40px;
+    font-weight:bold;
+    border: medium outset #00FFFF;
+    font-family: "黑体";
+}
+
+input.save:visited{
+    color:#FFFFFF;
+    font-size: 24px;
+    background-color:#00CCFF;
+    width:200px;
+    height:40px;
+    font-weight:bold;
+    border: medium outset #00FFFF;
+    font-family: "黑体";
+}
+
+input.save:hover{
+    color:#FFFFFF;
+    font-size: 24px;
+    background-color:#0066FF;
+    width:200px;
+    height:40px;
+    font-weight:bold;
+    border: medium inset #0033FF;
+    font-family: "黑体";
+}
+
+.message{
+    color:red;
+    font-size:24px;
+    padding-left:10px;
+}

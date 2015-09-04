@@ -22,7 +22,7 @@
 .wrong{
     border-color:red;
 }
-body{background-image:url(/resource/image/registerBackGround.jpg); background-repeat:no-repeat; background-size:100%;}
+body{background-image:url(../image/registerBackGround.jpg); background-repeat:no-repeat; background-size:100%;}
 #header {text-align:center;height:80px;font-size:36px;color:#3300CC}
 #line {height:20px;width:1333px}
 #menu {#FFFFFF;height:400px;width:400px;float:center;margin-left:60%;font-size:20px;margin:50px 0px 0px 800px ;}
