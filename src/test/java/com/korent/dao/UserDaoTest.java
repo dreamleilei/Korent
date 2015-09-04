@@ -160,4 +160,10 @@ public class UserDaoTest extends TestCase {
     public void testFindAll2() throws Exception {
         System.out.println(userDao.findAll(User.class));
     }
+
+    @Test
+    public void testGetUserByPage() throws Exception {
+        System.out.println(userDao.getUserByPage(2, 2));
+
+    }
 }

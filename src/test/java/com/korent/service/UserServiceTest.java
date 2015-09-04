@@ -1,5 +1,7 @@
 package com.korent.service;
 
+import com.korent.component.Address;
+import com.korent.entity.RentGoods;
 import com.korent.entity.User;
 import org.junit.After;
 import org.junit.Before;
@@ -11,6 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import javax.transaction.Transactional;
+
+import java.util.Date;
 
 import static org.junit.Assert.*;
 
@@ -115,6 +119,14 @@ public class UserServiceTest {
     public void testSaveUser() throws Exception {
         User user = new User("leilei", "leilei", "18829291276", "1679211339@qq.com", "1679211339");
         userService.saveUser(user);
+
+    }
+
+    @Test
+    public void testSendRentGoods() throws Exception {
+        Address address = new Address("山东", "淄博", "高青", "青城镇孙家村");
+        RentGoods rentGoods = new RentGoods("这是一栋别墅", "房屋", address, "100元/天", new Date());
+        userService.sendRentGoods(4, rentGoods);
 
     }
 }

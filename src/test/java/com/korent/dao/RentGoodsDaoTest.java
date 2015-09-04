@@ -96,4 +96,9 @@ public class RentGoodsDaoTest extends TestCase {
         System.out.println(rentGoodsDao.findByOrder(4, 1, 5));
 
     }
+
+    @Test
+    public void testDelete() throws Exception {
+        rentGoodsDao.delete(RentGoods.class, 2);
+    }
 }
