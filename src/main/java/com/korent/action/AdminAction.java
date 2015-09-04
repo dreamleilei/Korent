@@ -41,7 +41,7 @@ public class AdminAction extends ActionSupport {
 
     /*查看所有用户的action*/
     public String getAllUser() throws IOException {
-        if(getId() == null) {
+        if (getId() == null) {
             return null;
         }
         PrintWriter out = ServletActionContext.getResponse().getWriter();
@@ -50,17 +50,8 @@ public class AdminAction extends ActionSupport {
         out.write(result);
         out.flush();
         out.close();
-         return null;
-
-    }
-    /*管理员删除用户的action*/
-    public String deleteUser() {
-        if(getId() == null) {
-            return null;
-        }
-        Serializable delete = adminService.getUserIdByName(username);
-        adminService.deleteUser(delete);
         return null;
+
     }
 
 

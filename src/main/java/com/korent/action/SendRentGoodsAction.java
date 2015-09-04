@@ -22,11 +22,17 @@ public class SendRentGoodsAction extends ActionSupport {
     private String classify;
     private String description;
     private String price;
+    private String[] path;
 
     public String execute() {
         Address address = new Address(province,city, country, district);
         RentGoods rentGoods = new RentGoods(description, classify, address, price, new Date());
+        for(String s:path){
+            System.out.println(s);
+            rentGoods.getPicturePathList().add(s);
+        }
         Integer id = (Integer)ServletActionContext.getRequest().getSession().getAttribute("user");
+        id = 4;
         userService.sendRentGoods(id, rentGoods);
         return SUCCESS;
     }
@@ -102,7 +108,16 @@ public class SendRentGoodsAction extends ActionSupport {
         return userService;
     }
 
+    public String[] getPath() {
+        return path;
+    }
+
+    public void setPath(String[] path) {
+        this.path = path;
+    }
+
     public void setUserService(UserService userService) {
+
         this.userService = userService;
     }
 

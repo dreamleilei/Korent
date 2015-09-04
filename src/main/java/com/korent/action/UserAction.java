@@ -83,11 +83,10 @@ public class UserAction extends ActionSupport {
         List<String> userNameList = userService.getUserList();
         String userList = gson.toJson(userNameList);
 
-        ActionContext actionContext = ActionContext.getContext();
 
         ServletActionContext.getRequest().setAttribute("userList", userList);
 
-        return SUCCESS;
+        return null;
     }
 
     /*分页获取用户的订单*/
