@@ -26,7 +26,7 @@
 </head>
 
 <body onload="init()">>
-<s:form action="#" method="get" name="creator" enctype="multipart/form-data" class="ziti">
+<s:form id="form" action="#" method="get" name="creator" enctype="multipart/form-data" class="ziti">
   <div id="Layer1" style="position:absolute; left:261px; top:165px; width:1014px; height:71px; z-index:1 color:#0000FF">
     免费发布信息
     <hr /><span style="font-size:24px">
@@ -72,9 +72,9 @@
   <input name="submit" id ="photo1Button" type="button"  class="queren1" onclick="" value="上传图片"/>
    <%--<s:file name="photo1"   class="queren1" onclick="" label="上传图片"/>--%>
 </div>
-<div id="Layer7" style="position:absolute; left:407px; top:576px; width:139px; height:103px; z-index:6">
+<div id="Layer7" style="position:absolute; left:407px; top:576px; width:139px; height:103px; z-index:11">
   <%--<input value="" disabled  type="image"  name="photo" style=" height:103px; width:139px; "/><br/>--%>
-  <a href="" name="image"><img src="" height="103px" width="139px" name="photo1" /></a>
+  <a href="" name="image"><img id="img1"src="" height="103px" width="139px" name="photo1" style="position:absolute; " /></a>
 </div>
 <div id="Layer8" style="position:absolute; left:691px; top:698px; width:163px; height:29px; z-index:7">
   <input name="photo" id="photo2" type="file" hidden="hidden"  multiple/>
@@ -82,17 +82,17 @@
  <%--   <s:file name="photo2"   class="queren1" onclick="" label="上传图片"/>--%>
 </div>
 
-<div id="Layer9" style="position:absolute; left:667px; top:575px; width:139px; height:103px; z-index:8" >
+<div id="Layer9" style="position:absolute; left:667px; top:575px; width:139px; height:103px; z-index:10" >
   <%--<input value="" disabled type="image"  name="photo" style=" height:103px; width:139px; "/>--%>
-    <a href="" name="image"> <img src="" height="103px" width="139px" name="photo2" /></a><br/>
+    <a href="" name="image"> <img id="img2" src="" height="103px" width="139px" name="photo2" style="position:absolute; " /></a><br/>
 </div>
 <div id="Layer10" style="position:absolute; left:940px; top:693px; width:175px; height:30px; z-index:9">
   <input name="photo" id="photo3" type="file" hidden="hidden"  multiple/>
   <input name="submit" id ="photo3Button" type="button"   class="queren1" onclick="" value="上传图片"/>
 </div>
-<div id="Layer11" style="position:absolute; left:919px; top:573px; width:139px; height:103px; z-index:10">
+<div id="Layer11" style="position:absolute; left:919px; top:573px; width:139px; height:103px; z-index:9">
   <%--<input  value="" disabled type="image"  name="photo" style=" height:103px; width:139px; "/>--%>
-    <a href="" name="image" ><img src="" height="103px" width="139px" name="photo3" /></a>
+    <a href="" name="image" ><img id="img3" src="" height="103px" width="139px" name="photo3" style="position:absolute; " /></a>
     <br/>
 </div>
 </s:form>
@@ -138,113 +138,91 @@
 </div>
 </body>
 <script type="text/javascript">
-  $(document).ready(function(){
-
-    $('#submit').click(function(event){
+  $(document).ready(function() {
+    $('#submit').click(function (event) {
       event.preventDefault();
+      var temp= "&path="+encodeURIComponent($('#img1').attr("src"))+"&path=" + encodeURIComponent($('#img2').attr("src")) +"&path=" +encodeURIComponent($('#img3').attr("src"));
       $.ajax({
-        url:"/korent/sendGoods.action",
-        type:"POST",
+        url: "/korent/sendGoods.action",
+        type: "POST",
+        data:$('#form').serialize()+temp,
+        success:function(html){
+          alert(html);
+        }
 
       })
     });
-    $('#photo1Button').click(function(event){
+    $('#photo1Button').click(function (event) {
       $('#photo1').click().fileupload({
-        autoUpload:true,
-        url:"/korent/upload.action",
-        acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
-        maxNumberOfFiles : 1,
+        autoUpload: true,
+        url: "/korent/upload.action",
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        maxNumberOfFiles: 1,
+        maxFileSize: 2000000,
 
-        error:function(data,e){
+        error: function (data, e) {
           alert('error');
         },
 
-        success:function(data, e){
-          var url= data.savePath;
+        success: function (data, e) {
+          var url = data.savePath;
           alert(url);
           $('img').eq(0).attr("src", url);
 
-        },
-
-        progressall: function (e, data) {//设置上传进度事件的回调函数
-          var progress = parseInt(data.loaded / data.total * 5, 10);
-          $('#progress .bar').css(
-                  'width',
-                  progress + '%'
-          );
-          $('#pro').html(progress +"%");
         }
 
-
       });
-    });
-    $('#photo2Button').click(function(event){
-      $('#photo2').click().fileupload({
-        autoUpload:true,
-        url:"/korent/upload.action",
-        acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
-        maxNumberOfFiles : 1,
+      $('#photo2Button').click(function (event) {
+        $('#photo2').click().fileupload({
+          autoUpload: true,
+          url: "/korent/upload.action",
+          acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+          maxNumberOfFiles: 1,
+          maxFileSize: 2000000,
 
-        error:function(data,e){
-          alert('error');
-        },
+          error: function (data, e) {
+            alert('error');
+          },
 
-        success:function(data, e){
-          var url= data.savePath;
-          alert(url);
-          $('img').eq(1).attr("src", url);
+          success: function (data, e) {
+            var url = data.savePath;
+            alert(url);
+            $('img').eq(1).attr("src", url);
 
-        },
+          }
 
-        progressall: function (e, data) {//设置上传进度事件的回调函数
-          var progress = parseInt(data.loaded / data.total * 5, 10);
-          $('#progress .bar').css(
-                  'width',
-                  progress + '%'
-          );
-          $('#pro').html(progress +"%");
-        }
-
-
+        });
       });
-    });
-    $('#photo3Button').click(function(event){
-      $('#photo3').click().fileupload({
-        autoUpload:true,
-        url:"/korent/upload.action",
-        acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
-        maxNumberOfFiles : 1,
+      $('#photo3Button').click(function (event) {
+        $('#photo3').click().fileupload({
+          autoUpload: true,
+          url: "/korent/upload.action",
+          acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+          maxNumberOfFiles: 1,
+          maxFileSize: 2000000,
 
-        error:function(data,e){
-          alert('error');
-        },
+          error: function (data, e) {
+            alert('error');
+          },
 
-        success:function(data, e){
-          var url= data.savePath;
-          alert(url);
-          $('img').eq(2).attr("src", url);
+          success: function (data, e) {
+            var url = data.savePath;
+            alert(url);
+            $('img').eq(2).attr("src", url);
 
-        },
-
-        progressall: function (e, data) {//设置上传进度事件的回调函数
-          var progress = parseInt(data.loaded / data.total * 5, 10);
-          $('#progress .bar').css(
-                  'width',
-                  progress + '%'
-          );
-          $('#pro').html(progress +"%");
-        }
+          }
+        });
       });
+
+      $('a[name="image"]').hover(function () {
+        $(this).find('img[src !=""]').css({'width': 502, 'height': 302});
+
+      }, function () {
+        $(this).find('img[src !=""]').css({'width': 139, 'height': 103});
+
+      })
     });
-
-    $('a[name="image"]').hover(function(){
-      $(this).find('img[src !=""]').css({'width':502, 'height':302});
-
-    }, function(){
-      $(this).find('img[src !=""]').css({'width':139, 'height':103});
-
-    })
-  })
+  });
 </script>
 </html>
 

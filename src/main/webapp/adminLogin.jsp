@@ -43,7 +43,8 @@
   <div  align="center" id="Layer4">W E L C O M E</div>
   <div  align="center" id="Layer5"><a href="userLogin.jsp" class="yonghu">用户登录</a></div>
   <div  align="center" id="Layer6"><a href="adminLogin.jsp" class="guanliyuan">管理员登录</a></div>
-</s:form>>
+  <div id="layer7"> </div>
+</s:form>
 </body>
 <script type="text/javascript">
   <!--
