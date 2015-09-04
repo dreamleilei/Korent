@@ -35,6 +35,10 @@ public class AdminService {
     public List<User> getAllUser() {
         return userDao.findAll(User.class);
     }
+    /*管理员分页获取用户*/
+    public List<User> getUserByPage(int pageNo, int pageSize){
+        return userDao.getUserByPage(pageNo, pageSize);
+    }
 
     /*管理员删除用户*/
     public void deleteUser (Serializable id) {

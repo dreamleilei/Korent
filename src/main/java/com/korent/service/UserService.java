@@ -125,6 +125,7 @@ public class UserService {
         userDao.changeInformation(id, phone, qq, email, otherInformation);
     }
 
+    /*获取用户其它的信息*/
     public String getOtherInformation(Serializable id){
         return userDao.getOtherInformation(id);
     }
@@ -134,6 +135,13 @@ public class UserService {
         userDao.save(user);
     }
 
+    /*用户发布租品*/
+    public void sendRentGoods(Serializable id, RentGoods rentGoods){
+        User user = userDao.get(User.class, id);
+        rentGoods.setOwner(user);
+        rentGoodsDao.save(rentGoods);
+
+    }
 
     public UserService() {
     }
