@@ -61,5 +61,13 @@ public class PageModel<T>{
         this.pageSize = pageSize;
     }
 
+    public PageModel(int pageNo, int pageSize, int pageCount, int dataCount) {
+        this.pageNo = pageNo;
+        this.pageSize = pageSize;
+        this.pageCount = pageCount;
+        this.dataCount = dataCount;
+    }
 
+    public PageModel() {
+    }
 }

@@ -35,19 +35,19 @@ public class User implements Serializable {
     @Column(name="otherInformation")
     private String otherInformation;
 
-    @OneToMany(targetEntity=RentGoods.class)
+    @OneToMany(targetEntity=RentGoods.class,  orphanRemoval =true)
     @JoinColumn(name="orderId", referencedColumnName="uid")
     List<RentGoods> order = new ArrayList<RentGoods>();
 
     /*通过双向的关联映射，实现用户关注租品的功能*/
-    @ManyToMany(targetEntity=RentGoods.class)
+    @ManyToMany(targetEntity=RentGoods.class )
     @JoinTable(name="follow",
             joinColumns=@JoinColumn(name="uid", referencedColumnName="uid"),
             inverseJoinColumns=@JoinColumn(name="rid", referencedColumnName="rid")
     )
     private List<RentGoods> follow = new ArrayList<RentGoods>();
 
-    @OneToMany(targetEntity=RentGoods.class)
+    @OneToMany(targetEntity=RentGoods.class, orphanRemoval =true)
     @JoinColumn(name="ownerId", referencedColumnName="uid")
     private List<RentGoods> send = new ArrayList<RentGoods>();
 

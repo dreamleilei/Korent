@@ -76,6 +76,7 @@ public class UserDao extends BaseDao<User> {
     /*根据用户名获取用户的id*/
     @SuppressWarnings("unchecked")
     public Integer getIdByName(String name){
+        System.out.println(name);
         List<User> list = currentSession().createCriteria(User.class).
                 add(Restrictions.eq("name",  name)).
                 list();
@@ -146,6 +147,19 @@ public class UserDao extends BaseDao<User> {
     public int getOrderGoodsCount(Serializable id, int pageSize){
         int resultCount = getOrderGoodsByPage(id, 1, -1).size();
         return resultCount % pageSize == 0 ? resultCount /pageSize : resultCount /pageSize + 1;
+    }
+
+    /*分页获取用户所有的用户*/
+    @SuppressWarnings("unchecked")
+    public List<User> getUserByPage(int pageNo, int pageSize){
+        List<User> list = currentSession().createCriteria(User.class).
+                setFirstResult((pageNo - 1) * pageSize).
+                setMaxResults(pageSize).
+                list();
+        if(list == null) {
+            return null;
+        }
+        return list;
     }
 
     /*用户修改信息*/ //暂时先留个接口
