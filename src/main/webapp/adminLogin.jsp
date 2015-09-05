@@ -18,13 +18,13 @@
 <head>
   <base href="<%=basePath%>">
   <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-  <title>用户登录</title>
+  <title>管理员登录</title>
   <link href="./resource/css/login.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="./resource/js/jquery-1.6.1.min.js" ></script>
 
 </head>
 <body>
-<s:form method="post" action="adminLogin" namespace="/korent" >
+<s:form method="post" action="login" namespace="/admin" >
   <div id="Layer1">
     <input id="adminname" name="adminname" type="text" value="" placeholder="用户名" maxlength="10" class="login_mima" />
   </div>
@@ -32,7 +32,7 @@
     <input name="password" id = "password" type="password" value="" placeholder="密码" class="login_mima" />
   </div>
   <div id="checkCode">
-    <input type="text" id="check" name="check"  class="login_mima" placeholder="密码" maxlength="4"/>
+    <input type="text" id="check" name="check"  class="login_mima" placeholder="验证码" maxlength="4"/>
     <img border=0 src="/util/createCheckCode.action" id="safecode"><a href="javascript:changeCode();">不清晰，换一张</a></td>
     <span id="show"></span></div>
   <div id="Layer3" align="center">
@@ -41,8 +41,8 @@
 
   </div>
   <div  align="center" id="Layer4">W E L C O M E</div>
-  <div  align="center" id="Layer5"><a href="userLogin.jsp" class="yonghu">用户登录</a></div>
-  <div  align="center" id="Layer6"><a href="adminLogin.jsp" class="guanliyuan">管理员登录</a></div>
+  <div  align="center" id="Layer5"><a href="userLogin.jsp" class="guanliyuan">用户登录</a></div>
+  <div  align="center" id="Layer6"><a href="adminLogin.jsp" class="yonghu">管理员登录</a></div>
   <div id="layer7"> </div>
 </s:form>
 </body>
@@ -100,7 +100,8 @@
 
                         },
                         error:function(msg){
-                          alert("<br/>您的网络状态不佳,请稍后再次尝试");
+                          $("#show").css({"color":"#F00"});
+                          $("#show").html("<br/>网络连接超时,请检查网络");
                           $('#submit').prop('disabled', true);
 
                         }

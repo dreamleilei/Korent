@@ -6,13 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+ <%-- <meta http-equiv="Content测试用户1-Type" content="text/html; charset=UTF-8" />--%>
   <title>管理用户</title>
   <link href="bootstrap.css" rel="text/css" />
-  <link href="./resource/css/admin.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="./resource/js/jquery-2.1.1.js" >
+  <link href="/resource/css/admin.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="/resource/js/jquery-2.1.1.js" >
   </script>
 </head>
 
@@ -21,20 +22,18 @@
 
   <div id="header">
     <div id="header0">
-      <img src="resource/image/logo5.png" height="100" width="200" />
+      <img src="/resource/image/logo5.png" height="100" width="200" />
     </div>
-    <div id="username"><span>沉淀着梦</span>
+    <div id="username"><span><%=session.getAttribute("name")%></span>
       <span>退出</span>
     </div>
   </div>
 
-
-
   <div id="message">
     <div id="menu">
       <ul>
-        <li><a href="管理用户.html" class="href2">管理用户</a></li><p></p>
-        <li><a href="管理租品.html" class="href2">管理租品</a></li>
+        <li><a href="#" class="href2">管理用户</a></li><p></p>
+        <li><a href="#" class="href2">管理租品</a></li>
       </ul>
     </div>
 
@@ -65,16 +64,13 @@
         </tbody>
       </table>
     </div>
-    <div style="height:30px; margin-top:10px; text-align:center;">
-      <span id="spanFirst">第一页</span>
-      <span id="spanPre">上一页</span>
-      <span>1</span>
-      <span>2</span>
-      <span>3</span>
-      <span>4</span>
-      <span>第<input type="text" style="width:15px" value="2"/>页<input type="button" value="跳转" style="font-size:18px;"/></span>
-      <span id="spanNext">下一页</span>
-      <span id="spanLast">最后一页</span>
+    <div id= "spanPage" style="height:30px; margin-top:10px; text-align:center;">
+      <a><span id="spanFirst">第一页</span></a>
+      <a ><span id="spanPre">上一页</span></a>
+      <span id="add"> </span>
+      <span>第&nbsp;<input type="text" style="width:15px"/>&nbsp;页<input type="button" value="跳转" id ="searchButton" style="font-size:18px; color:blue"/></span>
+      <a><span id="spanNext">下一页</span></a>
+      <a><span id="spanLast">最后一页</span></a>
       第
       <span id="spanPageNum"></span>
       页/共
@@ -88,9 +84,33 @@
 
 </div>
 
-
+<%--<s:debug />--%>
 </body>
-<script type="text/javascript">
+<script type="text/javascript" charset="UTF-8">
+
+  function createPage(pageModel) {
+    var model = "";
+    for (var i = 1; i <= pageModel.pageCount; i++) {
+      model += "<a href=\"/adminOperate.jsp?pageNo=" + i + "\&pageSize=10\" ><span>" + i + "&nbsp;&nbsp;</span></a>";
+    }
+
+    $('#spanFirst').parent().attr("href", "/adminOperate.jsp?pageNo=1&page?Size=10");
+    $('#spanLast').parent().attr("href", "/adminOperate.jsp?pageNo=" + pageModel.pageCount + "&page?Size=10");
+    $('#spanNext').parent().attr("href", "/adminOperate.jsp?pageNo=" + (pageModel.pageNo + 1 ) +"&page?Size=10");
+    $('#spanPre').parent().attr("href", "/adminOperate.jsp?pageNo=" + (pageModel.pageNo - 1 ) +"&page?Size=10");
+    $('#add').append(model);
+    $('#spanPageNum').text(pageModel.pageNo);
+    $('#spanTotalPage').text(pageModel.pageCount);
+    if(pageModel.pageNo == 1){
+      $('#spanPre').parent().hide();
+    }
+    if(pageModel.pageNo == pageModel.pageCount){
+      $('#spanNext').parent().hide();
+    }
+    if(pageModel.pageCount == 1){
+      $('#spanPage').hide();
+    }
+  }
 
   function createTable( table_array){
     var row ="";
@@ -106,16 +126,22 @@
     $('#table2').append(row);
   }
 
+  //{"pageNo":1,"pageSize":10,"pageCount":1,"dataCount":7}
+
   $(document).ready(function(){
-    $.ajax({
+
+    $('#searchButton').click(function(){
+    });
+
+   $.ajax({
       url:"/admin/getUser.action",
       type:"get",
-      data:encodeURIComponent("pageNo=1&pageSize=10"),
-    //  "{"pageModel":{"pageNo":1,"pageSize":10,"pageCount":1,"dataCount":7},"user":[{"name":"leilei1","email":"1679211339@qq.com"},{"name":"leilei2","phone":"18829291277","email":"234234","qq":"1679211330"},{"name":"leilei3","phone":"188292921341","email":"1679211339@qq.com","qq":"16792113399"},{"name":"leilei4","email":"1679211339@qq.com"},{"name":"leilei5","email":"1679211339@qq.com"},{"name":"leilei6","email":"1679211339@qq.com"},{"name":"sunlei","phone":"18829291276","email":"1679211339@qq.com","qq":"1679211339"}]}"
-      success:function(html){
+      data:window.location.search.replace("?", ""),
 
+       success:function(html){
         var obj = JSON.parse(html);
         createTable(obj.user);
+        createPage(obj.pageModel);
 
         $('input:button[value="删除"]').click(function(event){
           var id = $(this).parent().parent().children().eq(0).text();
@@ -140,6 +166,7 @@
         alert('网络连接超时,请检查网络');
       }
     });
+
   });
 </script>
 </html>

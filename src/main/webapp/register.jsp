@@ -5,10 +5,11 @@
 <head lang="en">
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Language" content="zh-cn" />
-	<link rel="stylesheet" href="./resource/css/regist.css" type="text/css" />
-	<script type="text/javascript" src="./resource/js/jquery-1.6.1.min.js" ></script>
+	<link rel="stylesheet" href="/resource/css/regist.css" type="text/css" />
+	<script type="text/javascript" src="/resource/js/jquery-1.6.1.min.js" ></script>
 	<title></title>
 </head>
+<body onload="show()">
 <div id="header">
 	<h1>注册通行证</h1>
 </div>
@@ -19,7 +20,7 @@
 	<s:action name="getUserList" namespace="/korent" var="userList">
 	</s:action>
 
-	<s:form  action="login" namespace="/korent" method="post"><br/><br/>
+	<s:form  action="register" namespace="/korent" method="post"><br/><br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名:
 		<input type="text" name="username" id="username"/>
 		<span class="error" id="username_format_error"><br />用户名不合法只允许汉字,数字,字母和下划线</span>
@@ -71,12 +72,10 @@
 		<li><span class="red">收藏</span>您心仪的租品</li>
 	</ul>
 </div>
-<body onload="show()">
+
 <center>
 	<div id="footer" style="color:#000000">酷租网  Korent</div>
 </center>
-</body>
-<s:debug />
 </body>
 <script type="text/javascript" >
 

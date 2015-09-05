@@ -25,7 +25,8 @@
 
 </head>
 
-<body onload="init()">>
+<body onload="init()">
+<%@include file="/model.jsp" %>
 <s:form id="form" action="#" method="get" name="creator" enctype="multipart/form-data" class="ziti">
   <div id="Layer1" style="position:absolute; left:261px; top:165px; width:1014px; height:71px; z-index:1 color:#0000FF">
     免费发布信息
@@ -66,6 +67,7 @@
 
 <div id="Layer5" style="position:absolute; left:650px; top:797px; width:184px; height:45px; z-index:4">
   <input id="submit" type="submit" value="发布" onClick="" class="queren" style="width:195px; height:34px;" />
+  <span hidden id="send_success" class="message"></span>
 </div>
 <div id="Layer6" style="position:absolute; left:426px; top:699px; width:262px; height:16px; z-index:5">
   <input name="photo" id="photo1" type="file" hidden="hidden"  multiple/>
@@ -94,48 +96,12 @@
   <%--<input  value="" disabled type="image"  name="photo" style=" height:103px; width:139px; "/>--%>
     <a href="" name="image" ><img id="img3" src="" height="103px" width="139px" name="photo3" style="position:absolute; " /></a>
     <br/>
+
+
 </div>
 </s:form>
-<div id="container">
 
-  <div id="header">
-    <div id="header0">
-      <img src="./resource/image/logo4.png" height="100" width="200" /></div>
-
-    <div id="header1">
-
-      <a href="" class="href1">首页</a>
-    </div>
-
-    <div id="header2">
-      <a href="个人中心.html" class="href1">个人中心</a>
-    </div>
-
-    <div id="header3">
-      <a href="" class="href1">消息</a>
-    </div>
-  </div>
-
-  <div id="username">沉淀着梦</div>
-
-  <div id="message">
-    <div id="menu">
-      <ul>
-        <li><a href="我的预订.html" class="href2">我的预订</a></li>
-        <p></p>
-        <li><a href="" class="href2">我的订单</a></li><p></p>
-        <li><a href="" class="href2">我的发布</a></li><p></p>
-        <li><a href="" class="href2">我的收藏</a></li><p></p>
-        <li><a href="我要发布.html" class="href2">我要发布</a></li>
-      </ul>
-    </div>
-
-    <div id="goodsplay">
-    </div>
-
-  </div>
-
-</div>
+<s:debug />
 </body>
 <script type="text/javascript">
   $(document).ready(function() {
@@ -147,7 +113,7 @@
         type: "POST",
         data:$('#form').serialize()+temp,
         success:function(html){
-          alert(html);
+          $('#send_success').html('<br /> 您已成功发布租品').show(3000).hide(0);
         }
 
       })
@@ -158,16 +124,15 @@
         url: "/korent/upload.action",
         acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
         maxNumberOfFiles: 1,
-        maxFileSize: 2000000,
+        maxFileSize: 5000000,
 
         error: function (data, e) {
-          alert('error');
+          alert('网络连接超时');
         },
 
         success: function (data, e) {
           var url = data.savePath;
-          alert(url);
-          $('img').eq(0).attr("src", url);
+          $('#img1').attr("src", url);
 
         }
 
@@ -178,16 +143,15 @@
           url: "/korent/upload.action",
           acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
           maxNumberOfFiles: 1,
-          maxFileSize: 2000000,
+          maxFileSize: 5000000,
 
           error: function (data, e) {
-            alert('error');
+            alert('网络连接超时');
           },
 
           success: function (data, e) {
             var url = data.savePath;
-            alert(url);
-            $('img').eq(1).attr("src", url);
+            $('#img2').attr("src", url);
 
           }
 
@@ -199,16 +163,15 @@
           url: "/korent/upload.action",
           acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
           maxNumberOfFiles: 1,
-          maxFileSize: 2000000,
+          maxFileSize: 5000000,
 
           error: function (data, e) {
-            alert('error');
+            alert('网络连接超时');
           },
 
           success: function (data, e) {
             var url = data.savePath;
-            alert(url);
-            $('img').eq(2).attr("src", url);
+            $('#img3').attr("src", url);
 
           }
         });
