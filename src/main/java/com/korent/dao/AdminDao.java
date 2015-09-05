@@ -43,7 +43,7 @@ public class AdminDao extends BaseDao<Admin> {
     /*根据管理员名获取管理员的id*/
     @SuppressWarnings("unchecked")
     public Integer getIdByName(String name){
-        List<User> list = currentSession().createCriteria(Admin.class).
+        List<Admin> list = currentSession().createCriteria(Admin.class).
                 add(Restrictions.eq("name", name)).
                 list();
         return list.get(0).getId();

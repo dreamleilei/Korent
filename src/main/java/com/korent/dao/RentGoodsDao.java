@@ -130,6 +130,22 @@ public class RentGoodsDao extends BaseDao<RentGoods> {
         rentGoods.getPicturePathList().remove(path);
     }
 
+    /*分页获取租品*/
+    @SuppressWarnings("unchecked")
+    public List<RentGoods> getRentGoodsByPage(int pageNo, int pageSize){
+        List<RentGoods> list = currentSession().createCriteria(RentGoods.class).
+                setFirstResult((pageNo - 1) * pageSize).
+                setMaxResults(pageSize).
+                list();
+        if(list == null) {
+            return null;
+        }
+        return list;
+    }
+
+
+
+
     @Override
     public RentGoods get(Class<RentGoods> entityClass, Serializable id) {
         return super.get(entityClass, id);
