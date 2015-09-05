@@ -101,4 +101,11 @@ public class RentGoodsDaoTest extends TestCase {
     public void testDelete() throws Exception {
         rentGoodsDao.delete(RentGoods.class, 2);
     }
+
+    @Test
+    public void testGetRentGoodsByPage() throws Exception {
+
+        System.out.println(rentGoodsDao.getRentGoodsByPage(1, 5));
+    }
+
 }

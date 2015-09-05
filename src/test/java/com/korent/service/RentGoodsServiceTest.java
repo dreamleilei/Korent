@@ -34,4 +34,15 @@ public class RentGoodsServiceTest {
         System.out.println(rentGoodsService.getRentGoodsInfo(2));
 
     }
+
+    @Test
+    public void testGetRentGoodsByPage() throws Exception {
+        rentGoodsService.getRentGoodsByPage(1, 10);
+
+    }
+
+    @Test
+    public void testGetAllRentGoods() throws Exception {
+        System.out.println(rentGoodsService.getAllRentGoods());
+    }
 }
