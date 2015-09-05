@@ -32,6 +32,10 @@ public class AdminOperateAction extends ActionSupport {
         setDataCount();
         setPageCount();
 
+
+       // ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
+        ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+       // ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
         PrintWriter out = ServletActionContext.getResponse().getWriter();
         Map map = new HashMap();
         List<User> list = adminService.getUserByPage(pageNo, pageSize);
@@ -40,6 +44,7 @@ public class AdminOperateAction extends ActionSupport {
         map.put("user", list);
         map.put("pageModel", pageModel);
         out.write(userGson.toJson(map));
+
         return null;
     }
 
@@ -58,13 +63,11 @@ public class AdminOperateAction extends ActionSupport {
     }
 
     public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
         if(pageNo < 1){
             this.pageNo = 1;
-        } if(pageNo >getPageCount()){
-            this.pageNo = pageCount;
         }
 
-        this.pageNo = pageNo;
     }
 
     public Integer getPageSize() {
@@ -74,7 +77,7 @@ public class AdminOperateAction extends ActionSupport {
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
         if(pageSize < 1) {
-            this.pageSize = 5;
+            this.pageSize = 10;
         }
     }
 

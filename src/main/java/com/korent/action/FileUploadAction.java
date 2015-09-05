@@ -3,6 +3,7 @@ package com.korent.action;
 import com.google.gson.Gson;
 import com.korent.service.UserService;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.ServletActionContext;
 
 import java.io.File;
@@ -119,7 +120,7 @@ public class FileUploadAction extends ActionSupport {
     }
 
     public String getReturnDir() {
-        return  "./resource/uploadImage";
+        return  "/resource/uploadImage";
     }
 
     public void setReturnDir(String returnDir) {

@@ -38,6 +38,13 @@ public class UserAction extends ActionSupport {
         ActionContext actionContext = ActionContext.getContext();
         Integer id = userService.getIdByName(username);
         actionContext.getSession().put("user",id);
+        actionContext.getSession().put("name", username);
+        return SUCCESS;
+    }
+
+    /*用户退出的action*/
+    public String logout() {
+        ServletActionContext.getRequest().getSession().invalidate();
         return SUCCESS;
     }
 

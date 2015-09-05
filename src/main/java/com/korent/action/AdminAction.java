@@ -33,9 +33,12 @@ public class AdminAction extends ActionSupport {
         if(!adminMap.get(adminname).equals(password)){
             return ERROR;
         }
+/*        System.out.println(adminname);
+        System.out.println(adminMap);*/
         ActionContext actionContext = ActionContext.getContext();
         Integer id = adminService.getIdByName(adminname);
         actionContext.getSession().put("admin",id);
+        actionContext.getSession().put("name", adminname);
         return SUCCESS;
     }
 

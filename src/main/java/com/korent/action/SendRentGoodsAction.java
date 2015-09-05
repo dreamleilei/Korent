@@ -32,9 +32,8 @@ public class SendRentGoodsAction extends ActionSupport {
             rentGoods.getPicturePathList().add(s);
         }
         Integer id = (Integer)ServletActionContext.getRequest().getSession().getAttribute("user");
-        id = 4;
         userService.sendRentGoods(id, rentGoods);
-        return SUCCESS;
+        return null;
     }
 
     public SendRentGoodsAction() {
