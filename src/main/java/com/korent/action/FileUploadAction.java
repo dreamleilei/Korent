@@ -64,19 +64,12 @@ public class FileUploadAction extends ActionSupport {
         PrintWriter out = ServletActionContext.getResponse().getWriter();
         Integer last = photoFileName.lastIndexOf('.');
         String type =photoFileName.substring(last);
-        System.out.println(type);
-        //Integer id = (Integer) ServletActionContext.getRequest().getSession().getAttribute("user");
-        System.out.println("yes" + ServletActionContext.getServletContext().getRealPath("/resource/uploadImage"));
-       Integer  id=4;
 
         /*部署的时候需要用到的路径*/
         String deloyDir = ServletActionContext.getServletContext().getRealPath("/resource/uploadImage");
 
+         Integer id = (Integer) ServletActionContext.getRequest().getSession().getAttribute("user");
         String newName = "" + id +System.currentTimeMillis()+type;
-        System.out.println(type);
-        System.out.println(getSavePath() + "/" + getPhotoFileName());
-        System.out.println("hello");
-        System.out.println(newName);
         FileOutputStream fos = new FileOutputStream(deloyDir + "/" +newName);
         FileInputStream fis = new FileInputStream(photo);
 
