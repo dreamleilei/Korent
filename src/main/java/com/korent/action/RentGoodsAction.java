@@ -15,6 +15,7 @@ import org.apache.struts2.ServletActionContext;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,9 +29,9 @@ public class RentGoodsAction extends ActionSupport {
     private UserService userService;
     private int pageSize  = 6;
     private int pageNo = 1;
-    private int dataCount;
-    private int pageCount ;
     private String result ;
+    private Integer rid;
+
     List<RentGoods> list;
 
 
@@ -40,14 +41,13 @@ public class RentGoodsAction extends ActionSupport {
 
     /*初始化页面信息*/
     public void init(){
-        setDataCount();
-        setPageCount();
         ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
     }
 
-    /*生成页面信息*/
-    public PageModel getPageModel() {
-        return new PageModel(pageNo, pageSize, pageCount, dataCount);
+    /*获取页面的Model*/
+
+    public PageModel getPageModel(int pageCount) {
+        return new PageModel(pageNo, pageSize, pageCount);
     }
 
 
@@ -58,7 +58,7 @@ public class RentGoodsAction extends ActionSupport {
         list = rentGoodsService.getRentGoodsByPage(pageNo, pageSize);
         Gson gson = RentGson.getGson();
 
-        PageModel pageModel = getPageModel();
+        PageModel pageModel = getPageModel(rentGoodsService.getRentGoodsPage(pageSize));
         HashMap map = new HashMap();
         map.put("rent", list);
         map.put("pageModel", pageModel);
@@ -77,7 +77,7 @@ public class RentGoodsAction extends ActionSupport {
         list = userService.getOrderGoodsByPage(getId(), pageNo, pageSize);
         result = gson.toJson(list);
         Map<Object, Object> map = new HashMap<Object, Object>();
-        PageModel pageModel = getPageModel();
+        PageModel pageModel = getPageModel(userService.getOrderGoodsCount(getId(), pageSize));
         map.put("rent", list);
         map.put("pageModel", pageModel);
         out.write(gson.toJson(map));
@@ -94,7 +94,7 @@ public class RentGoodsAction extends ActionSupport {
         Gson gson = new GsonBuilder().setExclusionStrategies(new RentGoodsExclusionStrategy()).create();
         list = userService.getFollowRentGoodsByPage(getId(), pageNo, pageSize);
         result = gson.toJson(list);
-        PageModel pageModel = getPageModel();
+        PageModel pageModel = getPageModel(userService.getFollowGoodsCount(getId(), pageSize));
         HashMap map = new HashMap();
         map.put("rent", list);
         map.put("pageModel", pageModel);
@@ -110,8 +110,8 @@ public class RentGoodsAction extends ActionSupport {
         init();
         PrintWriter out = ServletActionContext.getResponse().getWriter();
         Gson gson = RentGson.getGson();
+        PageModel pageModel = getPageModel(userService.getSendGoodsCount(getId(), pageSize));
         list = userService.getSendGoodsByPage(getId(), pageNo, pageSize);
-        PageModel pageModel = getPageModel();
         HashMap map = new HashMap();
         map.put("rent", list);
         map.put("pageModel", pageModel);
@@ -121,9 +121,20 @@ public class RentGoodsAction extends ActionSupport {
         return null;
     }
 
+    /*根据租品的id获取租品的详细信息*/
+    public String getRentGoodsInfo() throws IOException {
+        RentGoods rentGoods = rentGoodsService.getRentGoodsInfo(rid);
+        Gson gson = RentGson.getGson();
+        ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+        PrintWriter out = ServletActionContext.getResponse().getWriter();
+        out.write(gson.toJson(rentGoods));
+        return null;
+    }
+
     public RentGoodsService getRentGoodsService() {
         return rentGoodsService;
     }
+
 
     public void setRentGoodsService(RentGoodsService rentGoodsService) {
         this.rentGoodsService = rentGoodsService;
@@ -165,14 +176,6 @@ public class RentGoodsAction extends ActionSupport {
 
     }
 
-    public int getDataCount() {
-        return dataCount;
-    }
-
-    public void setDataCount() {
-        this.dataCount = rentGoodsService.getAllRentGoods().size();
-    }
-
     public String getResult() {
         return result;
     }
@@ -190,12 +193,13 @@ public class RentGoodsAction extends ActionSupport {
         this.list = list;
     }
 
-    public int getPageCount() {
-        return pageCount;
+
+
+    public Integer getRid() {
+        return rid;
     }
 
-    public void setPageCount() {
-        this.pageCount = dataCount % pageSize == 0 ? dataCount /pageSize : dataCount /pageSize + 1;
-
+    public void setRid(Integer rid) {
+        this.rid = rid;
     }
 }
