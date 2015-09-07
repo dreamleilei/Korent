@@ -78,9 +78,22 @@ public class UserService {
         return rentGoodsDao.findByOwner(id, pageNo, pageSize);
     }
 
-    /*获取用户关注租品的总页数*/
+    /*获取用户发布租品的总页数*/
     public int getSendGoodsCount(Serializable id, int pageSize) {
         return userDao.getSendGoodsCount(id, pageSize);
+    }
+
+    /*用户删除租品*/
+    public void cancelSend(Serializable uid, Serializable rid){
+        User user = userDao.get(User.class, uid);
+        System.out.println(user);
+        RentGoods rentGoods = rentGoodsDao.get(RentGoods.class, rid);
+        if(!rentGoods.getOwner().equals(user)){
+            System.out.println(rentGoods.getOwner());
+            return ;
+        } else {
+            rentGoodsDao.delete(RentGoods.class, rid);
+        }
     }
 
     /*获取用户的个人信息*/
@@ -142,6 +155,40 @@ public class UserService {
         rentGoodsDao.save(rentGoods);
 
     }
+
+    /*用户预定租品*/
+    public void rentGoods(Serializable uid, Serializable rid){
+        User user = userDao.get(User.class, uid);
+        RentGoods rentGoods = rentGoodsDao.get(RentGoods.class, rid);
+        user.getOrder().add(rentGoods);
+        userDao.update(user);
+    }
+
+    /*用户取消预定*/
+    public void cancelGoods(Serializable uid, Serializable rid){
+        User user = userDao.get(User.class, uid);
+        RentGoods rentGoods = rentGoodsDao.get(RentGoods.class, rid);
+        user.getOrder().remove(rentGoods);
+        //rentGoods.setOrderUser(null);
+        userDao.update(user);
+    }
+
+    /*用户关注租品*/
+    public void followGoods(Serializable uid, Serializable rid){
+        User user = userDao.get(User.class, uid);
+        RentGoods rentGoods = rentGoodsDao.get(RentGoods.class, rid);
+        user.getFollow().add(rentGoods);
+        userDao.update(user);
+    }
+
+    /*用户取消关注*/
+    public void cancelFollowGoods(Serializable uid, Serializable rid){
+        User user = userDao.get(User.class, uid);
+        RentGoods rentGoods = rentGoodsDao.get(RentGoods.class, rid);
+        System.out.println(user.getFollow().remove(rentGoods));
+        userDao.update(user);
+    }
+
 
     public UserService() {
     }

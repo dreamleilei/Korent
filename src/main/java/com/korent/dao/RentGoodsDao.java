@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 
@@ -136,6 +137,8 @@ public class RentGoodsDao extends BaseDao<RentGoods> {
         List<RentGoods> list = currentSession().createCriteria(RentGoods.class).
                 setFirstResult((pageNo - 1) * pageSize).
                 setMaxResults(pageSize).
+                addOrder(Order.desc("updateDate")).
+                addOrder(Order.desc("id")).
                 list();
         if(list == null) {
             return null;

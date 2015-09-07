@@ -2,7 +2,9 @@ package com.korent.service;
 
 import com.korent.dao.AdminDao;
 import com.korent.dao.NotificationDao;
+import com.korent.dao.RentGoodsDao;
 import com.korent.dao.UserDao;
+import com.korent.entity.RentGoods;
 import com.korent.entity.User;
 
 import java.io.Serializable;
@@ -17,6 +19,7 @@ public class AdminService {
     private AdminDao adminDao;
     private UserDao userDao;
     private NotificationDao notificationDao;
+    private RentGoodsDao rentGoodsDao;
 
 
     /*根据管理员姓名获取管理员的id*/
@@ -46,8 +49,13 @@ public class AdminService {
 
     }
 
-    /*管理员根据用户姓名获取用户的id*/
+    /*管理员删除租品*/
 
+    public void deleteRentGoods(Serializable id) {
+        rentGoodsDao.delete(RentGoods.class, id);
+    }
+
+    /*管理员根据用户姓名获取用户的id*/
     public Serializable getUserIdByName(String name) {
         return userDao.getIdByName(name);
     }
@@ -76,6 +84,15 @@ public class AdminService {
     }
 
     public void setNotificationDao(NotificationDao notificationDao) {
+
         this.notificationDao = notificationDao;
+    }
+
+    public RentGoodsDao getRentGoodsDao() {
+        return rentGoodsDao;
+    }
+
+    public void setRentGoodsDao(RentGoodsDao rentGoodsDao) {
+        this.rentGoodsDao = rentGoodsDao;
     }
 }

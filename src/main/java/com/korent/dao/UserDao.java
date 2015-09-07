@@ -22,7 +22,21 @@ public class UserDao extends BaseDao<User> {
     private static final String qq = "qq";
     private static final String phone = "phone";
     private static final String password = "password";
-            
+
+
+    /*根据用户名获取用户的id*/
+    @SuppressWarnings("unchecked")
+    public Integer getIdByName(String name){
+        System.out.println(name);
+        List<User> list = currentSession().createCriteria(User.class).
+                add(Restrictions.eq("name",  name)).
+                list();
+        if(list == null) {
+            return null;
+        }
+        return list.get(0).getId();
+    }
+
     /*获取所有预定的租品的列表*/
     public List<RentGoods> findOrderRentGoods(Serializable id) {
         User user = get(User.class, id);
@@ -60,6 +74,24 @@ public class UserDao extends BaseDao<User> {
         return map;
     }
 
+
+    /*获取用户发布的租品*/
+    @SuppressWarnings("unchecked")
+    public List<RentGoods> getSendGoodsByPage(Serializable id, int pageNo, int pageSize) {
+        User user = get(User.class, id);
+        List<RentGoods> list =currentSession().createFilter(user.getOrder(),  "order by updateDate desc ,id desc")
+                .setMaxResults(pageSize)
+                .setFirstResult((pageNo - 1) * (pageSize))
+                .list();
+        return list;
+    }
+
+    /*获取用户发布租品的总集合页数*/
+    public int getSendGoodsCount(Serializable id, int pageSize){
+        int resultCount = getSendGoodsByPage(id, 1, -1).size();
+        return resultCount % pageSize == 0 ? resultCount /pageSize : resultCount /pageSize + 1;
+    }
+
     /*用户预定租品*/
     public void orderRentGoods (User user, RentGoods rentGoods) {  //用户预定租品
         user.getOrder().add(rentGoods);
@@ -73,24 +105,29 @@ public class UserDao extends BaseDao<User> {
         update(user);
     }
 
-    /*根据用户名获取用户的id*/
+    /*根据用户分页获取预定的租品*/
     @SuppressWarnings("unchecked")
-    public Integer getIdByName(String name){
-        System.out.println(name);
-        List<User> list = currentSession().createCriteria(User.class).
-                add(Restrictions.eq("name",  name)).
-                list();
-        if(list == null) {
-            return null;
-        }
-        return list.get(0).getId();
+    public List<RentGoods> getOrderGoodsByPage(Serializable id, int pageNo, int pageSize) {
+        User user = get(User.class, id);
+        List<RentGoods> list =currentSession().createFilter(user.getOrder(), "order by updateDate desc ,id desc")
+                .setMaxResults(pageSize)
+                .setFirstResult((pageNo -1) *(pageSize))
+                .list();
+        return list;
     }
+
+    /*获取用户预定租品的总集合页数*/
+    public int getOrderGoodsCount(Serializable id, int pageSize){
+        int resultCount = getOrderGoodsByPage(id, 1, -1).size();
+        return resultCount % pageSize == 0 ? resultCount /pageSize : resultCount /pageSize + 1;
+    }
+
 
     /*根据用户分页获关注的取租品*/
     @SuppressWarnings("unchecked")
     public List<RentGoods> getFollowGoodsByPage(Serializable id, int pageNo, int pageSize) {
         User user = get(User.class, id);
-        List<RentGoods> list =currentSession().createFilter(user.getFollow(), "")
+        List<RentGoods> list =currentSession().createFilter(user.getFollow(),  "order by updateDate desc ,id desc")
                 .setMaxResults(pageSize)
                 .setFirstResult((pageNo -1) *(pageSize))
                 .list();
@@ -103,51 +140,7 @@ public class UserDao extends BaseDao<User> {
         return resultCount % pageSize == 0 ? resultCount /pageSize : resultCount /pageSize + 1;
     }
 
-    /*根据用户分页获取发布的租品*/
-    @SuppressWarnings("unchecked")
-    public List<RentGoods> getSendGoodsByPage(Serializable id, int pageNo, int pageSize) {
-            User user = get(User.class, id);
-            List<RentGoods> list =currentSession().createFilter(user.getSend(), "")
-                    .setMaxResults(pageSize)
-                    .setFirstResult((pageNo -1) *(pageSize))
-                    .list();
-            return list;
-    }
 
-
-    /*获取用户租品的总集合页数*/
-    public int getSendGoodsCount(Serializable id, int pageSize){
-        int resultCount = getSendGoodsByPage(id, 1, -1).size();
-        return resultCount % pageSize == 0 ? resultCount /pageSize : resultCount /pageSize + 1;
-    }
-
-    /*获取用户的其它信息*/
-    @SuppressWarnings("unchecked")
-    public String getOtherInformation(Serializable id){
-        List<User> list = currentSession().createCriteria(User.class).
-                add(Restrictions.eq("id",  id)).
-                list();
-        if(list == null) {
-            return null;
-        }
-        return list.get(0).getOtherInformation();
-    }
-    /*根据用户分页获取预定的租品*/
-    @SuppressWarnings("unchecked")
-    public List<RentGoods> getOrderGoodsByPage(Serializable id, int pageNo, int pageSize) {
-        User user = get(User.class, id);
-        List<RentGoods> list =currentSession().createFilter(user.getOrder(), "")
-                .setMaxResults(pageSize)
-                .setFirstResult((pageNo -1) *(pageSize))
-                .list();
-        return list;
-    }
-
-    /*获取用户租品的总集合页数*/
-    public int getOrderGoodsCount(Serializable id, int pageSize){
-        int resultCount = getOrderGoodsByPage(id, 1, -1).size();
-        return resultCount % pageSize == 0 ? resultCount /pageSize : resultCount /pageSize + 1;
-    }
 
     /*分页获取用户所有的用户*/
     @SuppressWarnings("unchecked")
@@ -162,7 +155,20 @@ public class UserDao extends BaseDao<User> {
         return list;
     }
 
-    /*用户修改信息*/ //暂时先留个接口
+    /*获取用户的其它信息*/
+    @SuppressWarnings("unchecked")
+    public String getOtherInformation(Serializable id){
+        List<User> list = currentSession().createCriteria(User.class).
+                add(Restrictions.eq("id",  id)).
+                list();
+        if(list == null) {
+            return null;
+        }
+        return list.get(0).getOtherInformation();
+    }
+
+
+    /*用户修改信息*/
     public void changeInformation(Serializable id, String property, Object value) {
         User user = get(User.class, id);
         Field field = null;
@@ -217,7 +223,7 @@ public class UserDao extends BaseDao<User> {
         user.setOtherInformation((String)otherInformation);
     }
 
-
+/*
     public List<RentGoods> getSendGoods(User user, int pageNo, int pageSize) { //获取用户发布的消息
         List<RentGoods> list = user.getSend();
         if(pageSize < 0) {
@@ -258,7 +264,7 @@ public class UserDao extends BaseDao<User> {
         }
 
         return list.subList((pageNo - 1) * pageSize, pageNo *pageSize);
-    }
+    }*/
 
     @Override
     public User get(Class<User> entityClass, Serializable id) {

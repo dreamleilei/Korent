@@ -44,6 +44,12 @@ public class RentGoodsService {
         return rentGoodsDao.findAll(RentGoods.class);
     }
 
+    /*获取租品分页的总数*/
+    public Integer getRentGoodsPage(int pageSize){
+        List<RentGoods> list = getAllRentGoods();
+        return list.size() % pageSize == 0 ? list.size() / pageSize : list.size() /pageSize + 1;
+    }
+
     public UserDao getUserDao() {
         return userDao;
     }
