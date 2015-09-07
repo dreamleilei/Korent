@@ -52,7 +52,7 @@
       </div>
 
       <div style="position:relative; left:21px; margin-bottom:20px;">
-        *证件号码:
+        *证件号码:如何设置ajax定时查询
         <input type="text" name="idNumber" id="idNumber"  />
       </div>
 
@@ -111,7 +111,7 @@
     s = "\"ssss\"";
     }
     %>
-    var otherInformation =  <%=s%>;
+    var otherInformation = <%=s%>;
     $('input[name="realName"]').val(otherInformation.realName);
     $('input[name="idNumber"]').val(otherInformation.idNumber);
     $('input[name="address"]').val(otherInformation.address);
