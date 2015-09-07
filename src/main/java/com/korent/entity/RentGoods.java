@@ -74,6 +74,23 @@ public class RentGoods implements Serializable {
         this.updateDate = updateDate;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RentGoods)) return false;
+
+        RentGoods rentGoods = (RentGoods) o;
+
+        if (!id.equals(rentGoods.id)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
     public Integer getId() {
         return id;
     }

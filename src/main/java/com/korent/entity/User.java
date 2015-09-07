@@ -35,7 +35,7 @@ public class User implements Serializable {
     @Column(name="otherInformation")
     private String otherInformation;
 
-    @OneToMany(targetEntity=RentGoods.class,  orphanRemoval =true)
+    @OneToMany(targetEntity=RentGoods.class)
     @JoinColumn(name="orderId", referencedColumnName="uid")
     List<RentGoods> order = new ArrayList<RentGoods>();
 
@@ -140,6 +140,28 @@ public class User implements Serializable {
     }
 
     public void setOtherInformation(String otherInformation) {
+
         this.otherInformation = otherInformation;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+
+        User user = (User) o;
+
+        if (!id.equals(user.id)) return false;
+        if (!name.equals(user.name)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
+    }
 }
+
