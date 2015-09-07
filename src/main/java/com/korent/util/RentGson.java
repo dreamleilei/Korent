@@ -13,7 +13,7 @@ public class RentGson {
     }
     public static  Gson getGson() {
         if(gson == null) {
-            gson = new GsonBuilder().setExclusionStrategies(new RentGoodsExclusionStrategy()).create();
+            gson = new GsonBuilder().setExclusionStrategies(new RentGoodsExclusionStrategy()).setDateFormat("yyyy-MM-dd").create();
         }
         return gson;
 
