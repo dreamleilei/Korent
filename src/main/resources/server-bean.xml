@@ -8,6 +8,9 @@
 
        <bean id="adminService" class="com.korent.service.AdminService"
              p:adminDao-ref="adminDao"
+             p:notificationDao-ref="notificationDao"
+             p:userDao-ref="userDao"
+             p:rentGoodsDao-ref="rentGoodsDao"
                />
 
        <bean id="userService" class="com.korent.service.UserService"

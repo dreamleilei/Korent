@@ -9,6 +9,8 @@
     <bean id="userInfoAction" class="com.korent.action.UserInfoAction"
           p:userService-ref="userService"
           />
+    <bean id="userChangeAction" class="com.korent.action.UserChangeAction"
+          p:userService-ref="userService" />
     <bean id="upload" class="com.korent.action.FileUploadAction"
           p:userService-ref="userService"
           />
@@ -18,5 +20,18 @@
             p:userService-ref="userService"
             p:rentGoodsService-ref="rentGoodsService"
             />
+    <bean id="sendGoodsAction" class="com.korent.action.SendRentGoodsAction"
+          p:userService-ref="userService"
+          p:rentGoodsService-ref="rentGoodsService"
+          />
+
+    <bean id="adminAction" class="com.korent.action.AdminAction"
+          p:adminService-ref="adminService" />
+    <bean id="adminOperateAction" class="com.korent.action.AdminOperateAction"
+          p:adminService-ref="adminService" />
+    <bean id="userOperateAction" class="com.korent.action.UserOperateAction"
+          p:rentGoodsService-ref="rentGoodsService"
+          p:userService-ref="userService"
+          />
 
 </beans>

@@ -7,32 +7,69 @@
 <struts>
         <package name ="korent" namespace="/korent" extends="struts-default" >
 
-                <!--用户登录-->
-                <action name="login" class="userAction" method="login" >
-                        <result>/index.jsp</result>
-                        <result name="input">/WEB-INF/content/register.jsp</result>
-                </action>
 
                 <!--用户注册-->
                 <action name="register" class="userAction" method="register">
-                        <result name="success" >/userLogin.html</result>
+                        <result type="redirect" name="success" >/userLogin.jsp</result>
                         <result name="input" >/register.jsp</result>
                 </action>
-                <!--用户修改注释-->
+
+                <!--用户登录-->
+                <action name="login" class="userAction" method="login" >
+                        <result>/information.jsp</result>
+                        <result name="input" type="redirect">/userLogin.jsp</result>
+                        <result name="error" type="redirect">/userLogin.jsp</result>
+                </action>
+
+                <!--用户退出-->
+                <action name="logout" class="userAction" method="logout">
+                        <result>/index.jsp</result>
+                </action>
+
+                <!--用户修改信息-->
                 <action name="changeInformation" class="userAction" method="changeInformation" >
                 </action>
 
-                <!--获取用户列表-->
-                <action name="getUserList" class="userAction" method="getUserList" >
+                <!--用户发布租品的action-->
+                <action name="sendGoods" class="sendGoodsAction" method="execute">
                 </action>
 
+                <!--用户下架租品-->
+                <action name="cancelSendGoods" class="userOperateAction" method="cancelSendGoods">
+                </action>
+
+                <!--用户上传图片的action-->
                 <action name="upload" class="upload" method="execute" >
                         <param name="savePath">/uploadFiles</param>
-                        <result >/index.jsp</result>
+                        <interceptor-ref name="fileUpload">
+                                <param name="maximumSize">5242880</param>
+                        </interceptor-ref>
+                        <interceptor-ref name="defaultStack" /> <!-- 默认拦截器 -->
+                      <!--  <result name="success">/Fileupload.jsp</result>-->
+                </action>
+
+                <!--用户的注册的时候,获取已经存在的用户的列表-->
+                <action name="getUserList" class="userAction" method="getUserList" >
                 </action>
 
                 <!--用户获取个人信息-->
                 <action name="getInformation" class="userAction" method="getInformation" />
+
+                <!--用户修改个人信息的action-->
+                <action name="changeInformation" class="userChangeAction" method="changeInformation" />
+
+                <!--用户预定租品-->
+                <action name="orderRent" class="userOperateAction" method="orderRent">
+                </action>
+                <!--用户取消预定-->
+                <action name="cancelRent" class="userOperateAction" method="cancelRent">
+                </action>
+                <!--用户关注租品-->
+                <action name="followGoods" class="userOperateAction" method="followGoods">
+                </action>
+                <!--用户取消关注租品-->
+                <action name="cancelFollowGoods" class="userOperateAction" method="cancelFollowGoods">
+                </action>
 
         </package>
 
@@ -45,8 +82,58 @@
                         </result>
                 </action>
 
-                <action name="page" class="rentGoodsAction" method="getOrderRent">
+        </package>
+
+        <package name="admin" namespace="/admin" extends ="struts-default" >
+
+                <!--管理员登录的action-->
+                <action name="login" class="adminAction" method="login">
+                        <result>/adminOperate.jsp</result>
+                        <result name="input">/adminLogin.jsp</result>
+                        <result name="error">/adminLogin.jsp</result>
                 </action>
+
+                <!--管理员获取所有用户的action-->
+                <action name="getAllUser" class="adminAction" method="getAllUser" >
+                </action>
+
+                <!--管理员删除用户的action-->
+                <action name="deleteUser" class="adminOperateAction" method="deleteUser" />
+
+                <!--管理员分页获取用户的action-->
+                <action name="getUser" class="adminOperateAction" method="getUser">
+                </action>
+
+                <!--管理员删除租品-->
+                <action name="deleteRentGoods" class="adminOperateAction" method="deleteRentGoods">
+                </action>
+        </package>
+
+        <package name="rent" namespace="/rent" extends="struts-default" >
+                <!--/*分页获取所有租品的action*/-->
+                <action name="getAllRentGoods" class="rentGoodsAction" method="getAllRentGoods">
+                </action>
+
+                <!--用户分页获取发布租品的action-->
+                <action name="getSendGoods" class="rentGoodsAction" method="getSendRent" >
+                </action>
+
+
+                <!--<action name="getRentGoods" class="rentGoodsAction" method="getOrderRent">
+                </action>-->
+
+                <!--用户分页获取租赁过租品的action-->
+                <action name="getOrderGoods" class="rentGoodsAction" method="getOrderRent" >
+                </action>
+
+                <!--用户分页获取关注的租品的action-->
+                <action name="getFollowGoods" class="rentGoodsAction" method="getFollowRent" >
+                </action>
+
+                <action name="getRentGoodsInfo" class="rentGoodsAction" method="getRentGoodsInfo">
+
+                </action>
+
         </package>
 
         <package name="util" namespace="/util" extends="struts-default" >
