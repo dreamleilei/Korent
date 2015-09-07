@@ -82,10 +82,11 @@ public class FileUploadAction extends ActionSupport {
 
 
         /*下面的代码是开发时候避免重复调用挪用写的*/
+        FileInputStream fisTest = new FileInputStream(photo);
         FileOutputStream fosTest = new FileOutputStream(getSavePath() + "/" +newName);
         byte[] bufferTest = new byte[1024];
         int lenTest;
-        while ((lenTest = fis.read(buffer)) != -1) {
+        while ((lenTest = fisTest.read(bufferTest)) != -1) {
             fosTest.write(bufferTest, 0, lenTest);
         }
         fosTest.close();
