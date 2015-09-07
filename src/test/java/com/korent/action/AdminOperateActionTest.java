@@ -18,7 +18,7 @@ import javax.transaction.Transactional;
 import static org.junit.Assert.*;
 
 @ContextConfiguration(locations = "classpath*:spring-hibernate.xml")
-@RunWith(SpringJUnit4ClassRunner.class)
+/*@RunWith(SpringJUnit4ClassRunner.class)*/
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
 @Transactional
 /*@RunWith(SpringJUnit4ClassRunner.class)*/
@@ -62,6 +62,11 @@ public class AdminOperateActionTest extends StrutsSpringTestCase{
         executeAction("/admin/getUser.action");
        /* executeAction("/korent/register.action");*/
 
+    }
+
+    public void testDeleteRentGoods() throws Exception {
+        request.setParameter("rid", String.valueOf(17));
+        executeAction("/admin/deleteRentGoods.action");
     }
 
     public AdminService getAdminService() {

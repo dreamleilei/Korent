@@ -129,4 +129,31 @@ public class UserServiceTest {
         userService.sendRentGoods(4, rentGoods);
 
     }
+
+    @Test
+    public void testRentGoods() throws Exception {
+        userService.rentGoods(12,  18);
+
+    }
+
+    @Test
+    public void testCancelGoods() throws Exception {
+        userService.cancelGoods(12, 18);
+    }
+
+    @Test
+    public void testFollowGoods() throws Exception {
+        userService.followGoods(12, 18);
+    }
+
+    @Test
+    public void testCancelRentGoods() throws Exception {
+        userService.cancelFollowGoods(12,18);
+    }
+
+    @Test
+    public void testCancelSend() throws Exception {
+
+        userService.cancelSend(4, 24);
+    }
 }

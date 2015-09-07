@@ -41,27 +41,45 @@ public class RentGoodsActionTest extends StrutsSpringTestCase {
     public void testGetAllRentGoods() throws Exception {
         request.setParameter("pageNo", String.valueOf(1));
         request.setParameter("pageSize", String.valueOf(7));
-        request.getSession().setAttribute("user", 5);
+        request.getSession().setAttribute("user", 4);
         System.out.println(executeAction("/rent/getAllRentGoods.action"));
-        //System.out.println(executeAction("/rent/getSendGoods.action"));
-        //System.out.println(executeAction("/rent/getFollowGoods.action"));
-        //System.out.println(executeAction("/rent/getOrderGoods.action"));
 
 
+
+
+
+    }
+
+    @Test
+    public void testRentGoodsInfo() throws Exception{
+        request.setParameter("pageNo", String.valueOf(1));
+        request.setParameter("pageSize", String.valueOf(7));
+        request.getSession().setAttribute("user", 4);
+        request.setParameter("rid", String.valueOf(20));
+        System.out.println(executeAction("/rent/getRentGoodsInfo.action"));
     }
 
     @Test
     public void testGetOrderRent() throws Exception {
-
+        request.setParameter("pageNo", String.valueOf(1));
+        request.setParameter("pageSize", String.valueOf(7));
+        request.getSession().setAttribute("user", 4);
+        System.out.println(executeAction("/rent/getOrderGoods.action"));
     }
 
     @Test
     public void testGetFollowRent() throws Exception {
-
+        request.setParameter("pageNo", String.valueOf(1));
+        request.setParameter("pageSize", String.valueOf(7));
+        request.getSession().setAttribute("user", 12);
+        System.out.println(executeAction("/rent/getFollowGoods.action"));
     }
 
     @Test
     public void testGetSendRent() throws Exception {
-
+        request.setParameter("pageNo", String.valueOf(1));
+        request.setParameter("pageSize", String.valueOf(7));
+        request.getSession().setAttribute("user", 4);
+        System.out.println(executeAction("/rent/getSendGoods.action"));
     }
 }

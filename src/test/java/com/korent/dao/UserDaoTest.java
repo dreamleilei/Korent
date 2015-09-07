@@ -43,9 +43,9 @@ public class UserDaoTest extends TestCase {
 
     @Test
     public void testgetOrder() throws Exception {
-        User user = userDao.get(User.class, 2);
-        List<RentGoods> list = userDao.getOrderGoods(user, 1, -1);
-        System.out.println(list.get(0).getId());
+        User user = userDao.get(User.class, 4);
+     //   List<RentGoods> list = userDao.getOrderGoods(user, 1, 5);
+      //  System.out.println(list.get(0).getId());
 
     }
 
@@ -164,6 +164,12 @@ public class UserDaoTest extends TestCase {
     @Test
     public void testGetUserByPage() throws Exception {
         System.out.println(userDao.getUserByPage(2, 2));
+
+    }
+
+    @Test
+    public void testGetOrderGoodsByPage() throws Exception {
+        System.out.println(userDao.getOrderGoodsByPage(4, 1, 5));
 
     }
 }
