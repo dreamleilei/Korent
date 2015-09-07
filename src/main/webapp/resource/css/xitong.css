@@ -1,0 +1,39 @@
+
+ÔªËØ {
+
+}
+.p_reply {
+
+    float: right;
+    margin-left: 4px;
+
+}
+html, body, div, p, ul, li, ol, dl, dt, dd, pre, code, table, tr, td, form, fieldset, legend, button, input, textarea, h1, h2, h3, h4, h5, h6, hr, blockquote {
+
+    margin: 0px;
+    padding: 0px;
+
+}
+* {
+
+    box-sizing: content-box;
+
+}
+.core_reply_tail {
+
+    line-height: 28px;
+
+}
+body {
+
+    font-size: 12px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #333;
+    line-height: 22px;
+
+}
+html {
+
+    font-size: 10px;
+
+}
