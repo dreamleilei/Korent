@@ -12,8 +12,11 @@
   <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
   <title>房屋信息</title>
   <link href="bootstrap.css" rel="text/css" />
-  <link href="./resource/css/message1.css" rel="stylesheet" type="text/css" />
-  <script src="./resource/js/jquery-2.1.1.js" type="text/javascript"> </script>
+  <link href="/resource/css/message1.css" rel="stylesheet" type="text/css" />
+  <script src="/resource/js/jquery-2.1.1.js" type="text/javascript"> </script>
+  <link href="/resource/css/jNotify.jquery.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="/resource/js/jNotify.jquery.js" ></script>
+  <script type="text/javascript" src="/resource/js/operateTip.js" > </script>
 </head>
 
 <body>
@@ -139,10 +142,10 @@
       model += "<a href=\"/rent.jsp?pageNo=" + i + "\&pageSize=6\" ><span>" + i + "&nbsp;&nbsp;</span></a>";
     }
 
-    $('#spanFirst').parent().attr("href", "/rent.jsp?pageNo=1&page?Size=10");
-    $('#spanLast').parent().attr("href", "/rent.jsp?pageNo=" + pageModel.pageCount + "&page?Size=6");
-    $('#spanNext').parent().attr("href", "/rent.jsp?pageNo=" + (pageModel.pageNo + 1 ) +"&page?Size=6");
-    $('#spanPre').parent().attr("href", "/rent.jsp?pageNo=" + (pageModel.pageNo - 1 ) +"&page?Size=6");
+    $('#spanFirst').parent().attr("href", "/rent.jsp?pageNo=1&pageSize=6");
+    $('#spanLast').parent().attr("href", "/rent.jsp?pageNo=" + pageModel.pageCount + "&pageSize=6");
+    $('#spanNext').parent().attr("href", "/rent.jsp?pageNo=" + (pageModel.pageNo + 1 ) +"&pageSize=6");
+    $('#spanPre').parent().attr("href", "/rent.jsp?pageNo=" + (pageModel.pageNo - 1 ) +"&pageSize=6");
     $('#add').append(model);
     $('#spanPageNum').text(pageModel.pageNo);
     $('#spanTotalPage').text(pageModel.pageCount);
@@ -161,11 +164,17 @@
   function createRent(rent_array){
     for(var i = 1; i <= rent_array.length; i++){
       $('#img' + i).children('a').children('img').attr("src", rent_array[i-1].picturePathList[0]);
-      $('#img'+i).children('a').attr("href", "/house.jsp?uid=" + rent_array[i -1 ].id);
+      $('#img'+i).children('a').attr("href", "/rentInformation.jsp?rid=" + rent_array[i -1 ].id);
       $('#date' +i).text(rent_array[i-1].updateDate);
       $('#price' +i).text(rent_array[i -1].price);
       $('#classify' +i).text(rent_array[i -1].classify);
       $('#rid' +i).text(rent_array[i-1].id);
+      if(rent_array[i - 1].status == "IsOrder"){
+        $('#rid' +i).prev().val("已被预订");
+        $('#rid' +i).prev().attr("disabled", "disabled");
+      } else if(rent_array[i - 1].status == "CanOrder"){
+        $('#rid +i').prev().val("预订");
+      }
     } if(rent_array.length <6){
       for(i;i <= 6;i++){
         $('#case' +i).hide();
@@ -176,7 +185,7 @@
 
   $(document).ready(function(){
     /*用户预定按钮的点击*/
-    $(':button[name="submit"]').click(function(event){
+    $(':button[value="预订"]').click(function(event){
       event.preventDefault();
       var button  = $(this);
       $.ajax({
@@ -185,7 +194,8 @@
         data:"rid="+ encodeURIComponent($(this).next().text()),
         success:function(html){
           button.attr("disabled", "disabled");
-          button.val('已被预定');
+          button.val('已被预订');
+          operateSuccessTip();
         },
         error:function(){
           alert('网络连接超时,请检查网络');
