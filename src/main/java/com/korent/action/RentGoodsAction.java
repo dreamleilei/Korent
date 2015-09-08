@@ -7,19 +7,14 @@ import com.google.gson.reflect.TypeToken;
 import com.korent.entity.RentGoods;
 import com.korent.service.RentGoodsService;
 import com.korent.service.UserService;
-import com.korent.util.PageModel;
-import com.korent.util.RentGoodsExclusionStrategy;
-import com.korent.util.RentGson;
+import com.korent.util.*;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by lei on 15-8-28.
@@ -63,7 +58,6 @@ public class RentGoodsAction extends ActionSupport {
         map.put("rent", list);
         map.put("pageModel", pageModel);
         out.write(gson.toJson(map));
-        System.out.println(gson.toJson(map));
         out.close();
         return null;
     }
@@ -91,14 +85,20 @@ public class RentGoodsAction extends ActionSupport {
 
         init();
         PrintWriter out = ServletActionContext.getResponse().getWriter();
-        Gson gson = new GsonBuilder().setExclusionStrategies(new RentGoodsExclusionStrategy()).create();
+        Gson gson = RentGson.getGson();
         list = userService.getFollowRentGoodsByPage(getId(), pageNo, pageSize);
+        Set set = new HashSet();
+        for(RentGoods rent : list){
+            set.add(rent);
+        }
+        System.out.println(set);
         result = gson.toJson(list);
         PageModel pageModel = getPageModel(userService.getFollowGoodsCount(getId(), pageSize));
         HashMap map = new HashMap();
-        map.put("rent", list);
+        map.put("rent", set);
         map.put("pageModel", pageModel);
         out.write(gson.toJson(map));
+        System.out.println(gson.toJson(map));
         out.flush();
         out.close();
         return null;
@@ -115,6 +115,7 @@ public class RentGoodsAction extends ActionSupport {
         HashMap map = new HashMap();
         map.put("rent", list);
         map.put("pageModel", pageModel);
+        System.out.println(pageModel);
         out.write(gson.toJson(map));
         out.flush();
         out.close();
