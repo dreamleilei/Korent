@@ -15,34 +15,13 @@
   <link href="/resource/css/admin.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="/resource/js/jquery-2.1.1.js" >
   </script>
+     <link href="/resource/css/jNotify.jquery.css" rel="stylesheet" type="text/css" />
+     <script type="text/javascript" src="/resource/js/jNotify.jquery.js" ></script>
+     <script type="text/javascript" src="/resource/js/operateTip.js" > </script>
 </head>
 
 <body>
-<div id="container">
-
-  <div id="header">
-    <div id="header0">
-      <img src="/resource/image/logo5.png" height="100" width="200" />
-    </div>
-    <div id="username"><span><%=session.getAttribute("name")%></span>
-      <span>退出</span>
-    </div>
-  </div>
-
-  <div id="message">
-    <div id="menu">
-      <ul>
-        <li><a href="#" class="href2">管理用户</a></li><p></p>
-        <li><a href="#" class="href2">管理租品</a></li>
-      </ul>
-    </div>
-
-    <div id="goodsplay">
-    </div>
-
-  </div>
-</div>
-
+<%@ include file="/adminModel.jsp" %>
 <div id="chara">
   <div id="usermessage">用户信息<hr /></div>
   <div style="margin-top:60px;">
@@ -144,6 +123,7 @@
         createPage(obj.pageModel);
 
         $('input:button[value="删除"]').click(function(event){
+            var button = $(this);
           var id = $(this).parent().parent().children().eq(0).text();
           var thisRow = $(this).parent().parent();
           $.ajax({
@@ -152,10 +132,13 @@
             data:"uid="+encodeURIComponent(id),
             success:function(html){
               thisRow.remove();
+                operateSuccessTip(button);
 
             },
             error:function(){
+                operateErrorTip();
               alert('网络错误,请您重试');
+
             }
 
           })

@@ -12,8 +12,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
   <title>房屋信息</title>
   <link href="bootstrap.css" rel="text/css" />
-  <link href="./resource/css/message1.css" rel="stylesheet" type="text/css" />
-  <script src="./resource/js/jquery-2.1.1.js" type="text/javascript"> </script>
+  <link href="/resource/css/message1.css" rel="stylesheet" type="text/css" />
+  <script src="/resource/js/jquery-2.1.1.js" type="text/javascript"> </script>
+  <script src="/resource/js/userOperateUtil.js" type="text/javascript"> </script>
+  <link href="/resource/css/jNotify.jquery.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="/resource/js/jNotify.jquery.js" ></script>
+  <script type="text/javascript" src="/resource/js/operateTip.js" > </script>
 </head>
 
 <body>
@@ -21,7 +25,7 @@
 
 <div id="mess">
   <div  id="title">
-    租品浏览
+    我的关注
     <hr />
   </div>
   <!--  <div id="show">-->
@@ -104,7 +108,7 @@
       <span id="price6" class="red">0000</span>&nbsp;&nbsp;<span id="classify6" class="red">房屋</span><br/>
       &nbsp;&nbsp;&nbsp;日期：
       <span id="date6" class="red">yyyy-mm-dd</span><br/>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="submit" type="button"  class="fix" style="width:100px; height:30px; color:#FFFFFF; " onclick=""  value="取消关注"/>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id ="follow" name="submit" type="button"  class="fix" style="width:100px; height:30px; color:#FFFFFF; " onclick=""  value="取消关注"/>
       <span id="rid6"  hidden></span>
     </div>
   </div>
@@ -136,13 +140,13 @@
   function createPage(pageModel) {
     var model = "";
     for (var i = 1; i <= pageModel.pageCount; i++) {
-      model += "<a href=\"/rent.jsp?pageNo=" + i + "\&pageSize=6\" ><span>" + i + "&nbsp;&nbsp;</span></a>";
+      model += "<a href=\"/userFollowGoods.jsp?pageNo=" + i + "\&pageSize=6\" ><span>" + i + "&nbsp;&nbsp;</span></a>";
     }
 
-    $('#spanFirst').parent().attr("href", "/rent.jsp?pageNo=1&page?Size=10");
-    $('#spanLast').parent().attr("href", "/rent.jsp?pageNo=" + pageModel.pageCount + "&page?Size=6");
-    $('#spanNext').parent().attr("href", "/rent.jsp?pageNo=" + (pageModel.pageNo + 1 ) +"&page?Size=6");
-    $('#spanPre').parent().attr("href", "/rent.jsp?pageNo=" + (pageModel.pageNo - 1 ) +"&page?Size=6");
+    $('#spanFirst').parent().attr("href", "/userFollowGoods.jsp?pageNo=1&pageSize=6");
+    $('#spanLast').parent().attr("href", "/userFollowGoods.jsp?pageNo=" + pageModel.pageCount + "&pageSize=6");
+    $('#spanNext').parent().attr("href", "/userFollowGoods.jsp?pageNo=" + (pageModel.pageNo + 1 ) +"&pageSize=6");
+    $('#spanPre').parent().attr("href", "/userFollowGoods.jsp?pageNo=" + (pageModel.pageNo - 1 ) +"&pageSize=6");
     $('#add').append(model);
     $('#spanPageNum').text(pageModel.pageNo);
     $('#spanTotalPage').text(pageModel.pageCount);
@@ -161,7 +165,7 @@
   function createRent(rent_array){
     for(var i = 1; i <= rent_array.length; i++){
       $('#img' + i).children('a').children('img').attr("src", rent_array[i-1].picturePathList[0]);
-      $('#img'+i).children('a').attr("href", "/userRentInformation.jsp?rid=" + rent_array[i -1 ].id);
+      $('#img'+i).children('a').attr("href", "/userFollowInformation.jsp?rid=" + rent_array[i -1 ].id);
       $('#date' +i).text(rent_array[i-1].updateDate);
       $('#price' +i).text(rent_array[i -1].price);
       $('#classify' +i).text(rent_array[i -1].classify);
@@ -186,8 +190,6 @@
         var obj = JSON.parse(html);
         createPage(obj.pageModel);
         createRent(obj.rent);
-        //   var test =  [{"id":16,"description":"这是一栋别墅","classify":"房屋","address":{"province":"山东","city":"淄博","country":"高青","district":"青城镇孙家村"},"price":"100元/天","updateDate":"九月 4, 2015","picturePathList":[]}];
-        //createRent(test);
       },
 
       error:function(){
@@ -195,41 +197,39 @@
       }
     });
 
-    /*用户取消关注按钮的点击*/
-    $(':button[value="取消关注"]').click(function(event){
+   /* 用户取消关注按钮的点击*/
+    $('.fix').click(function(event){
       event.preventDefault();
       var button  = $(this);
-      $.ajax({
-        url:"/korent/cancelFollowGoods.action",
-        type:"get",
-        data:"rid="+ encodeURIComponent($(this).next().text()),
-        success:function(html){
-          button.val("关注");
-        },
-        error:function(){
-          alert('网络连接超时,请检查网络');
-        }
-      });
+      if(button.val()=="取消关注") {
+        $.ajax({
+          url: "/korent/cancelFollowGoods.action",
+          type: "get",
+          data: "rid=" + encodeURIComponent($(this).next().text()),
+          success: function (html) {
+            button.val("关注");
+            operateSuccessTip();
+          },
+          error: function () {
+            alert('网络连接超时,请检查网络');
+          }
+        });
+      } else if(button.val() == "关注") {
+        $.ajax({
+          url:"/korent/followGoods.action",
+          type:"get",
+          data:"rid="+ encodeURIComponent($(this).next().text()),
+          success:function(html){
+            alert('yse');
+            button.val("取消关注");
+            operateSuccessTip();
+          },
+          error:function(){
+            alert('网络连接超时,请检查网络');
+          }
+        });
+      }
     });
-
-    /*关注按钮的点击*/
-    $(':button[value="关注"]').click(function(event){
-      event.preventDefault();
-      var button  = $(this);
-      $.ajax({
-        url:"/korent/followGoods.action",
-        type:"get",
-        data:"rid="+ encodeURIComponent($(this).next().text()),
-        success:function(html){
-          alert('yse');
-          button.val("取消关注");
-        },
-        error:function(){
-          alert('网络连接超时,请检查网络');
-        }
-      });
-    });
-
 
   });
 </script>

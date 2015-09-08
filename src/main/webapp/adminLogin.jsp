@@ -19,8 +19,8 @@
   <base href="<%=basePath%>">
   <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
   <title>管理员登录</title>
-  <link href="./resource/css/login.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="./resource/js/jquery-1.6.1.min.js" ></script>
+  <link href="/resource/css/login.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="/resource/js/jquery-1.6.1.min.js" ></script>
 
 </head>
 <body>
