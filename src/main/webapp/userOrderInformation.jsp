@@ -28,6 +28,7 @@
 
 <body>
 <%@ include file="/model.jsp" %>
+<%--<%@ include file="/newModel.jsp" %>--%>
 <div id="mess">
   <div  id="title">
     租品详情
@@ -67,9 +68,10 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;租品描述：<span id="description" class="red"> 房子坐落在文化气息非常浓重的西邮校园里面，交通生活非常方便，家具齐全，可拎包入住。</span>
   </div>
   <div  id="button1" >
-<%--    <input name="submit" type="button" id="follow" class="fix" style="width:120px; height:60px; color:#FFFFFF; " onclick="" value="关注"/>--%>
+
 
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="submit" type="button"  id="order" class="fix" style="width:120px; height:60px; color:#FFFFFF; " onclick="" value="取消预订"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="contact" type="button" id="contact" class="fix" style="width:120px; height:60px; color:#FFFFFF; " onclick="" value="联系租主"/>
   </div>
 </div>
 
@@ -91,6 +93,22 @@
 
   $(document).ready(function() {
     $('img').bigic();
+    var owner;
+    $.ajax({
+      url:"/rent/getOwnerFollower.action",
+      type:"get",
+      data:window.location.search.replace("?", ""),
+
+      success:function(html) {
+        var obj = JSON.parse(html);
+        owner = obj.owner.id;
+        },
+
+      error:function(){
+        alert('网络连接超时,请检查网络');
+      }
+    });
+
     $.ajax({
       url:"/rent/getRentGoodsInfo.action",
       type:"get",
@@ -138,6 +156,11 @@
           }
         });
       }
+    });
+
+    $('#contact').click(function(event){
+      event.preventDefault();
+      window.location.href="/userInformationMore.jsp?id=" +encodeURIComponent(owner);
     });
 
   });

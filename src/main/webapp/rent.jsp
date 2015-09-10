@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: lei
@@ -20,7 +21,7 @@
 </head>
 
 <body>
-<%@ include file="model.jsp" %>
+<%@ include file="newModel.jsp" %>
 
 <div id="mess">
   <div  id="title">
@@ -124,7 +125,7 @@
     <a><span id="spanNext">下一页</span></a>
     <a><span id="spanLast">最后一页</span></a>
     第
-    <span id="spanPageNum"></span>korent/login.action
+    <span id="spanPageNum"></span>
     页/共
     <span id="spanTotalPage"></span>
     页
@@ -134,14 +135,12 @@
 
 </body>
 <script type="text/javascript" >
-
   /*生成页脚*/
   function createPage(pageModel) {
     var model = "";
     for (var i = 1; i <= pageModel.pageCount; i++) {
       model += "<a href=\"/rent.jsp?pageNo=" + i + "\&pageSize=6\" ><span>" + i + "&nbsp;&nbsp;</span></a>";
     }
-
     $('#spanFirst').parent().attr("href", "/rent.jsp?pageNo=1&pageSize=6");
     $('#spanLast').parent().attr("href", "/rent.jsp?pageNo=" + pageModel.pageCount + "&pageSize=6");
     $('#spanNext').parent().attr("href", "/rent.jsp?pageNo=" + (pageModel.pageNo + 1 ) +"&pageSize=6");
@@ -159,7 +158,6 @@
       $('#spanPage').hide();
     }
   }
-
   /*生成租品信息*/
   function createRent(rent_array){
     for(var i = 1; i <= rent_array.length; i++){
@@ -181,8 +179,6 @@
       }
     }
   }
-
-
   $(document).ready(function(){
     /*用户预定按钮的点击*/
     $(':button[value="预订"]').click(function(event){
@@ -202,21 +198,18 @@
         }
       });
     });
-
-/*获取租品信息*/
+    /*获取租品信息*/
     $.ajax({
       url:"/rent/getAllRentGoods.action",
       type:"get",
       data:window.location.search.replace("?", ""),
-
       success:function(html){
         var obj = JSON.parse(html);
         createPage(obj.pageModel);
         createRent(obj.rent);
-     //   var test =  [{"id":16,"description":"这是一栋别墅","classify":"房屋","address":{"province":"山东","city":"淄博","country":"高青","district":"青城镇孙家村"},"price":"100元/天","updateDate":"九月 4, 2015","picturePathList":[]}];
+        //   var test =  [{"id":16,"description":"这是一栋别墅","classify":"房屋","address":{"province":"山东","city":"淄博","country":"高青","district":"青城镇孙家村"},"price":"100元/天","updateDate":"九月 4, 2015","picturePathList":[]}];
         //createRent(test);
       },
-
       error:function(){
         alert('网络连接超时,请检查网络');
       }

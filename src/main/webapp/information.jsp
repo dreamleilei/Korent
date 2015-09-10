@@ -18,16 +18,12 @@
     <script type="text/javascript" src="/resource/js/operateTip.js" > </script>
     <script src="/resource/js/jquery.Jcrop.js" type="text/javascript"></script>
 
-
-    <style type="text/css">
-        <!--
-        -->
-    </style>
 </head>
 
 <body>
-<s:action name="getInformation" namespace="/korent" />
 <%@ include file="/model.jsp" %>
+<s:action name="getInformation" namespace="/korent" />
+
 <div id="content">
     <br/>
 
@@ -109,7 +105,7 @@
 
         <div style="position:relative; left:150px; margin-top:80px">
             <input id = "submit" name="submit" type="button"  class="save" onclick="" value="保存"/>
-            <span class="message" hidden> 信息修改成功!</span>
+            <span class="message" hidden> <br/>信息修改成功!</span>
         </div>
     </form>
 
@@ -213,6 +209,7 @@
                 data:$('#form').serialize()+"&username="+encodeURIComponent(information.name),
                 success:function(html){
                     $('.message').show().delay(3000).hide(0);
+                    operateSuccessTip();
                 },
                 error:function(){
                     alert('修改失败,请检查网络!')

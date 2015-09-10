@@ -21,8 +21,8 @@
 </head>
 
 <body>
-<%@ include file="model.jsp" %>
-
+<%--<%@ include file="model.jsp" %>--%>
+<%@ include file="/newModel.jsp" %>
 <div id="mess">
   <div  id="title">
     我的关注

@@ -28,6 +28,7 @@
 
 <body>
 <%@ include file="/model.jsp" %>
+<%--<%@ include file="/newModel.jsp" %>--%>
 <div id="mess">
   <div  id="title">
     租品详情
@@ -68,8 +69,10 @@
   </div>
   <div  id="button1" >
     <input name="submit" type="button" id="cut" class="fix" style="width:120px; height:60px; color:#FFFFFF; " onclick="" value="下架"/>
-
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input name="submit" type="button" id="change" class="fix" style="width:120px; height:60px; color:#FFFFFF; " onclick="" value="修改信息"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;<input name="submit" type="button" id="up" class="fix" style="width:120px; height:60px; color:#FFFFFF; " onclick="" value="上架"/>
+    &nbsp;&nbsp;&nbsp;&nbsp; <input name="submit" type="button" id="contact" class="fix" style="width:120px; height:60px; color:#FFFFFF; " onclick="" value="联系租客"/>
   </div>
 </div>
 
@@ -89,6 +92,9 @@
     $('#description').text(data.description);
   }
   $(document).ready(function() {
+    var orderUser;
+    $('img').bigic();
+    /*获取租品信息*/
     $.ajax({
       url:"/rent/getRentGoodsInfo.action",
       type:"get",
@@ -103,7 +109,29 @@
         alert('网络连接超时,请检查网络');
       }
     });
-    $('img').bigic();
+
+    /*获取的预订者*/
+    $.ajax({
+      url:"/rent/getOrder.action",
+      type:"get",
+      data:encodeURI(window.location.search.replace("?", "")),
+      success:function(html){
+        alert(html);
+        orderUser = JSON.parse(html);
+        if(orderUser.orderUser == null || orderUser.orderUser == ""){
+          $('#up').hide();
+          $('#contact').hide();
+        } else{
+          $('#up').show();
+          $('#contact').show();
+
+        }
+      },
+      error:function(){
+        alert('网络连接超时')
+      }
+    });
+
 
     /*用户下架按钮的点击*/
     $('#cut').click(function () {
@@ -125,6 +153,36 @@
         }
 
       })
+    });
+
+    /*用户修改按钮的点击*/
+    $('#change').click(function(event){
+      event.preventDefault();
+      window.location.href="/userChangeRent.jsp?" + encodeURI(window.location.search.replace("?", ""));
+    });
+
+    /*联系租客按钮的点击*/
+    $('#contact').click(function(event){
+      window.location.href="/userInformationMore.jsp?id=" + encodeURIComponent(orderUser.orderUser);
+    });
+
+    /*上架按钮的点击*/
+    $('#up').click(function(event){
+      $.ajax({
+        url:"/korent/upGoods.action",
+        type:"post",
+        data:window.location.search.replace("?", ""),
+        success:function(html){
+          operateSuccessTip();
+          $(this).delay(2000).queue(function(){window.location.href="/userSendGoods.jsp"})
+        },
+        error:function(){
+          alert("网络连接失败");
+        }
+
+      })
+
+
     });
   });
 </script>
