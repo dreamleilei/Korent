@@ -1,0 +1,30 @@
+/* 懒人图库 搜集整理 www.lanrentuku.com */
+
+html,body,h2{margin:0;}
+img{border:none}
+#pop{
+	background:#fff;
+	width:300px;
+	height:182px;
+	font-size:20px;
+	position:fixed;
+	right:0;
+	bottom:0;
+	border: solid #999999;
+}
+#popHead{
+	line-height:32px;
+	background:#66CC33;
+	border-bottom:1px solid #66CC33;
+	font-size:12px;
+	padding:0 0 0 10px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-top-color: #66CC33;
+	border-right-color: #66CC33;
+	border-left-color: #66CC33;
+}
+#popHead h2{font-size:14px;color:#666;line-height:32px;height:32px;}
+#popHead #popClose{position:absolute;right:10px;top:1px;}
+#popHead a#popClose:hover{color:#f00;cursor:pointer;}

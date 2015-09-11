@@ -1,13 +1,20 @@
 package com.korent.action;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.korent.entity.User;
 import com.korent.service.UserService;
+import com.korent.util.UserGson;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.struts2.ServletActionContext;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -27,7 +34,8 @@ public class UserAction extends ActionSupport {
     private String phone;
 
     /*用户登录的action*/
-    public String login() {
+    public String login() throws IOException {
+        String dirUrl;
         Map<Object, Object> userMap = userService.getUserMap();
         if(!userMap.containsKey(username)){
             return INPUT;
@@ -39,7 +47,19 @@ public class UserAction extends ActionSupport {
         Integer id = userService.getIdByName(username);
         actionContext.getSession().put("user",id);
         actionContext.getSession().put("name", username);
-        return SUCCESS;
+        User user = userService.getUserInformation(id);
+        actionContext.getSession().put("headImage", user.getHeadPicture());
+        if(null == ServletActionContext.getRequest().getSession().getAttribute("url")){
+            dirUrl = "/index.jsp";
+        }else {
+            dirUrl = (String) ServletActionContext.getRequest().getSession().getAttribute("url");
+        }
+
+        System.out.println(dirUrl);
+        System.out.println(ServletActionContext.getRequest().getSession().getAttribute("url"));
+        ServletActionContext.getResponse().sendRedirect(dirUrl);
+        ServletActionContext.getRequest().getSession().setAttribute("url", null);
+        return null;
     }
 
     /*用户退出的action*/
@@ -54,20 +74,48 @@ public class UserAction extends ActionSupport {
         if(userMap.containsKey(username)) {
             return INPUT;
         } else {
-            User user = new User(username, password, phone, email, qq);
+            User user = new User();
+            user.setName(username);
+            user.setPassword(password);
+            user.setPhone(phone);
+            user.setEmail(email);
+            user.setQq(qq);
+          //  User user = new User(username, password, phone, email, qq);
             userService.saveUser(user);
             return SUCCESS;
         }
     }
 
     /*用户获取个人信息*/
-    public String getInformation() {
+    public String getInformation() throws IOException {
 
         ServletActionContext.getRequest().setAttribute("userInfo", userService.information(getId()));
         ServletActionContext.getRequest().setAttribute("otherInfo", userService.getOtherInformation(getId()));
-        System.out.println(userService.information(getId()));
         return null;
     }
+
+    /*获取个人信息*/
+    public String getInformation1() throws IOException {
+ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+        PrintWriter out = ServletActionContext.getResponse().getWriter();
+        Gson gson = UserGson.getGson();
+        User user = userService.getUserInformation(id);
+        Map hashMap = new HashMap();
+        hashMap.put("user", user);
+        out.write(gson.toJson(hashMap));
+        return null;
+    }
+
+    /*获取用户的其它信息*/
+    public String getOtherInformation() throws IOException {
+        ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+        PrintWriter out = ServletActionContext.getResponse().getWriter();
+         User user = userService.getUserInformation(id);
+         out.write(user.getOtherInformation());
+        return null;
+
+    }
+
 
     /*用户修改信息的action*/
     public String changeInformation() {
@@ -89,7 +137,6 @@ public class UserAction extends ActionSupport {
 
         List<String> userNameList = userService.getUserList();
         String userList = gson.toJson(userNameList);
-
 
         ServletActionContext.getRequest().setAttribute("userList", userList);
 
