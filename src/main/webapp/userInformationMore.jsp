@@ -28,19 +28,16 @@
 </head>
 <body>
 <%@ include file="/newModel.jsp" %>
+<%@ include file="checkup.jsp"%>
 
 <div id="con" style="width:538px; text-aligin:center">
   <br/>
-  <div  id="title">
-    个人信息
-    <hr />
-  </div>
 
 
   <div style="font-size:24px; color:#FFFFFF; text-align:center;">
     <div style="position:relative; left:20px; margin-top:10px; margin-bottom:20px;width:1000px;height:90px;font-size:40px; float:left;color:#99CCCC; text-align:center; font-family:"Microsoft YaHei UI";">
     真实姓名:
-    <span id = "realName" class="red">杨雪</span>
+    <span id = "realName" class="red"></span>
 
 </div>
 
@@ -84,6 +81,18 @@ Email:
       success:function(html){
         user = JSON.parse(html);
         createUserInformation(user.user);
+      }
+    });
+    $.ajax({
+      url:"/korent/getOtherInformation.action",
+      type:"get",
+      data:window.location.search.replace("?", ""),
+      success:function(html){
+        user1 = JSON.parse(html);
+        $('#realName').text(user1.realName);
+      },
+      error:function(html){
+        alert('网络连接失败');
       }
     })
   })

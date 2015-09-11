@@ -39,6 +39,7 @@
 
 <body>
 <%@ include file="/model.jsp" %>
+<%@ include file="checkup.jsp"%>
 <%--<%@ include file="/newModel.jsp" %>--%>
 <div id="mess">
   <div  id="title">

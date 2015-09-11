@@ -11,6 +11,14 @@
     <title></title>
 </head>
 <body>
+<%
+  Object username = session.getAttribute("user");
+  if(null == username){
+    System.out.println(request.getRequestURI());
+    response.sendRedirect("/userLogin.jsp");
+    request.getSession().setAttribute("url", request.getRequestURI());
+  }
+%>
 
 </body>
 </html>

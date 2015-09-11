@@ -12,6 +12,7 @@
   <title>个人中心</title>
   <link  href="/resource/css/bootstrap.css" type="text/css" rel="stylesheet"/>
   <link href="/resource/js/bootstrap.js"  type="text/javascript" rel="stylesheet"/>
+  <style type="text/css">
     <!--
     body{
       background-image:url(/resource/image/firstpage.jpg);

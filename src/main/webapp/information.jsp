@@ -22,6 +22,7 @@
 
 <body>
 <%@ include file="/model.jsp" %>
+<%@ include file="checkup.jsp"%>
 <s:action name="getInformation" namespace="/korent" />
 
 <div id="content">
@@ -110,16 +111,15 @@
     </form>
 
     <form id ="headForm">
-        <input type="hidden" name="image.x" id="x"/>
-        <input type="hidden" name="image.y" id="y"/>
-        <input type="hidden" name="image.width" id="width"/>
-        <input type="hidden" name="image.height" id="height"/>
+        <input type="hidden" name="image.x" id="x" value="200"/>
+        <input type="hidden" name="image.y" id="y" value="200"/>
+        <input type="hidden" name="image.width" id="width" value="200"/>
+        <input type="hidden" name="image.height" id="height" value="200"/>
     </form>
 
 
 
 </div>
-<s:debug />
 </body>
 <script type="text/javascript" >
     // 对Date的扩展，将 Date 转化为指定格式的String
@@ -166,7 +166,7 @@
                 width: Math.round(100 / c.w * boundx) + "px", //预览图片宽度为计算比例值与原图片宽度的乘积
                 height: Math.round(100 / c.h * boundy) + "px", //预览图片高度为计算比例值与原图片高度的乘积
                 marginLeft: "-" + Math.round(100 / c.w * c.x) + "px",
-                marginTop: "-" + Math.round(200 / c.h * c.y) + "px"
+                marginTop: "-" + Math.round(100 / c.h * c.y) + "px"
             });
         }
     }

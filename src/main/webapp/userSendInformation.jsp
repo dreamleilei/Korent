@@ -28,6 +28,7 @@
 
 <body>
 <%@ include file="/model.jsp" %>
+<%@ include file="checkup.jsp"%>
 <%--<%@ include file="/newModel.jsp" %>--%>
 <div id="mess">
   <div  id="title">
@@ -116,7 +117,6 @@
       type:"get",
       data:encodeURI(window.location.search.replace("?", "")),
       success:function(html){
-        alert(html);
         orderUser = JSON.parse(html);
         if(orderUser.orderUser == null || orderUser.orderUser == ""){
           $('#up').hide();

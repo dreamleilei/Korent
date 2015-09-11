@@ -11,10 +11,10 @@
   <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
   <title>个人中心</title>
   <link  href="/resource/css/bootstrap.css" type="text/css" rel="stylesheet"/>
-   <link href="/resource/js/bootstrap.js"  type="text/javascript" rel="stylesheet"/>
+  <link href="/resource/js/bootstrap.js"  type="text/javascript" rel="stylesheet"/>
 
   <script src="/resource/js/jquery-2.1.1.js"></script>
-<%--  <script src="/resource/js/bootstrap.js" type="text/javascript" ></script>--%>
+  <%--  <script src="/resource/js/bootstrap.js" type="text/javascript" ></script>--%>
   <script src="/resource/js/transition.js"></script>
   <script src="/resource/js/dropdown.js"></script>
   <script src="/resource/js/collapse.js"></script>
@@ -37,7 +37,7 @@
 
   <div id="header">
     <div id="header0">
-     <a href="/index.jsp"><img src="/resource/image/logo4.png" height="100" width="200" /></a>
+      <a href="/index.jsp"><img src="/resource/image/logo4.png" height="100" width="200" /></a>
     </div>
   </div>
 
@@ -93,6 +93,23 @@
 </div>
 </body>
 <script type="text/javascript" >
+  /*获取10秒是是否有信息*/
+  function getLetter (data){
+    $.ajax({
+      url:"/note/haveUnReadNote.action",
+      type:"post",
+      data:"uid=" + encodeURIComponent(data)  + "&time=10",
+      success:function(html) {
+        if (html == "yes") {
+          $('#noReadMessage').css("color", "red");
+        }
+      } ,
+      error:function(){
+        alert('网络连接失败');
+      }
+    })
+  }
+
   $(document).ready(function() {
     $('#go').click(function(event){
       event.preventDefault();
@@ -105,6 +122,21 @@
       $('#Layer10').show();
     } else {
       $('#Layer1').show();
+      var timer =  setInterval(function() {
+        getLetter(temp);
+      }, 5000);
+
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) {
+          clearInterval(timer);
+
+        } else  {
+          timer  =  setInterval(function() {
+            getLetter(temp);
+          }, 5000);
+
+        }
+      }, false);
     }
   });
 </script>

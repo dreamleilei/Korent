@@ -37,6 +37,7 @@
 <body onload="init()">
 <%--<%@include file="/newModel.jsp" %>--%>
 <%@include file="/model.jsp" %>
+<%@ include file="checkup.jsp"%>
 <form id="form" action="#" method="get" name="creator" enctype="multipart/form-data" class="ziti">
   <div id="Layer1" style="position:absolute; left:261px; top:165px; width:1014px; height:71px; z-index:1 color:#0000FF; float:left; text-align:center">
     免费发布信息
@@ -131,6 +132,7 @@
         success:function(html){
           $('#send_success').html('<br /> <span class="message" >您已成功发布租品</span>').show(3000).hide(0);
           operateSuccessTip();
+          $(this).delay(2000).queue(function(){window.location.href="/userSendGoods.jsp";})
         }
 
       })

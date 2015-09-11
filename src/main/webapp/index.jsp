@@ -361,6 +361,60 @@
             z-index:1;
         }
 
+        #Layer100 {
+            position:absolute;
+            left:1200px;
+            top:50px;
+            width:175px;
+            height:60px;
+            font-size:24px;
+            font-family:"Microsoft YaHei UI Light";
+            z-index:1;
+        }
+        div#Layer100:link{
+            position:absolute;
+            left:1200px;
+            top:50px;
+            width:175px;
+            height:60px;
+            font-size:24px;
+            font-family:"Microsoft YaHei UI Light";
+            z-index:1;
+
+        }
+        div#Layer100:visited{
+            position:absolute;
+            left:1200px;
+            top:50px;
+            width:175px;
+            height:60px;
+            font-size:24px;
+            font-family:"Microsoft YaHei UI Light";
+            z-index:1;
+        }
+        div#Layer100:hover{
+            position:absolute;
+            left:1200px;
+            top:50px;
+            width:175px;
+            height:60px;
+            font-size:29px;
+            font-family:"Microsoft YaHei UI Light";
+            z-index:1;
+        }
+        div#Layer100:active{
+            position:absolute;
+            left:1200px;
+            top:50px;
+            width:175px;
+            height:60px;
+            font-size:29px;
+            font-family:"Microsoft YaHei UI Light";
+            z-index:1;
+        }
+
+
+
     </style>
     <script type="text/javascript">
 
@@ -532,11 +586,11 @@
         </div>
     </div>
     <div id="menu">
-        <div class="celan" style="float:left; width:270px; height:40px;"><a href=/userOrderGoods.jsp" class="href2">我的预订</a></div>
+        <div class="celan" style="float:left; width:270px; height:40px;"><a href="/userOrderGoods.jsp" class="href2">我的预订</a></div>
         <div class="celan" style="float:left; width:270px; height:40px;"><a href="/userSendGoods.jsp" class="href2">我的发布</a></div>
-        <div class="celan" style="float:left; width:270px; height:40px;"><a href="/userFollowGoods.jsp" class="href2">我的收藏</a></div>
+        <div class="celan" style="float:left; width:270px; height:40px;"><a href="/userFollowGoods.jsp" class="href2">我的关注</a></div>
         <div class="celan" style="float:left; width:270px; height:40px;"><a href="/send.jsp" class="href2">我要发布</a></div>
-        <div class="celan" style="float:left; width:270px; height:40px;"><a href="/information.jsp" class="href2">个人中心</a></div>
+        <div class="celan" style="float:left; width:270px; height:40px;"><a href="/rent.jsp" class="href2">我要预订</a></div>
     </div>
 
     <div id="message">
@@ -586,9 +640,9 @@
     </div>
 </div>
 
-<div id="Layer1">
+<div id="Layer1" hidden>
     <div class = "component-left" style="float:left">
-        <img src="resource/image/headimg.jpg" alt="..." class="img-circle" style=" width:60px; height:60px;">
+        <img src="<%=session.getAttribute("headImage")%>" alt="..." class="img-circle" style=" width:60px; height:60px;">
     </div>
     <!-- Split button -->
     <div class="btn-group" style="float:left; width:40px; height:60px; padding-top:25px; margin-left:5px;">
@@ -597,13 +651,13 @@
             <span class="caret"></span>
             <span class="sr-only">Toggle Dropdown</span>
         </button>
-        <ul class="dropdown-menu" style="position:relative; top:0px; left:-125px;">
+        <ul class="dropdown-menu" style="position:relative; top:0px; left:-125px; height:170px">
             <li><a href="/index.jsp">首页</a></li>
             <li><a href="/information.jsp">个人中心</a></li>
             <li><a href="/message.jsp">消息</a></li>
             <li><a href="/changePassword.jsp">修改密码</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">退出</a></li>
+            <li><a href="/korent/logout.action">退出</a></li>
         </ul>
     </div>
     </div>
@@ -617,13 +671,26 @@
         </form>
     </div> </div>
 
+<div id="Layer100" hidden>
+
+    <a href="/userLogin.jsp" style="text-decoration:none" >登录</a>
+</div>
+
 </body>
 <script type="text/javascript">
 $(document).ready(function() {
 $('#go').click(function(event){
 event.preventDefault();
 window.location.href="/userSearchGoods.jsp?keyWord=" + encodeURI($('#s').val());
-})
+});
+
+    /*登录按钮的提示*/
+    var temp = "<%=session.getAttribute("headImage")%>";
+    if( temp == "null" || temp == "" || temp == undefined) {
+        $('#Layer100').show();
+    } else {
+        $('#Layer1').show();
+    }
 });
 </script>
 </html>

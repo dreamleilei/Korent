@@ -17,8 +17,8 @@
 
 <div id="content">
 	<br/>
-	<s:action name="getUserList" namespace="/korent" var="userList">
-	</s:action>
+	<%--<s:action name="getUserList" namespace="/korent" var="userList">
+	</s:action>--%>
 
 	<s:form  action="register" namespace="/korent" method="post"><br/><br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名:
@@ -78,6 +78,7 @@
 </center>
 </body>
 <script type="text/javascript" >
+	var userList;
 
 	function show() {
 		footer.style.visibility = (footer.style.visibility == "hidden") ? "visible" : "hidden";
@@ -112,7 +113,7 @@
 	var usernameValidation = function(){
 		var username = $('#username').val();
 		var userPattern =  /^([_\u4e00-\u9fa5a-zA-Z0-9]{4,16})$/g;
-		var userList =<s:property value="#request.userList" escape="false" escapeHtml="false"/>;
+		/*var userList =<%--<s:property value="#request.userList" escape="false" escapeHtml="false"/>--%>;*/
 
 		if(username.length < 4 || username.length >16){
 			$('#username_length_error').show();
@@ -234,10 +235,22 @@
 		$('.error').hide();
 		$(".message").hide();
 		/*  $('#submit').prop('disabled', true);*
-
 		 */
+		$.ajax({
+			url:"/korent/getUserList.action",
+			type:"get",
+			data:"",
+			success:function(html){
+				var obj = JSON.parse(html);
+				userList = obj;
 
-		$('#protocol').click(protocolValidate).click(errorShow);
+			},
+			error:function(){
+				alert('网络连接失败');
+			}
+		});
+
+		$('#protocol').click(protocolValidate).click(errorShow).attr("checked", false);
 		$('#username').keyup(usernameValidation);
 		$('#email').keyup(emailValidation);
 		$('#qq').keyup(qqValidation);

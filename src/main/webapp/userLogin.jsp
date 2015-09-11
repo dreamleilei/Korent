@@ -14,6 +14,10 @@
 
 %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%
+  System.out.println(request.getRequestURI());
+  System.out.println(request.getSession().getAttribute("url"));
+%>
 <html>
 <head>
   <base href="<%=basePath%>">
@@ -38,12 +42,14 @@
   <div id="Layer3" align="center">
     <input type="submit" class="login_button" id="submit" value ="登录" style="width:195px; height:34px;" />
     <span id="submit_message" class="message"><br /> 请确保用户名和密码不为空</span>
-
+  </div>
+  <div id="unregister" style="position:absolute">
+    <p>还未注册? &nbsp;<a href="/register.jsp" style="text-decoration:none">立即注册</a></p>
   </div>
   <div  align="center" id="Layer4">W E L C O M E</div>
   <div  align="center" id="Layer5"><a href="/userLogin.jsp" class="yonghu">用户登录</a></div>
   <div  align="center" id="Layer6"><a href="/adminLogin.jsp" class="guanliyuan">管理员登录</a></div>
-  <div id="Layer7"></div>
+  <a href="/index.jsp"><div id="Layer7"></div></a>
 </s:form>
 </body>
 <script type="text/javascript">

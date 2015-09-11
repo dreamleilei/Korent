@@ -21,7 +21,9 @@
 
 <body>
 <%--<%@ include file="/model.jsp" %>--%>
-<%@ include file="/newModel.jsp" %>
+<%--<%@ include file="/newModel.jsp" %>--%>
+<%@ include file="/newModelNotify.jsp" %>
+<%@ include file="checkup.jsp"%>
 
 <div id="mess">
   <div  id="title">
@@ -113,8 +115,8 @@
     </div>
   </div>
   <!--</div>-->
-  <div id ="spanPage" style="height:30px; margin-top:920px; text-align:center; color:#FFFFFF; font-size:24px">
-    <a><span id="spanFirst">第一页</span></a>
+  <div id ="spanPage" style="height:30px; margin-top:920px; text-align:center; color:#FFFFFF; font-size:24px"><br/><br/>
+    <a><span id="spanFirst">&nbsp;第一页</span></a>
     <a><span id="spanPre">上一页</span></a>
     <!--<span>1</span>
     <span>2</span>
@@ -156,9 +158,9 @@
     if(pageModel.pageNo == pageModel.pageCount){
       $('#spanNext').parent().hide();
     }
-    if(pageModel.pageCount == 1) {
+   /* if(pageModel.pageCount == 1) {
       $('#spanPage').hide();
-    }
+    }*/
   }
 
   /*生成租品信息*/
