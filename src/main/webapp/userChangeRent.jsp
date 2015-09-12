@@ -105,15 +105,24 @@
 <script type="text/javascript">
   function createPage (data) {
     $('#rid').text(data.id);
-   // $('#province').text(data.address.province);
-    //$('#city').text(data.address.city);
-    //$('#country').text(data.address.country);
- //   $('#priceDescription').html(data.price);
-//    $('#district').value(data.address.district);
+   // $('#province').value(data.address.province);
+ //   $('#city').value(data.address.city);
+  //  $('#country').value(data.address.country);
+    var prov = data.address.province;
+    var city = data.address.city;
+    var country = data.address.country;
+    $('#province option[text=prov]').attr("selected", true);
+    $('#city option[text=city]').attr("selected", true);
+    $('#country option[text=country]').attr("selected", true);
+   // $('#province').val(prov);
+   // $('#city').val(city);
+  //  $('#country').val(country);
+    $('#priceDescription').html(data.price);
+    $('#district').html(data.address.district);
     $('#img1').attr("src", data.picturePathList[0]);
     $('#img2').attr("src", data.picturePathList[1]);
     $('#img3').attr("src", data.picturePathList[2]);
- //   $('#description').html(data.description);
+   $('#description').html(data.description);
   }
   $(document).ready(function() {
     $('#city').citySelect();

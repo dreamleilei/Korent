@@ -37,8 +37,8 @@
   </div>
   <div id="checkCode">
   <input type="text" id="check" name="check"  class="login_mima" placeholder="验证码" maxlength="4"/>
-  <img border=0 src="/util/createCheckCode.action" id="safecode"><a href="javascript:changeCode();">不清晰，换一张</a></td>
-    <span id="show"></span></div>
+    <a style="position:relative; top:6px;"href="javascript:changeCode();"><img  border=0 style="height:24px;width:60px;" src="/util/createCheckCode.action" id="safecode"></a></td>
+    </div>
   <div id="Layer3" align="center">
     <input type="submit" class="login_button" id="submit" value ="登录" style="width:195px; height:34px;" />
     <span id="submit_message" class="message"><br /> 请确保用户名和密码不为空</span>
@@ -90,8 +90,7 @@
                           if(msg==1)
                           {
                             code1="ok";
-                            $("#show").css({"color":"#666666"});
-                            $("#show").html("<br/>验证码正确");
+
                             $('#submit').prop('disabled', false);
 
                           }
@@ -99,15 +98,12 @@
                           else if(msg==0)
                           {
                             code1="";
-                            $("#show").css({"color":"#F00"});
-                            $("#show").html("<br/>验证码错误");
+
                             $('#submit').prop('disabled', true);
                           }
 
                         },
                         error:function(msg){
-                          $("#show").css({"color":"#F00"});
-                          $("#show").html("<br/>网络连接超时,请检查网络");
                           $('#submit').prop('disabled', true);
 
                         }
