@@ -18,7 +18,7 @@ div#lang{
 	height: 40px;}
 div#goodsplay{
 	width: 1050px;
-	height: 1000px;
+	height: 1600px;
 	float:left;
 	margin:70px;
 	margin-top:30px;
@@ -30,7 +30,7 @@ div#title{width:1000px;height:100px; font-size:30px; float:left; text-align:cent
 div#title1{width:1000px;height:30px;font-size:30px; float:left; text-align:center; color:#FFFFFF;}
 div#case1{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: none;
@@ -38,7 +38,7 @@ div#case1{
 }
 div#case3{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: none;
@@ -46,7 +46,7 @@ div#case3{
 }
 div#case5{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: none;
@@ -54,7 +54,7 @@ div#case5{
 }
 div#case2{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: none;
@@ -62,7 +62,7 @@ div#case2{
 }
 div#case4{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: none;
@@ -70,7 +70,7 @@ div#case4{
 }
 div#case6{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: none;
@@ -94,7 +94,7 @@ div#case1:visited{
 }
 div#case1:hover{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: solid #0000FF;
@@ -102,7 +102,7 @@ div#case1:hover{
 }
 div#case1:active{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: solid #0000FF;
@@ -110,7 +110,7 @@ div#case1:active{
 }
 div#case3:link{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: none;
@@ -118,7 +118,7 @@ div#case3:link{
 }
 div#case3:visited{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: none;
@@ -126,7 +126,7 @@ div#case3:visited{
 }
 div#case3:hover{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: solid #0000FF;
@@ -134,7 +134,7 @@ div#case3:hover{
 }
 div#case3:active{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: solid #0000FF;
@@ -142,7 +142,7 @@ div#case3:active{
 }
 div#case5:link{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: none;
@@ -150,7 +150,7 @@ div#case5:link{
 }
 div#case5:visited{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: none;
@@ -158,7 +158,7 @@ div#case5:visited{
 }
 div#case5:hover{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: solid #0000FF;
@@ -166,7 +166,7 @@ div#case5:hover{
 }
 div#case5:active{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 	margin-right:30px;
 	border: solid #0000FF;
@@ -174,7 +174,7 @@ div#case5:active{
 }
 div#case2:link{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 
 	margin-right:30px;
@@ -183,7 +183,7 @@ div#case2:link{
 }
 div#case2:visited{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 
 	margin-right:30px;
@@ -191,7 +191,7 @@ div#case2:visited{
 }
 div#case2:hover{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 
 	margin-right:30px;
@@ -199,7 +199,7 @@ div#case2:hover{
 }
 div#case2:active{
 	width:300px;
-	height:320px;
+	height:360px;
 	float:left;
 
 	margin-right:30px;
@@ -207,7 +207,7 @@ div#case2:active{
 }
 div#case4:link{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 
 	margin-right:30px;
@@ -216,7 +216,7 @@ div#case4:link{
 }
 div#case4:visited{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 
 	margin-right:30px;
@@ -224,7 +224,7 @@ div#case4:visited{
 }
 div#case4:hover{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 
 	margin-right:30px;
@@ -232,7 +232,7 @@ div#case4:hover{
 }
 div#case4:active{
 	width:300px;
-	height:320px;
+	height:360px;
 	float:left;
 
 	margin-right:30px;
@@ -240,7 +240,7 @@ div#case4:active{
 }
 div#case6:link{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 
 	margin-right:30px;
@@ -249,7 +249,7 @@ div#case6:link{
 }
 div#case6:visited{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 
 	margin-right:30px;
@@ -257,7 +257,7 @@ div#case6:visited{
 }
 div#case6:hover{
 	width:300px;
-	height:330px;
+	height:360px;
 	float:left;
 
 	margin-right:30px;
@@ -265,7 +265,7 @@ div#case6:hover{
 }
 div#case6:active{
 	width:300px;
-	height:320px;
+	height:360px;
 	float:left;
 
 	margin-right:30px;
@@ -288,13 +288,13 @@ div#text6{ color:#FFFFFF;font-size: 24px;}
 	background-color:#3399FF;
 }
 .red{
-	color:#FFFFFF;
+	color:red;
 	font-size: 24px;
 }
 div.case1.link{width:335px; height:400px; float:left;}
 
 ul {margin:0;}
-li {
+/*li {
 	text-align:center;
 	list-style:none;
 	border-top-style: groove;
@@ -305,7 +305,7 @@ li {
 	border-right-color: #CCCCCC;
 	border-bottom-color: #CCCCCC;
 	border-left-color: #CCCCCC;
-}
+}*/
 .href1{
 	color:#FFFFFF;
 	font-family:"黑体";

@@ -146,3 +146,14 @@ font-size: xx-large;
     background-repeat:no-repeat;
     background-size:100%;
 }
+
+#unregister{
+    position:absolute;
+    left:190px;
+    top:400px;
+    width:252px;
+    height:48px;
+    font-size:20px;
+    font-family:"Microsoft YaHei UI Light";
+    z-index:1;
+}

@@ -54,7 +54,7 @@
         })
     });
 
-    /*用户关注按钮的点击*/
+    /*用户关取消注按钮的点击*/
     $(':button[value="取消关注"]').click(function () {
         var button = $(this);
         $.ajax({

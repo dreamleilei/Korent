@@ -266,3 +266,8 @@ input.queren:active{
     top: 3px;
     left: 111px;
 }
+
+.message{
+    font-size:24px;
+    color:red;
+}

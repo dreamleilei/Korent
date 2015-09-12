@@ -1,4 +1,4 @@
-//¼æÈÝie6µÄfixed´úÂë 
+//ï¿½ï¿½ï¿½ï¿½ie6ï¿½ï¿½fixedï¿½ï¿½ï¿½ï¿½ 
 //jQuery(function($j){
 //	$j('#pop').positionFixed()
 //})
@@ -28,7 +28,7 @@
         o.bindEvent();
     }
     $j.extend(fixed.prototype,{
-        ie6 : $.browser.msie && $.browser.version < 7.0,
+        ie6 :!$.support.leadingWhitespace,
         bindEvent : function(){
             var o=this;
             o.sts.target.css('position','absolute')
@@ -81,21 +81,21 @@
 
 
 
-//popÓÒÏÂ½Çµ¯´°º¯Êý
+//popï¿½ï¿½ï¿½Â½Çµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 function Pop(){
-	this.apearTime=2000; //¸¡³ö¹ý³Ì¶¯»­µÄÊ±¼ä
+	this.apearTime=2000; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 	this.hideTime=500;
-	this.delay=6000; //20ÃëÖÓºó×Ô¶¯¹Ø±Õ
-	//ÏÔÊ¾
+	this.delay=6000; //20ï¿½ï¿½ï¿½Óºï¿½ï¿½Ô¶ï¿½ï¿½Ø±ï¿½
+	//ï¿½ï¿½Ê¾
 	this.showDiv();
-	//¹Ø±Õ
+	//ï¿½Ø±ï¿½
     this.closeDiv();
 }
 Pop.prototype={
   showDiv:function(time){
-	if (!($.browser.msie && ($.browser.version == "6.0") && !$.support.style)) {
+	if (!($.support.leadingWhitespace && ($.browser.version == "6.0") && !$.support.style)) {
       $('#pop').slideDown(this.apearTime).delay(this.delay).fadeOut(400);;
-    } else{//µ÷ÓÃjquery.fixed.js,½â¾öie6²»ÄÜÓÃfixed
+    } else{//ï¿½ï¿½ï¿½ï¿½jquery.fixed.js,ï¿½ï¿½ï¿½ie6ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½fixed
       $('#pop').show();
 			jQuery(function($j){
 			    $j('#pop').positionFixed()

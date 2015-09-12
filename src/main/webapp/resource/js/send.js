@@ -47,7 +47,7 @@ function select() {
     document.creator.newlocation.value=loca2+loca4;
 }
 function init() {
-    with(document.creator.province) {
+  /*  with(document.creator.province) {
         length = where.length;
         for(k=0;k<where.length;k++) { options[k].text = where[k].loca; options[k].value = where[k].loca; }
         options[selectedIndex].text = where[0].loca; options[selectedIndex].value = where[0].loca;
@@ -57,4 +57,5 @@ function init() {
         length = loca3.length;
         for(l=0;l<length;l++) { options[l].text = loca3[l]; options[l].value = loca3[l]; }
         options[selectedIndex].text = loca3[0]; options[selectedIndex].value = loca3[0];
-    }}
+    } */
+    }

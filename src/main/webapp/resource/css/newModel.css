@@ -15,7 +15,7 @@ div#message{width:1355px; height:550px}
 div#menu {height:500px;width:160px; padding-top:50px; float:left}
 div#goodsplay{
     width: 1050px;
-    height: 1000px;
+    height: 2500px;
     float:left;
     margin:70px;
     margin-top:30px;
@@ -297,5 +297,57 @@ form {
     top:26px;
     width:258px;
     height:50px;
+    z-index:1;
+}
+
+#Layer10 {
+    position:absolute;
+    left:1200px;
+    top:50px;
+    width:175px;
+    height:60px;
+    font-size:24px;
+    font-family:"Microsoft YaHei UI Light";
+    z-index:1;
+}
+div#Layer10:link{
+    position:absolute;
+    left:1200px;
+    top:50px;
+    width:175px;
+    height:60px;
+    font-size:24px;
+    font-family:"Microsoft YaHei UI Light";
+    z-index:1;
+
+}
+div#Layer10:visited{
+    position:absolute;
+    left:1200px;
+    top:50px;
+    width:175px;
+    height:60px;
+    font-size:24px;
+    font-family:"Microsoft YaHei UI Light";
+    z-index:1;
+}
+div#Layer10:hover{
+    position:absolute;
+    left:1200px;
+    top:50px;
+    width:175px;
+    height:60px;
+    font-size:29px;
+    font-family:"Microsoft YaHei UI Light";
+    z-index:1;
+}
+div#Layer10:active{
+    position:absolute;
+    left:1200px;
+    top:50px;
+    width:175px;
+    height:60px;
+    font-size:29px;
+    font-family:"Microsoft YaHei UI Light";
     z-index:1;
 }

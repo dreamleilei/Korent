@@ -1,5 +1,5 @@
 body{
-    background-image:url(resource/image/firstpage.jpg);
+    background-image:url(../image/firstpage.jpg);
     background-repeat:no-repeat;
     background-size:100%;
     background-attachment:fixed;
@@ -25,6 +25,7 @@ div#goodsplay{
 }
 
 div#headimg{width:538px; height:140px; position:relative; left:20px; }
+#preview{width:538px; height:140px; position:relative; left:20px; }
 
 .uploading{
     color:#FFFFFF;
@@ -195,7 +196,7 @@ div#Layer3{
 }
 
 ul {margin:0;}
-li {
+/*li {
     text-align:center;
     list-style:none;
     border-top-style: groove;
@@ -206,7 +207,7 @@ li {
     border-right-color: #CCCCCC;
     border-bottom-color: #CCCCCC;
     border-left-color: #CCCCCC;
-}
+}*/
 .href1{
     color:#FFFFFF;
     font-family:"黑体";
@@ -250,4 +251,9 @@ a.href2:active{
     text-decoration: none;
     position:relative;
     left:20px;
+}
+
+.message{
+    color:red;
+    font-size:24px;
 }
