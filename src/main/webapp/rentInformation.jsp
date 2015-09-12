@@ -140,9 +140,17 @@
         type:"get",
         data:"rid="+ encodeURIComponent($('#rid').text()),
         success:function(html){
-          button.attr("disabled", "disabled");
-          button.val('已被预订');
-          operateSuccessTip();
+          if(html == "noUser"){
+            <%
+            request.getSession().setAttribute("url",  request.getRequestURI()+"?"+request.getQueryString());
+            %>
+            window.location.href="/userLogin.jsp"
+
+          } else {
+            button.attr("disabled", "disabled");
+            button.val('已被预订');
+            operateSuccessTip();
+          }
         },
         error:function(){
           alert('网络连接超时,请检查网络');
@@ -158,9 +166,18 @@
           url: "/korent/followGoods.action",
           data: "rid=" + encodeURIComponent($('#rid').text()),
           type: "post",
-          success: function () {
-            button.val("取消关注");
-            operateSuccessTip();
+          success: function (html) {
+            if(html == "noUser"){
+              <%
+              request.getSession().setAttribute("url",  request.getRequestURI()+"?"+request.getQueryString());
+              %>
+              window.location.href="/userLogin.jsp"
+
+            } else {
+
+              button.val("取消关注");
+              operateSuccessTip();
+            }
 
           },
           error: function () {    /*用户预定按钮的点击*/
