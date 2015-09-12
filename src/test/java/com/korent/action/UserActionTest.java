@@ -38,7 +38,8 @@ public class UserActionTest extends StrutsSpringTestCase {
     public void testLogin() throws Exception {
        /* initServletMockObjects();*/
         request.getSession().setAttribute("user", 4);
-       executeAction("/korent/getInformation.action");
+        request.setParameter("id", String.valueOf(4));
+        System.out.println(executeAction("/korent/getInformation.action"));
         System.out.println(request.getAttribute("userInfo"));
        /* executeAction("korent/register");*/
 
@@ -46,6 +47,8 @@ public class UserActionTest extends StrutsSpringTestCase {
 
     @Test
     public void testRegister() throws Exception {
+        request.getSession().setAttribute("user", 4);
+        System.out.println(executeAction("/korent/getInformation.action"));
 
     }
 
@@ -66,6 +69,13 @@ public class UserActionTest extends StrutsSpringTestCase {
 
     @Test
     public void testGetUserList() throws Exception {
+        System.out.println(executeAction("/korent/getUserList.action"));
 
+    }
+
+    @Test
+    public void testGetOtherInformatino() throws Exception {
+        request.setParameter("id", String.valueOf(4));
+        System.out.println(executeAction("/korent/getOtherInformation.action"));
     }
 }

@@ -74,6 +74,7 @@ public class UserServiceTest {
 
     @Test
     public void testGetFollowRentGoodsByPage1() throws Exception {
+        System.out.println(userService.getFollowRentGoodsByPage(4, 1, 6));
 
     }
 
@@ -86,8 +87,8 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testGetAllRoderGoods1() throws Exception {
-
+    public void testUpdateHeadPath() throws Exception {
+        userService.updateHeadPath(4, "adfa");
     }
 
     @Test
@@ -132,7 +133,7 @@ public class UserServiceTest {
 
     @Test
     public void testRentGoods() throws Exception {
-        userService.rentGoods(12,  18);
+        userService.rentGoods(4,  47);
 
     }
 

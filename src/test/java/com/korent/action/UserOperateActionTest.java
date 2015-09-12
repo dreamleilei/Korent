@@ -42,8 +42,8 @@ public class UserOperateActionTest extends StrutsSpringTestCase{
     @Test
     public void testOrderRent() throws Exception {
         //request.setParameter("uid", String.valueOf(12));
-        request.setParameter("rid", String.valueOf(17));
-        request.getSession().setAttribute("user", 12);
+        request.setParameter("rid", String.valueOf(47));
+        request.getSession().setAttribute("user", 4);
         executeAction("/korent/orderRent.action");
 
     }
@@ -51,15 +51,15 @@ public class UserOperateActionTest extends StrutsSpringTestCase{
     @Test
     public void testCancelRent() throws Exception {
 
-        request.setParameter("rid", String.valueOf(17));
-        request.getSession().setAttribute("user", 12);
+        request.setParameter("rid", String.valueOf(50));
+        request.getSession().setAttribute("user", 4);
         executeAction("/korent/cancelRent.action");
     }
 
     @Test
     public void testFollowGoods() throws Exception {
-        request.setParameter("rid", String.valueOf(17));
-        request.getSession().setAttribute("user", 12);
+        request.setParameter("rid", String.valueOf(50));
+        request.getSession().setAttribute("user", 4);
         executeAction("/korent/followGoods.action");
     }
 
@@ -76,6 +76,13 @@ public class UserOperateActionTest extends StrutsSpringTestCase{
         request.setParameter("rid", String.valueOf(19));
         request.getSession().setAttribute("user", 4);
         executeAction("/korent/cancelSendGoods.action");
+
+    }
+    @Test
+    public void testUpGoods() throws Exception{
+        request.setParameter("rid", String.valueOf(48));
+        request.getSession().setAttribute("user", 4);
+        executeAction("/korent/upGoods.action");
 
     }
 }

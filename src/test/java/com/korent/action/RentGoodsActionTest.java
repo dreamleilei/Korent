@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 
 import static org.junit.Assert.*;
 @ContextConfiguration(locations = "classpath*:spring-hibernate.xml")
-@RunWith(SpringJUnit4ClassRunner.class)
+/*@RunWith(SpringJUnit4ClassRunner.class)*/
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
 @Transactional
 /*@RunWith(SpringJUnit4ClassRunner.class)*/
@@ -41,6 +41,7 @@ public class RentGoodsActionTest extends StrutsSpringTestCase {
     public void testGetAllRentGoods() throws Exception {
         request.setParameter("pageNo", String.valueOf(1));
         request.setParameter("pageSize", String.valueOf(7));
+        request.setParameter("classify", "汽车");
         request.getSession().setAttribute("user", 4);
         System.out.println(executeAction("/rent/getAllRentGoods.action"));
 
@@ -71,15 +72,23 @@ public class RentGoodsActionTest extends StrutsSpringTestCase {
     public void testGetFollowRent() throws Exception {
         request.setParameter("pageNo", String.valueOf(1));
         request.setParameter("pageSize", String.valueOf(7));
-        request.getSession().setAttribute("user", 12);
+        request.getSession().setAttribute("user", 4);
         System.out.println(executeAction("/rent/getFollowGoods.action"));
     }
 
     @Test
     public void testGetSendRent() throws Exception {
         request.setParameter("pageNo", String.valueOf(1));
-        request.setParameter("pageSize", String.valueOf(7));
+        request.setParameter("pageSize", String.valueOf(6));
         request.getSession().setAttribute("user", 4);
         System.out.println(executeAction("/rent/getSendGoods.action"));
+    }
+
+    @Test
+    public void testGetRentGoodsOrder() throws Exception{
+        request.setParameter("rid", "55");
+        System.out.println(executeAction("/rent/getOrder.action"));
+
+
     }
 }

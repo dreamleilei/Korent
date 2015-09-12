@@ -43,6 +43,10 @@ public class UserSearchActionTest extends StrutsSpringTestCase {
 
     @Test
     public void testExecute() throws Exception {
+        request.setParameter("keyWord", "房");
+        request.setParameter("pageNo", String.valueOf(1));
+        request.setParameter("pageSize", String.valueOf(5));
+        System.out.println(executeAction("/rent/getSearchGoods.action"));
 
     }
 }

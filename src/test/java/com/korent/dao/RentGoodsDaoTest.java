@@ -108,4 +108,8 @@ public class RentGoodsDaoTest extends TestCase {
         System.out.println(rentGoodsDao.getRentGoodsByPage(1, 5));
     }
 
+    @Test
+    public void testGetRentGoodsBySearch() throws Exception {
+        System.out.println(rentGoodsDao.getRentGoodsBySearch("房", 1, 4));
+    }
 }

@@ -172,4 +172,9 @@ public class UserDaoTest extends TestCase {
         System.out.println(userDao.getOrderGoodsByPage(4, 1, 5));
 
     }
+
+    @Test
+    public void testGetSendGoodsCount() throws Exception {
+        System.out.println(userDao.getSendGoodsCount(4, 6));
+    }
 }
