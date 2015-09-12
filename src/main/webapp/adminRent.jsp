@@ -33,7 +33,7 @@
     </div>
     <div id="text1">
       &nbsp;&nbsp;&nbsp;价格描述：
-      <span id="price1" class="red">0000</span>&nbsp;&nbsp;<span id="classify1" class="red">房屋</span><br/>
+      <span id="price1" class="red">0000</span>&nbsp;&nbsp;<br/>&nbsp;&nbsp;&nbsp;分类:&nbsp;<span id="classify1" class="red">房屋</span><br/>
       &nbsp;&nbsp;&nbsp;日期：
       <span id="date1" class="red">yyyy-mm-dd</span><br/>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="submit" type="button"  class="fix" style="width:100px; height:30px; color:#FFFFFF; "  onclick=""  value="删除"/>
@@ -46,7 +46,7 @@
     </div>
     <div id="text2">
       &nbsp;&nbsp;&nbsp;价格描述：
-      <span id="price2" class="red">0000</span>&nbsp;&nbsp;<span id="classify2" class="red">房屋</span><br/>
+      <span id="price2" class="red">0000</span>&nbsp;&nbsp;<br/>&nbsp;&nbsp;&nbsp;分类:&nbsp;<span id="classify2" class="red">房屋</span><br/>
       &nbsp;&nbsp;&nbsp;日期：
       <span id="date2" class="red">yyyy-mm-dd</span><br/>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="submit" type="button"  class="fix" style="width:100px; height:30px; color:#FFFFFF; "  onclick=""  value="删除"/>
@@ -58,7 +58,7 @@
       <a href="房屋信息.html" style="text-decoration:none"><img  border="0" src="/resource/image/3.jpg" width="300" height="200" /></a><br/>
       <div id="text3">
         &nbsp;&nbsp;&nbsp;价格描述：
-        <span id="price3" class="red">0000</span>&nbsp;&nbsp;<span id="classify3" class="red">房屋</span><br/>
+        <span id="price3" class="red">0000</span>&nbsp;&nbsp;<br/>&nbsp;&nbsp;&nbsp;分类:&nbsp;<span id="classify3" class="red">房屋</span><br/>
         &nbsp;&nbsp;&nbsp;日期：
         <span id="date3" class="red">yyyy-mm-dd</span><br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="submit" type="button"  class="fix" style="width:100px; height:30px;color:#FFFFFF; "  onclick="" value="删除"/>
@@ -77,9 +77,9 @@
     </div>
     <div id="text4">
       &nbsp;&nbsp;&nbsp;价格描述：
-      <span id="price4" class="red">0000</span>&nbsp;&nbsp;<span id="classify4" class="red">房屋</span><br/>
+      <span id="price4" class="red">0000</span>&nbsp;&nbsp;<br/>&nbsp;&nbsp;&nbsp;分类:&nbsp;<span id="classify4" class="red">房屋</span><br/>
       &nbsp;&nbsp;&nbsp;日期：
-      <span id="date4" id="date4" class="red">yyyy-mm-dd</span><br/>
+      <span id="date4" class="red">yyyy-mm-dd</span><br/>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="submit" type="button"  class="fix" style="width:100px; height:30px;color:#FFFFFF; "  onclick="" value="删除"/>
       <span id="rid4" hidden ></span>
     </div>
@@ -90,7 +90,7 @@
     </div>
     <div id="text5">
       &nbsp;&nbsp;&nbsp;价格描述：
-      <span id="price5" class="red">0000</span>&nbsp;&nbsp;<span id="classify5" class="red">房屋</span><br/>
+      <span id="price5" class="red">0000</span>&nbsp;&nbsp;<br/>&nbsp;&nbsp;&nbsp;分类:&nbsp;<span id="classify5" class="red">房屋</span><br/>
       &nbsp;&nbsp;&nbsp;日期：
       <span id="date5" class="red">yyyy-mm-dd</span><br/>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="submit" type="button"  class="fix" style="width:100px; height:30px; color:#FFFFFF; " onclick="" value="删除"/>
@@ -103,7 +103,7 @@
     </div>
     <div id="text6">
       &nbsp;&nbsp;&nbsp;价格描述：
-      <span id="price6" class="red">0000</span>&nbsp;&nbsp;<span id="classify6" class="red">房屋</span><br/>
+      <span id="price6" class="red">0000</span>&nbsp;&nbsp;<br/>&nbsp;&nbsp;&nbsp;分类:&nbsp;<span id="classify6" class="red">房屋</span><br/>
       &nbsp;&nbsp;&nbsp;日期：
       <span id="date6" class="red">yyyy-mm-dd</span><br/>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="submit" type="button"  class="fix" style="width:100px; height:30px; color:#FFFFFF; " onclick=""  value="删除"/>
@@ -111,6 +111,7 @@
     </div>
   </div>
   <!--</div>-->
+  <br/><br/><br/><br/>
   <div id ="spanPage" style="height:30px; margin-top:920px; text-align:center; color:#FFFFFF; font-size:24px">
     <a><span id="spanFirst">第一页</span></a>
     <a><span id="spanPre">上一页</span></a>
@@ -141,7 +142,7 @@
       model += "<a href=\"/adminRent.jsp?pageNo=" + i + "\&pageSize=6\" ><span>" + i + "&nbsp;&nbsp;</span></a>";
     }
 
-    $('#spanFirst').parent().attr("href", "/adminRent.jsp?pageNo=1&page?ize=10");
+    $('#spanFirst').parent().attr("href", "/adminRent.jsp?pageNo=1&pageize=6");
     $('#spanLast').parent().attr("href", "/adminRent.jsp?pageNo=" + pageModel.pageCount + "&pageSize=6");
     $('#spanNext').parent().attr("href", "/adminRent.jsp?pageNo=" + (pageModel.pageNo + 1 ) +"&pageSize=6");
     $('#spanPre').parent().attr("href", "/adminRent.jsp?pageNo=" + (pageModel.pageNo - 1 ) +"&pageSize=6");
@@ -154,9 +155,9 @@
     if(pageModel.pageNo == pageModel.pageCount){
       $('#spanNext').parent().hide();
     }
-    if(pageModel.pageCount == 1) {
+    /*if(pageModel.pageCount == 1) {
       $('#spanPage').hide();
-    }
+    }*/
   }
 
   /*生成租品信息*/
