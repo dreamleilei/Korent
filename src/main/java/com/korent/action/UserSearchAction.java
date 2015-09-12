@@ -10,6 +10,7 @@ import org.apache.struts2.ServletActionContext;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,9 +21,9 @@ import java.util.Map;
 public class UserSearchAction {
     private RentGoodsService rentGoodsService;
     private UserService userService;
-    private String keyWord;
-    private Integer pageNo;
-    private Integer pageSize;
+    private String keyWord = "";
+    private Integer pageNo = 1;
+    private Integer pageSize = 6;
 
     /*初始化页面信息*/
     public void init(){
@@ -42,9 +43,15 @@ public class UserSearchAction {
         List<RentGoods> list = rentGoodsService.getRentGoodsBySearchByPage(keyWord, pageNo, pageSize);
         Map<Object, Object> map = new HashMap<Object, Object>();
         PageModel pageModel = getPageModel(rentGoodsService.getRentGoodsBySearchPageCount(keyWord, pageSize));
-        map.put("rent", list);
+        if(list == null){
+            map.put("rent", new ArrayList());
+        }else {
+            map.put("rent", list);
+        }
         map.put("pageModel", pageModel);
+        map.put("keyWord", keyWord);
         out.write(gson.toJson(map));
+        System.out.println(gson.toJson(map));
         out.flush();
         out.close();
         return null;
@@ -67,6 +74,30 @@ public class UserSearchAction {
 
     public void setKeyWord(String keyWord) {
         this.keyWord = keyWord;
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 }
 

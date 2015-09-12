@@ -50,6 +50,33 @@ public class RentGoodsService {
         return list.size() % pageSize == 0 ? list.size() / pageSize : list.size() /pageSize + 1;
     }
 
+    /*分类获取租品*/
+    public List<RentGoods> getRentGoodsByClassifyByPage(String classify, int pageNo, int pageSize){
+        return rentGoodsDao.findByClassify(classify, pageNo, pageSize);
+    }
+
+    /*获取分类的页数*/
+    public Integer getRentGoodsByClassifyPageCount(String classify, int pageSize){
+        List <RentGoods> list = getRentGoodsByClassifyByPage(classify, 1, -1);
+        return list.size() % pageSize == 0 ? list.size() /pageSize : list.size() /pageSize + 1;
+    }
+
+    /*分页获取搜索的租品*/
+    public List<RentGoods> getRentGoodsBySearchByPage(String key, int pageNo, int pageSize) {
+        return rentGoodsDao.getRentGoodsBySearch(key, pageNo, pageSize);
+    }
+
+    /*获取搜索的页数*/
+    public Integer getRentGoodsBySearchPageCount(String key, int pageSize) {
+        List<RentGoods> list = getRentGoodsBySearchByPage(key, 1, -1);
+        return list.size() % pageSize == 0 ? list.size() /pageSize : list.size() /pageSize + 1;
+    }
+
+    /*更新租品*/
+    public void updateRent(RentGoods rentGoods) {
+        rentGoodsDao.update(rentGoods);
+    }
+
     public UserDao getUserDao() {
         return userDao;
     }

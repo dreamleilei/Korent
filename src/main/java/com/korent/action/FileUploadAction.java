@@ -67,6 +67,7 @@ public class FileUploadAction extends ActionSupport {
 
         /*部署的时候需要用到的路径*/
         String deloyDir = ServletActionContext.getServletContext().getRealPath("/resource/uploadImage");
+        System.out.println(deloyDir);
 
          Integer id = (Integer) ServletActionContext.getRequest().getSession().getAttribute("user");
         String newName = "" + id +System.currentTimeMillis()+type;

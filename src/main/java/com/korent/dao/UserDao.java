@@ -5,13 +5,12 @@ import com.korent.entity.User;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import javax.jws.soap.SOAPBinding;
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by lei on 15-8-27.
@@ -79,7 +78,7 @@ public class UserDao extends BaseDao<User> {
     @SuppressWarnings("unchecked")
     public List<RentGoods> getSendGoodsByPage(Serializable id, int pageNo, int pageSize) {
         User user = get(User.class, id);
-        List<RentGoods> list =currentSession().createFilter(user.getOrder(),  "order by updateDate desc ,id desc")
+        List<RentGoods> list =currentSession().createFilter(user.getSend(),  "order by updateDate desc ,id desc")
                 .setMaxResults(pageSize)
                 .setFirstResult((pageNo - 1) * (pageSize))
                 .list();
@@ -137,8 +136,16 @@ public class UserDao extends BaseDao<User> {
     /*获取用户关注租品的总集合页数*/
     public int getFollowGoodsCount(Serializable id, int pageSize){
         int resultCount = getFollowGoodsByPage(id, 1, -1).size();
-        return resultCount % pageSize == 0 ? resultCount /pageSize : resultCount /pageSize + 1;
+        List <RentGoods> list = getFollowGoodsByPage(id, 1, -1);
+        Set<RentGoods> set = new HashSet<RentGoods>();
+        for(RentGoods rentGoods : list){
+            set.add(rentGoods);
+
+        }
+        return set.size() % pageSize == 0 ? set.size() /pageSize : set.size() / pageSize + 1;
     }
+
+
 
 
 

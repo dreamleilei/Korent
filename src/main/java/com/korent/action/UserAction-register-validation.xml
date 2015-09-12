@@ -1,3 +1,4 @@
+<!--
 <?xml version="1.0" encoding="UTF-8"?>
 
 
@@ -26,7 +27,7 @@
         </field-validator>
     </field>
 
-    <!--邮箱校验-->
+    &lt;!&ndash;邮箱校验&ndash;&gt;
     <field name="email" >
         <field-validator type="requiredstring" short-circuit="true">
             <param name="trim">true</param>
@@ -38,7 +39,7 @@
         </field-validator>
     </field>
 
-    <!--QQ号校验-->
+    &lt;!&ndash;QQ号校验&ndash;&gt;
     <field name="qq" >
         <field-validator type="stringlength" >
             <param name="trim">true</param>
@@ -47,4 +48,4 @@
             <message >请输入正确的QQ号码</message>
         </field-validator>
     </field>
-        </validators>
+        </validators>-->

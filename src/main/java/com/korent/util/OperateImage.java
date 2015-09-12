@@ -3,8 +3,11 @@ package com.korent.util;
 /**
  * Created by lei on 15-9-6.
  */
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.CropImageFilter;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageFilter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -65,13 +68,95 @@ public class OperateImage {
 			 * BufferedImage 返回。
 			 */
             BufferedImage bi = reader.read(0, param);
+            String newName = "12345";
             // 保存新图片
-            ImageIO.write(bi, "jpg", new File(subpath));
+            ImageIO.write(bi, "jpg", new File(newName));
         } finally {
             if (is != null)
                 is.close();
             if (iis != null)
                 iis.close();
         }
+    }
+
+    public void cutImage(){
+        try {
+            Image img;
+            ImageFilter cropFilter;
+            // 读取源图像
+            BufferedImage bi = ImageIO.read(new File(srcpath));
+            int srcWidth = bi.getWidth();      // 源图宽度
+            int srcHeight = bi.getHeight();    // 源图高度
+
+            //若原图大小大于切片大小，则进行切割
+            if (srcWidth >= width && srcHeight >= height) {
+                Image image = bi.getScaledInstance(srcWidth, srcHeight,Image.SCALE_DEFAULT);
+
+                int x1 = x*srcWidth/136;
+                int y1 = y*srcHeight/136;
+                int w1 = width*srcWidth/136;
+                int h1 = height*srcHeight/136;
+
+                cropFilter = new CropImageFilter(x1, y1, w1, h1);
+                img = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(image.getSource(), cropFilter));
+                BufferedImage tag = new BufferedImage(w1, h1,BufferedImage.TYPE_INT_RGB);
+                Graphics g = tag.getGraphics();
+                g.drawImage(img, 0, 0, null); // 绘制缩小后的图
+                g.dispose();
+                // 输出为文件
+                ImageIO.write(tag, "jpg", new File( subpath));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally{
+        }
+    }
+
+    public String getSrcpath() {
+        return srcpath;
+    }
+
+    public void setSrcpath(String srcpath) {
+        this.srcpath = srcpath;
+    }
+
+    public String getSubpath() {
+        return subpath;
+    }
+
+    public void setSubpath(String subpath) {
+        this.subpath = subpath;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

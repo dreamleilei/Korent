@@ -25,6 +25,7 @@ public class AdminOperateAction extends ActionSupport {
     private Integer pageCount;
     private Integer dataCount;
     private Integer uid;
+    private Integer rid;
 
 
     public String getUser() throws IOException {
@@ -52,6 +53,12 @@ public class AdminOperateAction extends ActionSupport {
     public String deleteUser() {
         System.out.println(uid);
         adminService.deleteUser(uid);
+        return null;
+    }
+
+    /*管理员删除租品*/
+    public String deleteRentGoods() {
+        adminService.deleteRentGoods(rid);
         return null;
     }
     public AdminOperateAction() {
@@ -118,6 +125,15 @@ public class AdminOperateAction extends ActionSupport {
     }
 
     public void setUid(Integer uid) {
+
         this.uid = uid;
+    }
+
+    public Integer getRid() {
+        return rid;
+    }
+
+    public void setRid(Integer rid) {
+        this.rid = rid;
     }
 }

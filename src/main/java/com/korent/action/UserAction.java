@@ -11,6 +11,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -64,6 +65,12 @@ public class UserAction extends ActionSupport {
 
     /*用户退出的action*/
     public String logout() {
+        HttpSession session = ServletActionContext.getRequest().getSession();
+        session.setAttribute("user", null);
+        session.setAttribute("url", null);
+        session.setAttribute("name", null);
+        session.setAttribute("headImage", null);
+        /*ServletActionContext.getRequest().getSession().invalidate();*/
         ServletActionContext.getRequest().getSession().invalidate();
         return SUCCESS;
     }
@@ -80,6 +87,7 @@ public class UserAction extends ActionSupport {
             user.setPhone(phone);
             user.setEmail(email);
             user.setQq(qq);
+            System.out.println("do");
           //  User user = new User(username, password, phone, email, qq);
             userService.saveUser(user);
             return SUCCESS;
@@ -111,7 +119,11 @@ ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
         ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
         PrintWriter out = ServletActionContext.getResponse().getWriter();
          User user = userService.getUserInformation(id);
-         out.write(user.getOtherInformation());
+        String otherInfo = user.getOtherInformation();
+        if(null == otherInfo){
+            otherInfo = "";
+        }
+         out.write(otherInfo);
         return null;
 
     }
@@ -131,25 +143,29 @@ ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
     }
 
     /*获得所有用户的action*/
-    public String getUserList() {
+    public String getUserList() throws IOException {
 
+        ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+        PrintWriter out = ServletActionContext.getResponse().getWriter();
         Gson gson = new Gson();
 
         List<String> userNameList = userService.getUserList();
         String userList = gson.toJson(userNameList);
 
-        ServletActionContext.getRequest().setAttribute("userList", userList);
+        out.write(userList);
+
+        // ServletActionContext.getRequest().setAttribute("userList", userList);
 
         return null;
     }
 
     /*分页获取用户的订单*/
-    public void validateRegister() {
+   /* public void validateRegister() {
         if (phone == null) {
         } else if(phone.length() != 11){
             addFieldError("phone", "电话号码格式不正确");
         }
-    }
+    }*/
 
    /* @Override
     public void validate() {

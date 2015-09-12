@@ -31,7 +31,7 @@ public class RentGoods implements Serializable {
     private Address address;
 
     @Enumerated(EnumType.ORDINAL)
-    private GoodsStatus status;
+    private GoodsStatus status = GoodsStatus.CanOrder;
 
     @Column(name="priceDescription",length=30,nullable=true)
     private String price;

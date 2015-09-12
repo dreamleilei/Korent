@@ -38,7 +38,7 @@ public class AdminAction extends ActionSupport {
         ActionContext actionContext = ActionContext.getContext();
         Integer id = adminService.getIdByName(adminname);
         actionContext.getSession().put("admin",id);
-        actionContext.getSession().put("name", adminname);
+        actionContext.getSession().put("adminName", adminname);
         return SUCCESS;
     }
 
@@ -55,6 +55,11 @@ public class AdminAction extends ActionSupport {
         out.close();
         return null;
 
+    }
+
+    public String logout() {
+        ServletActionContext.getRequest().getSession().invalidate();
+        return SUCCESS;
     }
 
 

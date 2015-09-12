@@ -7,7 +7,9 @@ import com.korent.service.UserService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by lei on 15-9-3.
@@ -23,17 +25,50 @@ public class SendRentGoodsAction extends ActionSupport {
     private String description;
     private String price;
     private String[] path;
+    private Integer rid;
 
     public String execute() {
         Address address = new Address(province,city, country, district);
         RentGoods rentGoods = new RentGoods(description, classify, address, price, new Date());
+
+        rentGoods.getPicturePathList().add("/resource/image/3.jpg");
+        rentGoods.getPicturePathList().add("/resource/image/3.jpg");
+        rentGoods.getPicturePathList().add("/resource/image/3.jpg");
+
+
         for(String s:path){
             System.out.println(s);
             rentGoods.getPicturePathList().add(s);
+            rentGoods.getPicturePathList().remove(0);
         }
         Integer id = (Integer)ServletActionContext.getRequest().getSession().getAttribute("user");
         userService.sendRentGoods(id, rentGoods);
         return null;
+    }
+
+    public String changeRent() {
+        RentGoods rentGoods = rentGoodsService.getRentGoodsInfo(rid);
+        rentGoods.setDescription(description);
+        Address address = new Address(province, city, country, district);
+        rentGoods.setAddress(address);
+        List<String> list  = new ArrayList<String>();
+
+        for(String path1 :path){
+            System.out.println(path1);
+            list.add(path1);
+        }
+        if(list.size() <= 3) {
+            for(int i = list.size(); i < 3; i++){
+                list.add("/resource/image/3.jpg");
+            }
+
+        }
+
+        rentGoods.setPicturePathList(list);
+        rentGoods.setPrice(price);
+        rentGoodsService.updateRent(rentGoods);
+        return null;
+
     }
 
     public SendRentGoodsAction() {
@@ -120,4 +155,11 @@ public class SendRentGoodsAction extends ActionSupport {
         this.userService = userService;
     }
 
+    public Integer getRid() {
+        return rid;
+    }
+
+    public void setRid(Integer rid) {
+        this.rid = rid;
+    }
 }

@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.korent.entity.RentGoods;
+import com.korent.entity.User;
 import com.korent.service.RentGoodsService;
 import com.korent.service.UserService;
 import com.korent.util.*;
@@ -26,6 +27,7 @@ public class RentGoodsAction extends ActionSupport {
     private int pageNo = 1;
     private String result ;
     private Integer rid;
+    private String classify;
 
     List<RentGoods> list;
 
@@ -46,14 +48,24 @@ public class RentGoodsAction extends ActionSupport {
     }
 
 
-    /*分页获取所有的租品*/
+    /*分页获取所有的租品*/   /*分类获取租品*/
     public String getAllRentGoods() throws IOException {
         init();
-        PrintWriter out = ServletActionContext.getResponse().getWriter();
-        list = rentGoodsService.getRentGoodsByPage(pageNo, pageSize);
         Gson gson = RentGson.getGson();
+        PageModel pageModel = null;
+        PrintWriter out = ServletActionContext.getResponse().getWriter();
 
-        PageModel pageModel = getPageModel(rentGoodsService.getRentGoodsPage(pageSize));
+        /*如果类别为空,获取所有租品*/
+        if(classify == null || classify.equals("") ) {
+            list = rentGoodsService.getRentGoodsByPage(pageNo, pageSize);
+           pageModel = getPageModel(rentGoodsService.getRentGoodsPage(pageSize));
+        } else {    /*否则分类获取租品*/
+            list = rentGoodsService.getRentGoodsByClassifyByPage(classify, pageNo, pageSize);
+             pageModel = getPageModel(rentGoodsService.getRentGoodsByClassifyPageCount(classify, pageSize));
+
+        }
+
+        System.out.println(list);
         HashMap map = new HashMap();
         map.put("rent", list);
         map.put("pageModel", pageModel);
@@ -61,6 +73,22 @@ public class RentGoodsAction extends ActionSupport {
         out.close();
         return null;
     }
+
+ /*
+    public String getRentGoodsByClassify() throws Exception {
+        init();
+        PrintWriter out = ServletActionContext.getResponse().getWriter();
+        Gson gson = RentGson.getGson();
+        list = rentGoodsService.getRentGoodsByClassifyByPage(classify, pageNo, pageSize);
+        PageModel pageModel = getPageModel(rentGoodsService.getRentGoodsByClassifyPageCount(classify, pageSize));
+        HashMap map = new HashMap();
+        map.put("rent", list);
+        map.put("pageModel", pageModel);
+        out.write(gson.toJson(map));
+        out.close();
+        return null;
+
+    } */
 
     /*根据用户查询租赁的租品*/
     public String getOrderRent() throws IOException {
@@ -130,6 +158,24 @@ public class RentGoodsAction extends ActionSupport {
         PrintWriter out = ServletActionContext.getResponse().getWriter();
         out.write(gson.toJson(rentGoods));
         return null;
+    }
+
+    /*根据id获取用户预定者*/
+    public String getRentGoodsOrder() throws Exception {
+        RentGoods rentGoods = rentGoodsService.getRentGoodsInfo(rid);
+        Gson gson = RentGson.getGson();
+        ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+        PrintWriter out = ServletActionContext.getResponse().getWriter();
+        Map map = new HashMap();
+        User user = rentGoods.getOrderUser();
+        if(user == null){
+            map.put("orderUser", "");
+        } else {
+            map.put("orderUser", user.getId());
+        }
+        out.write(gson.toJson(map));
+        return null;
+
     }
 
     public RentGoodsService getRentGoodsService() {
@@ -202,5 +248,13 @@ public class RentGoodsAction extends ActionSupport {
 
     public void setRid(Integer rid) {
         this.rid = rid;
+    }
+
+    public String getClassify() {
+        return classify;
+    }
+
+    public void setClassify(String classify) {
+        this.classify = classify;
     }
 }

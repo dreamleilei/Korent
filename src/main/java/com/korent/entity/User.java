@@ -35,6 +35,9 @@ public class User implements Serializable {
     @Column(name="otherInformation")
     private String otherInformation;
 
+    @Column(name = "headPicture")
+    private String headPicture = "/resource/uploadImage/defaultHead.jpg";
+
     @OneToMany(targetEntity=RentGoods.class)
     @JoinColumn(name="orderId", referencedColumnName="uid")
     List<RentGoods> order = new ArrayList<RentGoods>();
@@ -142,6 +145,14 @@ public class User implements Serializable {
     public void setOtherInformation(String otherInformation) {
 
         this.otherInformation = otherInformation;
+    }
+
+    public void setHeadPicture(String headPicture) {
+        this.headPicture = headPicture;
+    }
+
+    public String getHeadPicture() {
+        return headPicture;
     }
 
     @Override

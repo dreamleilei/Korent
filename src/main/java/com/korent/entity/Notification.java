@@ -2,6 +2,7 @@ package com.korent.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by lei on 2015/8/25.
@@ -23,7 +24,11 @@ public class Notification implements Serializable {
     private String content;              //发送通知的内容
 
     @Column(name="status",nullable=false)
-    private Integer status;              //消息的状态，默认为0未读，已读为1
+    private Integer status = 0;              //消息的状态，默认为0未读，已读为1
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="initDate", nullable=true)
+   private  Date date = new Date();
 
     public Notification() {
     }
@@ -60,5 +65,31 @@ public class Notification implements Serializable {
         this.status = status;
     }
 
+    public Date getDate() {
+        return date;
+    }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Notification)) return false;
+
+        Notification that = (Notification) o;
+
+        if (!ToId.equals(that.ToId)) return false;
+        if (!id.equals(that.id)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + ToId.hashCode();
+        return result;
+    }
 }

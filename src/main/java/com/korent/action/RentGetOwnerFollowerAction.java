@@ -14,7 +14,7 @@ import java.io.PrintWriter;
  */
 public class RentGetOwnerFollowerAction {
     private RentGoodsService rentGoodsService;
-    private String rid;
+    private Integer rid;
 
 
     public String execute() throws IOException {
@@ -29,11 +29,19 @@ public class RentGetOwnerFollowerAction {
     public RentGetOwnerFollowerAction() {
     }
 
-    public String getRid() {
+    public Integer getRid() {
         return rid;
     }
 
-    public void setRid(String rid) {
+    public void setRid(Integer rid) {
         this.rid = rid;
+    }
+
+    public RentGoodsService getRentGoodsService() {
+        return rentGoodsService;
+    }
+
+    public void setRentGoodsService(RentGoodsService rentGoodsService) {
+        this.rentGoodsService = rentGoodsService;
     }
 }

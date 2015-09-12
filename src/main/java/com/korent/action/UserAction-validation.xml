@@ -1,3 +1,4 @@
+<!--
 <?xml version="1.0" encoding="UTF-8"?>
 
 
@@ -25,4 +26,4 @@
             <message>密码的长度应在4到20个字符之间</message>
         </field-validator>
     </field>
-</validators>
+</validators>-->

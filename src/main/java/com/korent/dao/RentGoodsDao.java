@@ -1,7 +1,9 @@
 package com.korent.dao;
 
+import com.google.gson.Gson;
 import com.korent.entity.RentGoods;
 import com.korent.entity.User;
+import com.korent.util.RentGson;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -12,6 +14,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -144,6 +148,46 @@ public class RentGoodsDao extends BaseDao<RentGoods> {
             return null;
         }
         return list;
+    }
+
+    /*效率最最最低的模糊查询*/
+    @SuppressWarnings("unchecked")
+    public List<RentGoods> getRentGoodsBySearch(String key, int pageNo, int pageSize) {
+        Gson gson = RentGson.getGson();
+        List<RentGoods> list = currentSession().createCriteria(RentGoods.class).addOrder(Order.desc("updateDate"))
+                .addOrder(Order.desc("id")).list();
+
+        System.out.println(list);
+        Iterator<RentGoods> iterator = list.iterator();
+        while(iterator.hasNext()) {
+            RentGoods rentGoods = iterator.next();
+            String temp = gson.toJson(rentGoods);
+            System.out.println(temp);
+            if(!temp.contains(key)){
+                iterator.remove();
+                System.out.println("remove");
+            }
+        }
+   /*     System.out.println(list);*/
+
+        for(RentGoods rentGoods : list){
+            System.out.println(rentGoods.getId());
+        }
+        System.out.println(list);
+        if(pageSize < 0) {
+            return list;
+        }
+        if(pageNo < 1) {
+            return list;
+        }
+        if((pageNo - 1) * pageSize  > list.size() ) {
+            return null;
+        } else if((pageNo * pageSize > list.size())) {
+            return list.subList((pageNo -1) * pageSize, list.size());
+        }
+
+        return list.subList((pageNo - 1) * pageSize, pageNo *pageSize);
+
     }
 
 

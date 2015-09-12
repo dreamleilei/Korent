@@ -6,6 +6,7 @@ import com.korent.dao.RentGoodsDao;
 import com.korent.dao.UserDao;
 import com.korent.entity.RentGoods;
 import com.korent.entity.User;
+import com.korent.kenum.GoodsStatus;
 import com.korent.util.UserExclusionStrategy;
 
 import java.io.Serializable;
@@ -34,6 +35,10 @@ public class UserService {
     }
     /*获取用户名和密码的map序列*/
 
+    public User getUserInformation(Serializable id) {
+        User user = userDao.get(User.class, id);
+        return user;
+    }
     public Map<Object, Object> getUserMap() {
         return userDao.getLoginList();
     }
@@ -59,7 +64,7 @@ public class UserService {
 
     /*分页获取用户预定的租品*/
     public List<RentGoods> getOrderGoodsByPage(Serializable id, int pageNo, int pageSize) {
-        return rentGoodsDao.findByOrder(id, pageNo, pageSize);
+        return userDao.getOrderGoodsByPage(id, pageNo, pageSize);
     }
 
     /*获取用户预定租品的总页数*/
@@ -103,6 +108,14 @@ public class UserService {
         return gson.toJson(user);
     }
 
+    /*用户修改头像*/
+    public void updateHeadPath(Serializable id, String path){
+        User user = userDao.get(User.class, id);
+        user.setHeadPicture(path);
+        userDao.update(user);
+
+    }
+
     /*用户修改电话信息*/
     public void changePhone(Serializable id, Object phone) {
         userDao.changePhone(id, phone);
@@ -119,8 +132,14 @@ public class UserService {
     }
 
     /*用户修改密码*/
-    public void changePassword(Serializable id, Object password) {
+ /*   public void changePassword(Serializable id, Object password) {
         userDao.changePassword(id, password);
+    }*/
+
+    public void changePassword(Serializable id, Object password){
+       User user = userDao.get(User.class, id);
+        user.setPassword((String) password);
+        userDao.update(user);
     }
 
     public List<RentGoods> searchRentGoods(String key) {
@@ -160,7 +179,9 @@ public class UserService {
     public void rentGoods(Serializable uid, Serializable rid){
         User user = userDao.get(User.class, uid);
         RentGoods rentGoods = rentGoodsDao.get(RentGoods.class, rid);
+        rentGoods.setStatus(GoodsStatus.IsOrder);
         user.getOrder().add(rentGoods);
+        rentGoodsDao.update(rentGoods);
         userDao.update(user);
     }
 
@@ -169,6 +190,8 @@ public class UserService {
         User user = userDao.get(User.class, uid);
         RentGoods rentGoods = rentGoodsDao.get(RentGoods.class, rid);
         user.getOrder().remove(rentGoods);
+        rentGoods.setStatus(GoodsStatus.CanOrder);
+        rentGoodsDao.update(rentGoods);
         //rentGoods.setOrderUser(null);
         userDao.update(user);
     }
