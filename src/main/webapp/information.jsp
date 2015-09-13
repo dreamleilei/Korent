@@ -30,12 +30,13 @@
 
     <form id="form" style="font-size:24px; color:#FFFFFF ">
         <div style="position:relative; left:20px; margin-top:10px; margin-bottom:20px;">
-            *真实姓名:
+            真实姓名:
             <input type="text" name="realName" id="realName"/>
         </div>
 
+
         <div style="position:relative; left:44px; margin-bottom:20px;">
-            *用户名:
+            用户名:
             <input type="text" name="username" disabled="disabled"/>
         </div>
 
@@ -45,31 +46,31 @@
         </div>
 
         <div style="position:relative; left:21px; margin-bottom:20px;">
-            *出生日期:
-            <input type="date" name="birth" id="birth"  />
+            出生日期:
+            <input type="date" name="birth" id="birth"   />
         </div>
 
         <div style="position:relative; left:45px; margin-bottom:20px;">
-            *手机号:
+            手机号:
             <input type="tel" name="phone"  id="phone" />
         </div>
 
-        <div style="position:relative; left:81px; margin-bottom:20px;">
+        <div style="position:relative; left:58px; margin-bottom:20px;">
             QQ号:
             <input type="text" name="qq"  id="qq" />
         </div>
 
-        <div style="position:relative; left:69px; margin-bottom:20px;">
+        <div style="position:relative; left:60px; margin-bottom:20px;">
             Email:
             <input type="email" name="email" id="Email"  />
         </div>
 
         <div style="position:relative; left:21px; margin-bottom:20px;">
-            *证件号码:
+            证件号码:
             <input type="text" name="idNumber" id="idNumber"  />
         </div>
 
-        <div style="position:relative; left:57px; margin-bottom:20px;">
+        <div style="position:relative; left:43px; margin-bottom:20px;">
             居住地:
             <input type="text" name="address" id="address"  />
         </div>
@@ -89,16 +90,16 @@
         <div id="headimg" style="position:relative; left:34px; margin-bottom:20px  width:600px; height :200px">
             <div style="float:left">新头像:</div>
             <div style="float:left; margin-left:10px;"><img  id="myHead" src="" name="photo" style="height:140px; width:190px; "/></div>
-            <div style="float:left; margin-left:30px; overflow:hidden; width:100px; height :100px" id="previewDiv" ><img   id="preview" src="" name="photo" style="height:100px; width:100px;" /></div>
+            <div style="float:left; margin-left:30px; overflow:hidden; width:140px; height :100px" id="previewDiv" ><img   id="preview" src="" name="photo" style="height:100px; width:100px;" /></div>
         </div>
 
         <%--<div style="position:relative; left:110px; margin-top:-40px">
           <input name="submit" type="button"  class="uploading" onclick="" value="上传图片"/>
         </div>--%>
 
-        <div style="position:relative; left:175px;">
+        <div style="position:relative; left:135px;">
             <input id="photoImage" type="file" name="photo" hidden  multiple />
-            <input id="uploadPhoto" name="submit" type="button"  class="uploading" onclick="" value="上传图片"/>
+            <input id="uploadPhoto"  name="submit" type="button"  class="uploading" onclick="" value="上传图片"/>
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 
             <input id="yes" name="submit" type="button"  hidden class="uploading" onclick="" value="确定"/>

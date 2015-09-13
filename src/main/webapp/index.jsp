@@ -563,20 +563,20 @@
 </head>
 
 <body>
-<div id="Layer13" onclick="MM_openBrWindow('/rent.jsp?classify=%e6%88%bf%e5%b1%8b','','')" onmouseout="MM_showHideLayers('Layer7','','hide','Layer13','','hide')"></div>
-<div id="Layer14" onclick="MM_openBrWindow('/rent.jsp?classify=%e4%b9%a6%e7%b1%8d','','')" onmouseout="MM_showHideLayers('Layer8','','hide','Layer14','','hide')"></div>
-<div id="Layer3" onclick="MM_openBrWindow('/rent.jsp?classify=%e8%87%aa%e8%a1%8c%e8%bd%a6
+<div id="Layer13" onclick="MM_openBrWindow('/rent.jsp?pageNo=1&pageSize=6&classify=%e6%88%bf%e5%b1%8b','','')" onmouseout="MM_showHideLayers('Layer7','','hide','Layer13','','hide')"></div>
+<div id="Layer14" onclick="MM_openBrWindow('/rent.jsp?pageNo=1&pageSize=6&classify=%e4%b9%a6%e7%b1%8d','','')" onmouseout="MM_showHideLayers('Layer8','','hide','Layer14','','hide')"></div>
+<div id="Layer3" onclick="MM_openBrWindow('/rent.jsp?pageNo=1&pageSize=6&classify=%e8%87%aa%e8%a1%8c%e8%bd%a6
 ','','')" onmouseout="MM_showHideLayers('Layer3','','hide','Layer9','','hide')"></div>
-<div id="Layer4" onclick="MM_openBrWindow('/rent.jsp?classify=%e6%b1%bd%e8%bd%a6','','')" onmouseout="MM_showHideLayers('Layer4','','hide','Layer10','','hide')"></div>
-<div id="Layer5" onclick="MM_openBrWindow('/rent.jsp?classify=%e6%9c%8d%e8%a3%85','','')" onmouseout="MM_showHideLayers('Layer5','','hide','Layer11','','hide')"></div>
-<div id="Layer6" onclick="MM_openBrWindow('/rent.jsp?classify=%e5%a9%9a%e5%ba%86%e7%94%a8%e5%93%81','','')" onmouseout="MM_showHideLayers('Layer6','','hide','Layer12','','hide')"></div>
+<div id="Layer4" onclick="MM_openBrWindow('/rent.jsp?pageNo=1&pageSize=6&classify=%e6%b1%bd%e8%bd%a6','','')" onmouseout="MM_showHideLayers('Layer4','','hide','Layer10','','hide')"></div>
+<div id="Layer5" onclick="MM_openBrWindow('/rent.jsp?pageNo=1&pageSize=6&classify=%e6%9c%8d%e8%a3%85','','')" onmouseout="MM_showHideLayers('Layer5','','hide','Layer11','','hide')"></div>
+<div id="Layer6" onclick="MM_openBrWindow('/rent.jsp?pageNo=1&pageSize=6&classify=%e5%a9%9a%e5%ba%86%e7%94%a8%e5%93%81','','')" onmouseout="MM_showHideLayers('Layer6','','hide','Layer12','','hide')"></div>
 
-<div id="Layer7" onclick="MM_openBrWindow('/rent.jsp?classify=%e6%88%bf%e5%b1%8b','','')">房屋</div>
-<div id="Layer8" onclick="MM_openBrWindow('/rent.jsp?classify=%e4%b9%a6%e7%b1%8d','','')">书籍</div>
-<div id="Layer9" onclick="MM_openBrWindow('/rent.jsp?classify=%e8%87%aa%e8%a1%8c%e8%bd%a6','','')">自行车</div>
-<div id="Layer10" onclick="MM_openBrWindow('/rent.jsp?classify=%e6%b1%bd%e8%bd%a6','','')">汽车</div>
-<div id="Layer11" onclick="MM_openBrWindow('/rent.jsp?classify=%e6%9c%8d%e8%a3%85','','')">服装</div>
-<div id="Layer12" onclick="MM_openBrWindow('/rent.jsp?classify=%e5%a9%9a%e5%ba%86%e7%94%a8%e5%93%81','','')">婚庆</div>
+<div id="Layer7" onclick="MM_openBrWindow('/rent.jsp?pageNo=1&pageSize=6&classify=%e6%88%bf%e5%b1%8b','','')">房屋</div>
+<div id="Layer8" onclick="MM_openBrWindow('/rent.jsp?pageNo=1&pageSize=6&classify=%e4%b9%a6%e7%b1%8d','','')">书籍</div>
+<div id="Layer9" onclick="MM_openBrWindow('/rent.jsp?pageNo=1&pageSize=6&classify=%e8%87%aa%e8%a1%8c%e8%bd%a6','','')">自行车</div>
+<div id="Layer10" onclick="MM_openBrWindow('/rent.jsp?pageNo=1&pageSize=6&classify=%e6%b1%bd%e8%bd%a6','','')">汽车</div>
+<div id="Layer11" onclick="MM_openBrWindow('/rent.jsp?pageNo=1&pageSize=6&classify=%e6%9c%8d%e8%a3%85','','')">服装</div>
+<div id="Layer12" onclick="MM_openBrWindow('/rent.jsp?pageNo=1&pageSize=6&classify=%e5%a9%9a%e5%ba%86%e7%94%a8%e5%93%81','','')">婚庆</div>
 
 <div id="container">
 
@@ -586,11 +586,11 @@
         </div>
     </div>
     <div id="menu">
-        <div class="celan" style="float:left; width:270px; height:40px;"><a href="/userOrderGoods.jsp" class="href2">我的预订</a></div>
-        <div class="celan" style="float:left; width:270px; height:40px;"><a href="/userSendGoods.jsp" class="href2">我的发布</a></div>
-        <div class="celan" style="float:left; width:270px; height:40px;"><a href="/userFollowGoods.jsp" class="href2">我的关注</a></div>
+        <div class="celan" style="float:left; width:270px; height:40px;"><a href="/userOrderGoods.jsp?pageNo=1&pageSize=6" class="href2">我的预订</a></div>
+        <div class="celan" style="float:left; width:270px; height:40px;"><a href="/userSendGoods.jsp?pageNo=1&pageSize=6" class="href2">我的发布</a></div>
+        <div class="celan" style="float:left; width:270px; height:40px;"><a href="/userFollowGoods.jsp?pageNo=1&pageSize=6" class="href2">我的关注</a></div>
         <div class="celan" style="float:left; width:270px; height:40px;"><a href="/send.jsp" class="href2">我要发布</a></div>
-        <div class="celan" style="float:left; width:270px; height:40px;"><a href="/rent.jsp" class="href2">我要预订</a></div>
+        <div class="celan" style="float:left; width:270px; height:40px;"><a href="/rent.jsp?pageNo=1&pageSize=6" class="href2">我要预订</a></div>
     </div>
 
     <div id="message">
