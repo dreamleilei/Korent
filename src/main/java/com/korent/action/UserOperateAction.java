@@ -130,6 +130,14 @@ public class UserOperateAction {
         rentGoods.setStatus(GoodsStatus.CanOrder);
         rentGoods.setOrderUser(null);
         rentGoodsService.updateRent(rentGoods);
+        List<User> list = rentGoods.getFollower();
+        for(User u :list ){
+            Notification note = new Notification();
+            note.setContent("您关注的租品又可以被预订了,还等什么呢" +"租品的详细信息<a href=" +"\"/rentInformation.jsp?rid=" + rentGoods.getId() + "\">点击链接查看" +"</a>");
+            note.setToId(u.getId());
+            notificationService.save(note);
+        }
+
         return null;
     }
     public UserService getUserService() {

@@ -57,11 +57,14 @@ public class RentGoodsAction extends ActionSupport {
 
         /*如果类别为空,获取所有租品*/
         if(classify == null || classify.equals("") ) {
+            System.out.println("classsify == null" + classify);
             list = rentGoodsService.getRentGoodsByPage(pageNo, pageSize);
            pageModel = getPageModel(rentGoodsService.getRentGoodsPage(pageSize));
         } else {    /*否则分类获取租品*/
+            System.out.println(classify);
             list = rentGoodsService.getRentGoodsByClassifyByPage(classify, pageNo, pageSize);
              pageModel = getPageModel(rentGoodsService.getRentGoodsByClassifyPageCount(classify, pageSize));
+            classify = null;
 
         }
 

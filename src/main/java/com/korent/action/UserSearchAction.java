@@ -54,6 +54,7 @@ public class UserSearchAction {
         System.out.println(gson.toJson(map));
         out.flush();
         out.close();
+        keyWord = null;
         return null;
     }
 
