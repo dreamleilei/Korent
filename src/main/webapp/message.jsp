@@ -93,6 +93,7 @@
     div#frame1,div#frame2,div#frame3,div#frame4,div#frame5,div#frame6{
       width:1000px;
       height:330px;
+      margin-left:40px;
 
 
     }
@@ -116,6 +117,7 @@
 
 <body>
 <%@ include file="/newModel.jsp" %>
+<%@ include file="/checkup.jsp"%>
 <div id="container">
 
 
@@ -132,7 +134,7 @@
       <img  border="0" src="/resource/image/adminHead.jpg" width="120" height="140" />
     </div>
     <div id="text1" >
-      <span class="red" id="note1">不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了</span>
+      <span class="red" id="note1"></span>
 
     </div>
     <div   style="font-size:24px ">
@@ -142,7 +144,7 @@
     <br/>
 
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="submit" type="button"  class="fix" style="width:100px; height:30px;color:#FFFFFF; " onclick="" value="标记已读"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  hidden name="delete" type="button"  class="fix" style="width:100px; height:30px;color:#FFFFFF; " onclick="" value="移除"/>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="date1" style="font-size:20px; color:red">2015-01-01:22:33:22</span><span  id="nid1" hidden></span>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="date1" style="font-size:20px;color:red;text-align:right" >2015-01-01:22:33:22</span><span  id="nid1" hidden></span>
 
 
     <hr />
@@ -153,7 +155,7 @@
       <img  border="0" src="/resource/image/adminHead.jpg" width="120" height="140" />
     </div>
     <div id="text2" >
-      <span class="red" id="note2">不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了</span>
+      <span class="red" id="note2"></span>
 
     </div>
     <div style="font-size:24px ">
@@ -174,7 +176,7 @@
       <img  border="0" src="/resource/image/adminHead.jpg" width="120" height="140" />
     </div>
     <div id="text3" >
-      <span class="red" id="note3">不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了</span>
+      <span class="red" id="note3"></span>
 
 
     </div>
@@ -196,7 +198,7 @@
       <img  border="0" src="/resource/image/adminHead.jpg" width="120" height="140" />
     </div>
     <div id="text4" >
-      <span class="red" id="note4">不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了</span>
+      <span class="red" id="note4"></span>
 
     </div>
     <div  style="font-size:24px ">
@@ -216,7 +218,7 @@
       <img  border="0" src="/resource/image/adminHead.jpg" width="120" height="140" />
     </div>
     <div id="text5" >
-      <span class="red" id="note5">不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了</span>
+      <span class="red" id="note5"></span>
     </div>
     <div   style="font-size:24px ">
       &nbsp;系统消息
@@ -235,7 +237,7 @@
       <img  border="0" src="/resource/image/adminHead.jpg" width="120" height="140" />
     </div>
     <div id="text6" >
-      <span class="red" id="note6">不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了</span>
+      <span class="red" id="note6"></span>
 
     </div>
     <div  style="font-size:24px ">
@@ -255,7 +257,7 @@
     <a><span id="spanFirst">&nbsp;第一页</span></a>
     <a><span id="spanPre">上一页</span></a>
     <span id="add"> </span>
-    <span>第<input type="text" style="width:15px"  value=""/>页<input type="button" class="fix" value="跳转" style="font-size:18px; width:60px"/></span>
+    <span>第<input type="text" style="width:30px"  value=""/>页<input type="button" class="fix" value="跳转" style="font-size:18px; width:60px"/></span>
     <a><span id="spanNext">下一页</span></a>
     <a><span id="spanLast">最后一页</span></a>
     第

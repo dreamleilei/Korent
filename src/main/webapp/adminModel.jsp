@@ -70,8 +70,8 @@
   <div id="message">
     <div id="menu">
       <ul>
-        <li><a href="/adminOperate.jsp" class="href2">管理用户</a></li><p></p>
-        <li><a href="/adminRent.jsp" class="href2">管理租品</a></li>
+        <li><a href="/adminOperate.jsp?pageNo=1&pageSize=10" class="href2">管理用户</a></li><p></p>
+        <li><a href="/adminRent.jsp?pageNo=1&pageSize=6" class="href2">管理租品</a></li>
       </ul>
     </div>
 

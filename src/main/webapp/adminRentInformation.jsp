@@ -28,7 +28,8 @@
 </head>
 
 <body>
-<%@ include file="/model.jsp" %>
+<%--<%@ include file="/model.jsp" %>--%>
+<%@ include file="/adminModel.jsp" %>
 <div id="mess">
   <div  id="title">
     租品详情
@@ -58,7 +59,7 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价格描述：<span id="priceDescription" class="red">0000元/月</span>
   </div>
   <div  id="address">
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地址：<span class="red" id="province">陕西</span>省--<span class="red" id="city">西安</span>市--<span id="country" class="red">长安</span>(区/县)
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地址：<span class="red" id="province">陕西</span>省--<span class="red" id="city">西安</span>市--<span id="country" class="red">长安</span>(区/县)
   </div>
   <div  id="detail">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;详细地址：<span class="red" id="district">西安邮电大学东区3号家属楼203室 </span>
@@ -98,8 +99,8 @@
           button.attr("disabled", "disabled");
           button.val("成功删除");
           operateSuccessTip();
-          $(this).delay(2000);
-          window.location.href="/adminRent.jsp";
+          $(this).delay(2000).queue(function(){  window.location.href="/adminRent.jsp";});
+
 
         },
         error: function () {    /*用户预定按钮的点击*/

@@ -93,6 +93,7 @@
     div#frame1,div#frame2,div#frame3,div#frame4,div#frame5,div#frame6{
       width:1000px;
       height:330px;
+      margin-left:40px;
 
 
     }
@@ -116,6 +117,7 @@
 
 <body>
 <%@ include file="/newModel.jsp" %>
+<%@ include file="/checkup.jsp"%>
 <div id="container">
 
 
@@ -132,7 +134,7 @@
       <img  border="0" src="/resource/image/adminHead.jpg" width="120" height="140" />
     </div>
     <div id="text1" >
-      <span class="red" id="note1">不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了不想敲了</span>
+      <span class="red" id="note1"></span>
 
     </div>
     <div   style="font-size:24px ">
@@ -142,7 +144,7 @@
     <br/>
 
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input hidden name="submit" type="button"  class="fix" style="width:100px; height:30px;color:#FFFFFF; " onclick="" value="删除"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  hidden name="delete" type="button"  class="fix" style="width:100px; height:30px;color:#FFFFFF; " onclick="" value="移除"/>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="date1" style="font-size:20px; color:red">2015-01-01:22:33:22</span><span  id="nid1" hidden></span>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="date1" style="font-size:20px; color:red; text-align: right">2015-01-01:22:33:22</span><span  id="nid1" hidden></span>
 
 
     <hr />
@@ -255,7 +257,7 @@
     <a><span id="spanFirst">&nbsp;第一页</span></a>
     <a><span id="spanPre">上一页</span></a>
     <span id="add"> </span>
-    <span>第<input type="text" style="width:15px"  value=""/>页<input type="button" class="fix" value="跳转" style="font-size:18px; width:60px"/></span>
+    <span>第<input type="text" style="width:30px"  value=""/>页<input type="button" class="fix" value="跳转" style="font-size:18px; width:60px"/></span>
     <a><span id="spanNext">下一页</span></a>
     <a><span id="spanLast">最后一页</span></a>
     第
@@ -284,13 +286,13 @@
   function createPage(pageModel) {
     var model = "";
     for (var i = 1; i <= pageModel.pageCount; i++) {
-      model += "<a href=\"/message.jsp?pageNo=" + i + "\&pageSize=6\" ><span>" + i + "&nbsp;&nbsp;</span></a>";
+      model += "<a href=\"/readMessage.jsp?pageNo=" + i + "\&pageSize=6\" ><span>" + i + "&nbsp;&nbsp;</span></a>";
     }
 
-    $('#spanFirst').parent().attr("href", "/message.jsp?pageNo=1&pageSize=6");
-    $('#spanLast').parent().attr("href", "/message.jsp?pageNo=" + pageModel.pageCount + "&pageSize=6");
-    $('#spanNext').parent().attr("href", "/message.jsp?pageNo=" + (pageModel.pageNo + 1 ) +"&pageSize=6");
-    $('#spanPre').parent().attr("href", "/message.jsp?pageNo=" + (pageModel.pageNo - 1 ) +"&pageSize=6");
+    $('#spanFirst').parent().attr("href", "/readMessage.jsp?pageNo=1&pageSize=6");
+    $('#spanLast').parent().attr("href", "/readMessage.jsp?pageNo=" + pageModel.pageCount + "&pageSize=6");
+    $('#spanNext').parent().attr("href", "/readMessage.jsp?pageNo=" + (pageModel.pageNo + 1 ) +"&pageSize=6");
+    $('#spanPre').parent().attr("href", "/readMessage.jsp?pageNo=" + (pageModel.pageNo - 1 ) +"&pageSize=6");
     $('#add').append(model);
     $('#spanPageNum').text(pageModel.pageNo);
     $('#spanTotalPage').text(pageModel.pageCount);

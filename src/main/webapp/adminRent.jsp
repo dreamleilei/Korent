@@ -10,7 +10,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-  <title>房屋信息</title>
+  <title>管理员租品信息</title>
   <link href="/resource/css/message1.css" rel="stylesheet" type="text/css" />
   <script src="/resource/js/jquery-2.1.1.js" type="text/javascript"> </script>
   <link href="/resource/css/jNotify.jquery.css" rel="stylesheet" type="text/css" />
@@ -120,7 +120,7 @@
     <span>3</span>
     <span>4</span>-->
     <span id="add"> </span>
-    <span>第<input type="text" style="width:15px" value="2"/>页<input type="button" value="跳转" style="font-size:18px;"/></span>
+    <span>第<input type="text" style="width:30px" value=""/>页<input type="button" class="fix" value="跳转" style="font-size:18px;"/></span>
     <a><span id="spanNext">下一页</span></a>
     <a><span id="spanLast">最后一页</span></a>
     第

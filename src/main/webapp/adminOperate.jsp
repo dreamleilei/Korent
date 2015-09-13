@@ -47,7 +47,7 @@
       <a><span id="spanFirst">第一页</span></a>
       <a ><span id="spanPre">上一页</span></a>
       <span id="add"> </span>
-      <span>第&nbsp;<input type="text" style="width:15px"/>&nbsp;页<input type="button" value="跳转" id ="searchButton" style="font-size:18px; color:blue"/></span>
+      <span>第&nbsp;<input type="text" style="width:30px"/>&nbsp;页<input type="button" value="跳转" id ="searchButton" style="font-size:18px; color:blue"/></span>
       <a><span id="spanNext">下一页</span></a>
       <a><span id="spanLast">最后一页</span></a>
       第

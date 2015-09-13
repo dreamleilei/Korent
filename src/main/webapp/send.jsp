@@ -54,7 +54,7 @@
   </div>
 
 
-  <div id="Layer2" style="position:absolute; left:539px; top:352px; width:729px; height:76px; z-index:1; font-family:"Microsoft YaHei UI Light", "Microsoft YaHei UI" ;">
+  <div id="Layer2" style="position:absolute; left:510px; top:352px; width:729px; height:76px; z-index:1; font-family:"Microsoft YaHei UI Light", "Microsoft YaHei UI" ;">
   租品分类:
   <select id="classify" style="height:30px;width:80px" name="classify" >
     <option>房屋</option>
@@ -85,7 +85,7 @@
     <span hidden id="send_success" class="message"></span></div>
   <div id="Layer6" style="position:absolute; left:405px; top:822px; width:262px; height:16px; z-index:5">
     <input name="photo" id="photo1" type="file" hidden="hidden"  multiple/>
-    <input name="submit" id ="photo1Button" type="button"  class="queren1" onclick="" value="上传图片"/>
+    &nbsp;&nbsp; &nbsp;&nbsp; <input name="submit" id ="photo1Button" type="button"  class="queren1" onclick="" value="上传图片"/>
   </div>
   <div id="Layer7" style="position:absolute; left:407px; top:576px; width:139px; height:103px; z-index:11">
     <a href="" name="image"><img id="img1"src="" height="103px" width="139px" name="photo1" style="position:absolute; top: 98px;" /></a>
@@ -108,7 +108,7 @@
     <br/>
   </div>
 
-  <div id="Layer12" style="position:absolute; left:505px; top:548px; width:756px; height:67px; z-index:12; color:#FFFFFF; font-size:24px; font-weight:700;">
+  <div id="Layer12" style="position:absolute; left:480px; top:548px; width:756px; height:67px; z-index:12; color:#FFFFFF; font-size:24px; font-weight:700;">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价格描述:
 
     <input type="text" name="price" style=" height:50px; width:300px; "/><br/><br/>
