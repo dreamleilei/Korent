@@ -29,14 +29,14 @@
   <div id="message">
     <div id="menu">
       <ul>
-        <li><a href="/userOrderGoods.jsp" class="href2">我的预订</a></li>
+        <li><a href="/userOrderGoods.jsp?pageNo=1&pageSize=6" class="href2">我的预订</a></li>
         <p></p>
-        <li><a href="/userSendGoods.jsp" class="href2">我的发布</a></li><p></p>
-        <li><a href="/rent.jsp" class="href2">我要预订</a></li><p></p>
-        <li><a href="/userFollowGoods.jsp" class="href2">我的关注</a></li><p></p>
+        <li><a href="/userSendGoods.jsp?pageNo=1&pageSize=6" class="href2">我的发布</a></li><p></p>
+        <li><a href="/rent.jsp?pageNo=1&pageSize=6" class="href2">我要预订</a></li><p></p>
+        <li><a href="/userFollowGoods.jsp?pageNo=1&pageSize=6" class="href2">我的关注</a></li><p></p>
         <li><a href="/send.jsp" class="href2">我要发布</a></li><p></p>
-        <li ><a id ="noReadMessage" href="/message.jsp" class="href2">未读消息</a></li><p></p>
-        <li ><a href="/readMessage.jsp" class="href2">已读消息</a></li></li>
+        <li ><a id ="noReadMessage" href="/message.jsp?pageNo=1&pageSize=6" class="href2">未读消息</a></li><p></p>
+        <li ><a href="/readMessage.jsp?pageNo=1&pageSize=6" class="href2">已读消息</a></li></li>
 
       </ul>
     </div>
