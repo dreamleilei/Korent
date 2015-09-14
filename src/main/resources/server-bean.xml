@@ -24,5 +24,8 @@
              p:rentGoodsDao-ref="rentGoodsDao"
              p:notificationDao-ref="notificationDao"
              />
+    <bean id="notificationService" class="com.korent.service.NotificationService"
+          p:notificationDao-ref="notificationDao"
+          />
 
 </beans>

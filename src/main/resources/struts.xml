@@ -10,24 +10,32 @@
 
                 <!--用户注册-->
                 <action name="register" class="userAction" method="register">
-                        <result type="redirect" name="success" >/userLogin.jsp</result>
-                        <result name="input" >/register.jsp</result>
+                        <result type="redirect" name="success" >/finishRegister.jsp</result>
+                        <result type="redirect" name="input" >/register.jsp</result>
                 </action>
 
                 <!--用户登录-->
                 <action name="login" class="userAction" method="login" >
-                        <result>/information.jsp</result>
+                        <result type="redirect">/index.jsp</result>
                         <result name="input" type="redirect">/userLogin.jsp</result>
                         <result name="error" type="redirect">/userLogin.jsp</result>
                 </action>
 
                 <!--用户退出-->
                 <action name="logout" class="userAction" method="logout">
-                        <result>/index.jsp</result>
+                        <result type="redirect">/index.jsp</result>
                 </action>
 
                 <!--用户修改信息-->
                 <action name="changeInformation" class="userAction" method="changeInformation" >
+                </action>
+
+                <!--验证密码是否致-->
+                <action name="validatePassword" class="changePassword" method="valPassword">
+                </action>
+
+                <!--修改密码-->
+                <action name="changePasasword" class="changePassword" method="execute">
                 </action>
 
                 <!--用户发布租品的action-->
@@ -48,6 +56,10 @@
                       <!--  <result name="success">/Fileupload.jsp</result>-->
                 </action>
 
+                <!--用户修改头像-->
+                <action name="uploadHead" class="uploadHead" method="execute">
+                </action>
+
                 <!--用户的注册的时候,获取已经存在的用户的列表-->
                 <action name="getUserList" class="userAction" method="getUserList" >
                 </action>
@@ -55,14 +67,21 @@
                 <!--用户获取个人信息-->
                 <action name="getInformation" class="userAction" method="getInformation" />
 
+                <!--获取用户的信息-->
+                <action name="getInformation1" class="userAction" method="getInformation1" />
+
+                <!--获取其它用户的信息-->
+                <action name="getOtherInformation" class="userAction" method="getOtherInformation">
+                </action>
+
                 <!--用户修改个人信息的action-->
                 <action name="changeInformation" class="userChangeAction" method="changeInformation" />
 
                 <!--用户预定租品-->
                 <action name="orderRent" class="userOperateAction" method="orderRent">
                 </action>
-                <!--用户取消预定-->
-                <action name="cancelRent" class="userOperateAction" method="cancelRent">
+                <!--用户取消预订-->
+                <action name="cancelOrder" class="userOperateAction" method="cancelRent">
                 </action>
                 <!--用户关注租品-->
                 <action name="followGoods" class="userOperateAction" method="followGoods">
@@ -70,6 +89,11 @@
                 <!--用户取消关注租品-->
                 <action name="cancelFollowGoods" class="userOperateAction" method="cancelFollowGoods">
                 </action>
+
+                <!--用户在次上架租品-->
+                <action name="upGoods" class="userOperateAction" method="upGoods">
+                </action>
+
 
         </package>
 
@@ -93,6 +117,10 @@
                         <result name="error">/adminLogin.jsp</result>
                 </action>
 
+                <action name="logout" class="adminAction" method="logout">
+                        <result type="redirect">/adminLogin.jsp</result>
+                </action>
+
                 <!--管理员获取所有用户的action-->
                 <action name="getAllUser" class="adminAction" method="getAllUser" >
                 </action>
@@ -110,9 +138,14 @@
         </package>
 
         <package name="rent" namespace="/rent" extends="struts-default" >
-                <!--/*分页获取所有租品的action*/-->
+
+                <!--分类或者获得全部的租品-->
                 <action name="getAllRentGoods" class="rentGoodsAction" method="getAllRentGoods">
                 </action>
+
+                <!-- 分页按类别获取租品
+                <action name="getRentGoodsByClassify" class="rentGoodsAction" method="getRentGoodsByClassify">
+                </action>-->
 
                 <!--用户分页获取发布租品的action-->
                 <action name="getSendGoods" class="rentGoodsAction" method="getSendRent" >
@@ -130,9 +163,25 @@
                 <action name="getFollowGoods" class="rentGoodsAction" method="getFollowRent" >
                 </action>
 
+                <!--分页搜索获取租品-->
+                <action name="getSearchGoods" class ="userSearchAction" method="execute">
+                </action>
+
+                <!--获取租品的详细信息-->
                 <action name="getRentGoodsInfo" class="rentGoodsAction" method="getRentGoodsInfo">
 
                 </action>
+
+                <!--获取租品的发布者和关注者-->
+                <action name="getOwnerFollower" class="getFollowerOwnerAction" method="execute">
+                </action>
+
+                <action name="getOrder" class="rentGoodsAction" method="getRentGoodsOrder">
+                </action>
+
+                <action name="changeRent" class="sendGoodsAction" method="changeRent" >
+                </action>
+
 
         </package>
 
@@ -140,4 +189,36 @@
                 <action name="createCheckCode" class="codeAction" method="createCheckCode" />
                 <action name="checkCheckCode" class="codeAction" method="checkCheckCode" />
         </package>
+
+        <package name="note"  namespace="/note" extends="struts-default" >
+
+                <!--获取来信提示-->
+                <action name="getLetter" class="note" method="searchNotification">
+                </action>
+
+                <!--获取已读的信息-->
+                <action name="getReadNote" class="userNoteAction" method="getReadNote">
+                </action>
+
+                <!--获取未读的信息-->
+                <action name="getUnReadNote" class="userNoteAction" method="getUnReadNote">
+                </action>
+
+                <!--获取删除的信息-->
+                <action name="getDeleteNote" class="userNoteAction" method="getUnReadNote">
+                </action>
+
+                <!--信息被阅读-->
+                <action name="readNote" class="userNoteAction" method="readNote" >
+                </action>
+
+                <!--信息被删除-->
+                <action name="deleteNote" class="userNoteAction" method="deleteNote">
+                </action>
+
+                <!--判断用户是否有未读来信-->
+                <action name="haveUnReadNote" class="userNoteAction" method="isHaveUnReadNote">
+                </action>
+
+                </package>
 </struts>

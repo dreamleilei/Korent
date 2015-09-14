@@ -32,6 +32,27 @@
     <bean id="userOperateAction" class="com.korent.action.UserOperateAction"
           p:rentGoodsService-ref="rentGoodsService"
           p:userService-ref="userService"
+          p:notificationService-ref="notificationService"
           />
+    <bean id="getFollowerOwnerAction" class="com.korent.action.RentGetOwnerFollowerAction"
+          p:rentGoodsService-ref="rentGoodsService"
+          />
+    <bean id="uploadHead" class="com.korent.action.UploadHeadAction"
+          p:userService-ref="userService" />
+    <bean id="userSearchAction" class="com.korent.action.UserSearchAction"
+          p:rentGoodsService-ref="rentGoodsService"
+          />
+    <bean id="changePassword" class="com.korent.action.UserChangePasswordAction"
+          p:userService-ref="userService"
+          />
+
+    <bean id="note" class="com.korent.action.NotificationAction"
+          p:notificationService-ref="notificationService"
+          />
+
+    <bean id="userNoteAction" class="com.korent.action.UserNoteAction"
+          p:notificationService-ref="notificationService"
+          />
+
 
 </beans>
