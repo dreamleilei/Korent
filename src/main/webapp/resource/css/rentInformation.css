@@ -26,12 +26,12 @@ div#goodsplay{
     background-color:#000000;
     opacity:0.5;
 }
-div#title{width:1000px;height:100px; font-size:30px; float:left; text-align:center; color:#FFFFFF;}
-div#price{width:1000px;height:90px;font-size:40px; float:left;color:#99CCCC; font-family:"Microsoft YaHei UI";margin-left:80px;}
-div#address{width:1000px;height:90px;font-size:40px; float:left;color:#99CCCC; font-family:"Microsoft YaHei UI";}
-div#city{width:1000px;height:90px;font-size:40px; float:left;color:#99CCCC; font-family:"Microsoft YaHei UI"; margin-top:50px; margin-left:100px;}
-div#detail{width:1000px;height:90px;font-size:40px; float:left;color:#99CCCC; font-family:"Microsoft YaHei UI";margin-left:80px;}
-div#describe{width:1000px;height:90px;font-size:40px; float:left;color:#99CCCC; font-family:"Microsoft YaHei UI";margin-left:80px;}
+div#title{width:900px;height:100px; font-size:30px; float:left; text-align:center; color:#FFFFFF;}
+div#price{width:900px;height:90px;font-size:40px; float:left;color:#99CCCC; font-family:"Microsoft YaHei UI";margin-left:80px;}
+div#address{width:900px;height:90px;font-size:40px; float:left;color:#99CCCC; font-family:"Microsoft YaHei UI";}
+div#city{width:900px;height:90px;font-size:40px; float:left;color:#99CCCC; font-family:"Microsoft YaHei UI"; margin-top:50px; margin-left:100px;}
+div#detail{width:900px;height:90px;font-size:40px; float:left;color:#99CCCC; font-family:"Microsoft YaHei UI";margin-left:80px;}
+div#describe{width:900px;height:90px;font-size:40px; float:left;color:#99CCCC; font-family:"Microsoft YaHei UI";margin-left:80px;}
 div#button1{width:900px;height:100px;font-size:50px; float:left;color:#FFFFFF;margin-top:90px;margin-right:100px; margin-left:280px;}
 div#button2{width:900px;height:100px;font-size:50px; float:left;color:#FFFFFF;margin-top:90px; margin-left:900px;}
 div#img1{width:300px; height:200px; float:left;margin:60px; margin-top:0px; margin-left:22px; margin-bottom:0px;}
@@ -46,6 +46,7 @@ div#text1{ color:#FFFFFF;font-size: 24px;}
 .red{
     color:#FFFFFF;
     font-size: 36px;
+    width:900px;
 }
 div#case1, div#case2, div#case3{
     width:300px;
